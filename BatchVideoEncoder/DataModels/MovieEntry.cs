@@ -9,6 +9,7 @@ namespace BatchVideoEncoder
 {
     public  enum ResizeOption { NoResize,ResizeByPercent, LimitRes};
     public enum Preset { fast, medium, slow, slower, slowest };
+    public enum VideoCodec { X264, X265, AV1 };
 
     public class MovieEntry
     {
@@ -32,7 +33,7 @@ namespace BatchVideoEncoder
             fullFilePath = _filePath;
             fileNameOnly = Path.GetFileName(_filePath);
             useDefaultParams = true;
-            useX264 = true;
+            videoCodec = VideoCodec.X265;
             useNoiseFilter = true;
             curPercentDone = 0.0;
             audioMode = AudioMode.Encode;
@@ -68,8 +69,8 @@ namespace BatchVideoEncoder
         public Preset preset { get; set; }
         public string presetStr { get; set; }
         public bool useDefaultParams { get; set; } // if false - use default Encoding params.
-        
-        public bool useX264 { get; set; }
+
+        public VideoCodec videoCodec { get; set; }
         public bool useNoiseFilter { get; set; }
         public string DenoiseFilterName { get; set; }
         public string DenoiseFilterStr { get; set; }

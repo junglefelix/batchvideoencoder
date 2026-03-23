@@ -63,26 +63,41 @@ namespace BatchVideoEncoder.Helpers
             logger.Info("Output filename is going to be = " + dbEntry.dstEncodedFile);
             #endregion
 
-            string vCodecStr = dbEntry.useX264 ? " libx264 -x264-params " : " hevc -x265-params ";
+            // Build codec + CRF arguments:
+            // x264/x265 pass CRF via encoder params string; AV1 (libaom-av1) uses -crf directly.
+            string vCodecAndCrfStr;
+            switch (dbEntry.videoCodec)
+            {
+                case VideoCodec.X264:
+                    vCodecAndCrfStr = " libx264 -x264-params crf=" + crf;
+                    break;
+                case VideoCodec.AV1:
+                    vCodecAndCrfStr = " libaom-av1 -crf " + crf + " -b:v 0";
+                    break;
+                default: // X265
+                    vCodecAndCrfStr = " hevc -x265-params crf=" + crf;
+                    break;
+            }
+
             string cli_path = string.Empty;
-            
+
             switch (dbEntry.audioMode)
             {
                 case AudioMode.Encode:
                     cli_path = @"start ""encode"" /b /low /wait """ +                                       //set low priority
                        workingDir + @"\tools\ffmpeg.exe"" -i " + "\"" + dbEntry.encodedAacFile + "\"" +   //Input1 - aac Audio
                        " -i " + " \"" + srcFileName + "\"" + " -map 0:0 -map 1:0 -acodec copy " + filtersStr + " -preset " + preset +
-                       " -map 1:s? -c copy " + " -c:v " + vCodecStr + " crf=" + crf + " \"" + dbEntry.dstEncodedFile + "\"";
+                       " -map 1:s? -c copy " + " -c:v " + vCodecAndCrfStr + " \"" + dbEntry.dstEncodedFile + "\"";
                     break;
                 case AudioMode.Copy:
                     cli_path = @"start ""encode"" /b /low /wait """ + workingDir + @"\tools\ffmpeg.exe"" -i " +
-                       " \"" + srcFileName + "\"" + " -c:a copy -map 0 " + filtersStr + " -preset " + preset+ 
-                     " -c:v " + vCodecStr + " crf=" + crf + " \"" + dbEntry.dstEncodedFile + "\"";
+                       " \"" + srcFileName + "\"" + " -c:a copy -map 0 " + filtersStr + " -preset " + preset +
+                     " -c:v " + vCodecAndCrfStr + " \"" + dbEntry.dstEncodedFile + "\"";
                     break;
                 case AudioMode.Disable:
-                    cli_path = @"start ""encode"" /b /low /wait """ + workingDir + @"\tools\ffmpeg.exe"" -i " + 
-                       " \"" + srcFileName + "\"" + " -an " + filtersStr + " -preset " + preset   + " -map 0:s? -c copy " +
-                      " -map 0:v -c:v " + vCodecStr + " crf=" + crf + " \"" + dbEntry.dstEncodedFile + "\"";
+                    cli_path = @"start ""encode"" /b /low /wait """ + workingDir + @"\tools\ffmpeg.exe"" -i " +
+                       " \"" + srcFileName + "\"" + " -an " + filtersStr + " -preset " + preset + " -map 0:s? -c copy " +
+                      " -map 0:v -c:v " + vCodecAndCrfStr + " \"" + dbEntry.dstEncodedFile + "\"";
                     break;
                 default:
                     break;

@@ -56,28 +56,22 @@ namespace BatchVideoEncoder
         {
 
 
-            tbSuffix.Text = Settings.Default.OutFileSuffix;
+            tbSuffixMenu.Text = Settings.Default.OutFileSuffix;
             textBoxAAC.Text = Settings.Default.NeroAaacDefaultQuality;
             numericCrf.Value = Convert.ToDecimal(Settings.Default.X265DefaultCrf);
             comboBoxPreset.Items.AddRange(Settings.Default.X265Presets.Split(','));
             comboBoxPreset.SelectedItem = Settings.Default.defaultVideoPreset;
             radioEncodeAAC.Checked = true;
-            //textBoxCRF.Text = "26";
-            //textBoxNR.Text = "400";
             numericUpDown1.Value = 100;
             MediaProcessingHelper.workingDir = Directory.GetCurrentDirectory();
-            //fileList = new List<string>();
-            //fileLIstToEncode = new List<string>();
-            //checkBoxResize.Checked = false;
             radioNoResize.Checked = true;
             tbXresLimit.Text = "720";
             tbYresLimit.Text = "480";
-            CheckBoxRunHidden.Checked = true;
-            radioX264.Checked = false;
-            radioX265.Checked = true;
-            //cbNoiseFilter.Checked = true;
+            runHiddenMenuItem.Checked = true;
+            codecX265MenuItem.Checked = true;
 
-            radioMkv.Checked = true;
+            formatMkvMenuItem.Checked = true;
+            formatMp4MenuItem.Checked = false;
 
             foreach (var filter in Settings.Default.NoiseFilters)
             {
@@ -103,25 +97,53 @@ namespace BatchVideoEncoder
 
             }
         }
-        private void btn_browse_Click(object sender, EventArgs e)
+        private void addFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //SaveGuiParamsToDbEntry(defaultParams);
             FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 folderPath = folderBrowserDialog1.SelectedPath;
                 SaveCurrentGuiParamsToDbEntry(defaultParams);
                 dgvSrc.Rows.Clear();
-         
-                // can all the files with desired extensions and add them to fileList list
                 var allVideoFiles = AddSupportedFilesFromDir(folderPath);
                 AddFilesToSrcDB(allVideoFiles);
                 PopulateSrcDGVfromSrcDB();
-
-
             }
-            
-            
+        }
+
+        private void addFilesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog theDialog = new OpenFileDialog();
+            theDialog.Multiselect = true;
+            theDialog.Title = "Open Media File";
+            theDialog.Filter = "All files|*.*";
+            if (theDialog.ShowDialog() == DialogResult.OK)
+            {
+                List<string> supportedFiles = GetFilesFromDroppedLocations(theDialog.FileNames);
+                AddFilesToSrcDB(supportedFiles);
+                PopulateSrcDGVfromSrcDB();
+            }
+        }
+
+        private void formatMkvMenuItem_Click(object sender, EventArgs e)
+        {
+            formatMkvMenuItem.Checked = true;
+            formatMp4MenuItem.Checked = false;
+        }
+
+        private void formatMp4MenuItem_Click(object sender, EventArgs e)
+        {
+            formatMp4MenuItem.Checked = true;
+            formatMkvMenuItem.Checked = false;
+        }
+
+        private void tbSuffixMenu_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void btn_browse_Click(object sender, EventArgs e)
+        {
+            addFolderToolStripMenuItem_Click(sender, e);
         }
  
 
@@ -148,7 +170,7 @@ namespace BatchVideoEncoder
                     dbEntry.aSizeStr,
                     dbEntry.aStreams.ToString(),
                     dbEntry.bitsPixelFrameStr,
-                    dbEntry.useX264 ? "x264" : "265",
+                    GetCodecLabel(dbEntry.videoCodec),
                     dbEntry.crf,
                     //dbEntry.preset.ToString(),
                     dbEntry.presetStr,
@@ -259,7 +281,7 @@ namespace BatchVideoEncoder
                     dbEntry.aSizeStr,
                     dbEntry.aStreams.ToString(),
                     dbEntry.bitsPixelFrameStr,
-                    dbEntry.useX264 ? "x264" : "265",
+                    GetCodecLabel(dbEntry.videoCodec),
                     dbEntry.crf,
                     //dbEntry.preset.ToString(),
                     dbEntry.presetStr,
@@ -287,7 +309,7 @@ namespace BatchVideoEncoder
 
             currentFileIndex = 0; // reset loops
 
-            MediaProcessingHelper.isRunHidden = CheckBoxRunHidden.Checked;
+            MediaProcessingHelper.isRunHidden = runHiddenMenuItem.Checked;
             if (DstDB.Any())
             {
                 // go over all dst db, and update with latest ui changes - as suffix,extension,codec, etc.
@@ -307,10 +329,10 @@ namespace BatchVideoEncoder
                 string targetOutFileDir = string.IsNullOrEmpty(Settings.Default.OutputDirectory) ? Path.GetDirectoryName(entry.fullFilePath) : Settings.Default.OutputDirectory;
                 string name = Path.GetFileNameWithoutExtension(entry.fullFilePath);
 
-                entry.dstEncodedFile = Path.Combine(targetOutFileDir, name + tbSuffix.Text + (radioMkv.Checked ? ".mkv" : ".mp4"));
+                entry.dstEncodedFile = Path.Combine(targetOutFileDir, name + tbSuffixMenu.Text + (formatMkvMenuItem.Checked ? ".mkv" : ".mp4"));
                 entry.encodedAacFile = Path.Combine(tempDir, name + GeneralHelper.GenerateRandomWord(5, 5) + ".mp4");
                 logger.Info("encoded aac mp4 file: " + entry.encodedAacFile);
-                entry.useX264 = radioX264.Checked;
+                entry.videoCodec = GetSelectedCodec();
                
             }
         }
@@ -537,7 +559,7 @@ namespace BatchVideoEncoder
             entry.aQuality = defaultParams.aQuality;
             //entry.preset = defaultParams.preset;
             entry.presetStr = defaultParams.presetStr;
-            entry.useX264 = defaultParams.useX264;
+            entry.videoCodec = defaultParams.videoCodec;
             entry.resize = defaultParams.resize;
             entry.ResizePercentage = defaultParams.ResizePercentage;
             entry.NewXRes = defaultParams.NewXRes;
@@ -656,8 +678,7 @@ namespace BatchVideoEncoder
                 default:
                     break;
             }
-            radioX264.Checked = dbEntry.useX264;
-            radioX265.Checked = !dbEntry.useX264;
+            SetCheckedCodecMenuItem(dbEntry.videoCodec);
             //cbNoiseFilter.Checked = dbEntry.useNoiseFilter;
             if(dbEntry.useNoiseFilter == false)
             {
@@ -717,15 +738,6 @@ namespace BatchVideoEncoder
             SetNewRes(step);
         }
 
-        private void radioX265_CheckedChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void radioX264_CheckedChanged(object sender, EventArgs e)
-        {
-        }
-
         private void btnSaveConfig_Click(object sender, EventArgs e) // Save config Button. 
         {
             //dataGridViewDst.SelectedCells[0].RowIndex
@@ -755,7 +767,7 @@ namespace BatchVideoEncoder
                     //if (dgv == dataGridViewSrc)
                     //{
                     if (radioResizeByLimit.Checked || radioResizeByPercent.Checked) dgv.Rows[rowIndex].Cells[4].Value = matchingDbEntry.newResStr;
-                    dgv.Rows[rowIndex].Cells[13].Value = matchingDbEntry.useX264 ? "x264" : "x265";
+                    dgv.Rows[rowIndex].Cells[13].Value = GetCodecLabel(matchingDbEntry.videoCodec);
                     dgv.Rows[rowIndex].Cells[14].Value = matchingDbEntry.crf;
                     dgv.Rows[rowIndex].Cells[15].Value = matchingDbEntry.presetStr;
                     //dgv.Rows[rowIndex].Cells[15].Value = matchingDbEntry.preset.ToString();
@@ -796,7 +808,7 @@ namespace BatchVideoEncoder
                 dbEntry.limitYres = Convert.ToInt32(tbYresLimit.Text);
             }
 
-            dbEntry.useX264 = radioX264.Checked;
+            dbEntry.videoCodec = GetSelectedCodec();
             //dbEntry.useNoiseFilter = cbNoiseFilter.Checked;
 
             dbEntry.useNoiseFilter = (comboDenoise.SelectedIndex != 0);
@@ -832,18 +844,7 @@ namespace BatchVideoEncoder
 
         private void btnAddFiles_Click(object sender, EventArgs e)
         {
-
-            OpenFileDialog theDialog = new OpenFileDialog();
-            theDialog.Multiselect = true;
-            theDialog.Title = "Open Media File";
-            theDialog.Filter = "All files|*.*";
-            //theDialog.InitialDirectory = @"C:\";
-            if (theDialog.ShowDialog() == DialogResult.OK)
-            {
-                List<string> supportedFiles = GetFilesFromDroppedLocations(theDialog.FileNames);
-                AddFilesToSrcDB(supportedFiles);
-                PopulateSrcDGVfromSrcDB();
-            }
+            addFilesToolStripMenuItem_Click(sender, e);
         }
         private List<string> GetFilesFromDroppedLocations(string[] droppedList)
         {
@@ -915,6 +916,51 @@ namespace BatchVideoEncoder
         private void setCurrentParamsAsDefaultToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveCurrentGuiParamsToDbEntry(defaultParams);
+        }
+
+        private VideoCodec GetSelectedCodec()
+        {
+            if (codecX264MenuItem.Checked) return VideoCodec.X264;
+            if (codecAv1MenuItem.Checked)  return VideoCodec.AV1;
+            return VideoCodec.X265; // default
+        }
+
+        private void SetCheckedCodecMenuItem(VideoCodec codec)
+        {
+            codecX265MenuItem.Checked = codec == VideoCodec.X265;
+            codecX264MenuItem.Checked = codec == VideoCodec.X264;
+            codecAv1MenuItem.Checked  = codec == VideoCodec.AV1;
+        }
+
+        private void codecX265MenuItem_Click(object sender, EventArgs e)
+        {
+            codecX264MenuItem.Checked = false;
+            codecAv1MenuItem.Checked  = false;
+            codecX265MenuItem.Checked = true;
+        }
+
+        private void codecX264MenuItem_Click(object sender, EventArgs e)
+        {
+            codecX265MenuItem.Checked = false;
+            codecAv1MenuItem.Checked  = false;
+            codecX264MenuItem.Checked = true;
+        }
+
+        private void codecAv1MenuItem_Click(object sender, EventArgs e)
+        {
+            codecX265MenuItem.Checked = false;
+            codecX264MenuItem.Checked = false;
+            codecAv1MenuItem.Checked  = true;
+        }
+
+        private static string GetCodecLabel(VideoCodec codec)
+        {
+            switch (codec)
+            {
+                case VideoCodec.X264: return "x264";
+                case VideoCodec.AV1:  return "av1";
+                default:             return "x265";
+            }
         }
     }
 }

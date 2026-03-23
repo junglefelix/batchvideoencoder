@@ -108,13 +108,24 @@
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setCurrentParamsAsDefaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectDestinationForOutputFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.radioX264 = new System.Windows.Forms.RadioButton();
-            this.radioX265 = new System.Windows.Forms.RadioButton();
+            this.videoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.codecToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.codecX265MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.codecX264MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.codecAv1MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.outputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.outputFormatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.formatMkvMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.formatMp4MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.outputSuffixToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tbSuffixMenu = new System.Windows.Forms.ToolStripTextBox();
+            this.runHiddenMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tbCmdOut = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.comboDenoise = new System.Windows.Forms.ComboBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.BtnSaveDstConfig = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.radioMp4 = new System.Windows.Forms.RadioButton();
@@ -142,7 +153,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvDst)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSrc)).BeginInit();
             this.menuStrip1.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCrf)).BeginInit();
@@ -155,7 +165,7 @@
             // btn_browse
             // 
             this.btn_browse.Location = new System.Drawing.Point(16, 32);
-            this.btn_browse.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_browse.Margin = new System.Windows.Forms.Padding(4);
             this.btn_browse.Name = "btn_browse";
             this.btn_browse.Size = new System.Drawing.Size(100, 28);
             this.btn_browse.TabIndex = 1;
@@ -166,7 +176,7 @@
             // btnStart
             // 
             this.btnStart.Location = new System.Drawing.Point(348, 0);
-            this.btnStart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnStart.Margin = new System.Windows.Forms.Padding(4);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(60, 28);
             this.btnStart.TabIndex = 12;
@@ -187,7 +197,7 @@
             // textBoxAAC
             // 
             this.textBoxAAC.Location = new System.Drawing.Point(189, 21);
-            this.textBoxAAC.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxAAC.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxAAC.Name = "textBoxAAC";
             this.textBoxAAC.Size = new System.Drawing.Size(68, 22);
             this.textBoxAAC.TabIndex = 16;
@@ -216,7 +226,7 @@
             // 
             this.comboBoxPreset.FormattingEnabled = true;
             this.comboBoxPreset.Location = new System.Drawing.Point(95, 38);
-            this.comboBoxPreset.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBoxPreset.Margin = new System.Windows.Forms.Padding(4);
             this.comboBoxPreset.Name = "comboBoxPreset";
             this.comboBoxPreset.Size = new System.Drawing.Size(103, 24);
             this.comboBoxPreset.TabIndex = 21;
@@ -254,7 +264,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(1363, 380);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(61, 28);
             this.button1.TabIndex = 28;
@@ -265,7 +275,7 @@
             // bntStop
             // 
             this.bntStop.Location = new System.Drawing.Point(416, 0);
-            this.bntStop.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bntStop.Margin = new System.Windows.Forms.Padding(4);
             this.bntStop.Name = "bntStop";
             this.bntStop.Size = new System.Drawing.Size(63, 28);
             this.bntStop.TabIndex = 29;
@@ -286,10 +296,10 @@
             this.groupBox2.Controls.Add(this.radioResizeByPercent);
             this.groupBox2.Controls.Add(this.labelNewRes);
             this.groupBox2.Controls.Add(this.numericUpDown1);
-            this.groupBox2.Location = new System.Drawing.Point(904, 25);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Location = new System.Drawing.Point(895, 25);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox2.Size = new System.Drawing.Size(412, 124);
             this.groupBox2.TabIndex = 31;
             this.groupBox2.TabStop = false;
@@ -298,7 +308,7 @@
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(305, 100);
-            this.button3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(39, 22);
             this.button3.TabIndex = 12;
@@ -309,7 +319,7 @@
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(304, 74);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(40, 21);
             this.button2.TabIndex = 11;
@@ -340,7 +350,7 @@
             // tbYresLimit
             // 
             this.tbYresLimit.Location = new System.Drawing.Point(200, 91);
-            this.tbYresLimit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbYresLimit.Margin = new System.Windows.Forms.Padding(4);
             this.tbYresLimit.Name = "tbYresLimit";
             this.tbYresLimit.Size = new System.Drawing.Size(93, 22);
             this.tbYresLimit.TabIndex = 9;
@@ -348,7 +358,7 @@
             // tbXresLimit
             // 
             this.tbXresLimit.Location = new System.Drawing.Point(71, 91);
-            this.tbXresLimit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbXresLimit.Margin = new System.Windows.Forms.Padding(4);
             this.tbXresLimit.Name = "tbXresLimit";
             this.tbXresLimit.Size = new System.Drawing.Size(93, 22);
             this.tbXresLimit.TabIndex = 8;
@@ -357,7 +367,7 @@
             // 
             this.radioNoResize.AutoSize = true;
             this.radioNoResize.Location = new System.Drawing.Point(13, 17);
-            this.radioNoResize.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioNoResize.Margin = new System.Windows.Forms.Padding(4);
             this.radioNoResize.Name = "radioNoResize";
             this.radioNoResize.Size = new System.Drawing.Size(104, 20);
             this.radioNoResize.TabIndex = 7;
@@ -370,7 +380,7 @@
             // 
             this.radioResizeByLimit.AutoSize = true;
             this.radioResizeByLimit.Location = new System.Drawing.Point(13, 69);
-            this.radioResizeByLimit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioResizeByLimit.Margin = new System.Windows.Forms.Padding(4);
             this.radioResizeByLimit.Name = "radioResizeByLimit";
             this.radioResizeByLimit.Size = new System.Drawing.Size(139, 20);
             this.radioResizeByLimit.TabIndex = 6;
@@ -382,7 +392,7 @@
             // 
             this.radioResizeByPercent.AutoSize = true;
             this.radioResizeByPercent.Location = new System.Drawing.Point(13, 42);
-            this.radioResizeByPercent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioResizeByPercent.Margin = new System.Windows.Forms.Padding(4);
             this.radioResizeByPercent.Name = "radioResizeByPercent";
             this.radioResizeByPercent.Size = new System.Drawing.Size(146, 20);
             this.radioResizeByPercent.TabIndex = 5;
@@ -403,7 +413,7 @@
             // numericUpDown1
             // 
             this.numericUpDown1.Location = new System.Drawing.Point(177, 43);
-            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(76, 22);
             this.numericUpDown1.TabIndex = 1;
@@ -412,7 +422,7 @@
             // btnAddAllToList
             // 
             this.btnAddAllToList.Location = new System.Drawing.Point(4, 4);
-            this.btnAddAllToList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAddAllToList.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddAllToList.Name = "btnAddAllToList";
             this.btnAddAllToList.Size = new System.Drawing.Size(100, 28);
             this.btnAddAllToList.TabIndex = 33;
@@ -423,7 +433,7 @@
             // btnClear
             // 
             this.btnClear.Location = new System.Drawing.Point(819, 382);
-            this.btnClear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(91, 28);
             this.btnClear.TabIndex = 34;
@@ -462,12 +472,12 @@
             this.Time,
             this.ETA});
             this.dgvDst.Location = new System.Drawing.Point(3, 416);
-            this.dgvDst.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvDst.Margin = new System.Windows.Forms.Padding(4);
             this.dgvDst.Name = "dgvDst";
             this.dgvDst.ReadOnly = true;
             this.dgvDst.RowHeadersWidth = 51;
             this.dgvDst.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDst.Size = new System.Drawing.Size(1500, 297);
+            this.dgvDst.Size = new System.Drawing.Size(1500, 285);
             this.dgvDst.TabIndex = 35;
             this.dgvDst.SelectionChanged += new System.EventHandler(this.dataGridViewDst_SelectionChanged);
             // 
@@ -680,7 +690,7 @@
             // 
             this.btnAddSelected.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.btnAddSelected.Location = new System.Drawing.Point(112, 5);
-            this.btnAddSelected.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAddSelected.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddSelected.Name = "btnAddSelected";
             this.btnAddSelected.Size = new System.Drawing.Size(107, 28);
             this.btnAddSelected.TabIndex = 36;
@@ -692,7 +702,7 @@
             // 
             this.CheckBoxRunHidden.AutoSize = true;
             this.CheckBoxRunHidden.Location = new System.Drawing.Point(273, 33);
-            this.CheckBoxRunHidden.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.CheckBoxRunHidden.Margin = new System.Windows.Forms.Padding(4);
             this.CheckBoxRunHidden.Name = "CheckBoxRunHidden";
             this.CheckBoxRunHidden.Size = new System.Drawing.Size(100, 20);
             this.CheckBoxRunHidden.TabIndex = 37;
@@ -702,7 +712,7 @@
             // progressBar
             // 
             this.progressBar.Location = new System.Drawing.Point(3, 384);
-            this.progressBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.progressBar.Margin = new System.Windows.Forms.Padding(4);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(793, 25);
             this.progressBar.TabIndex = 38;
@@ -731,7 +741,7 @@
             this._preset,
             this._Denoise});
             this.dgvSrc.Location = new System.Drawing.Point(4, 36);
-            this.dgvSrc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvSrc.Margin = new System.Windows.Forms.Padding(4);
             this.dgvSrc.Name = "dgvSrc";
             this.dgvSrc.ReadOnly = true;
             this.dgvSrc.RowHeadersWidth = 51;
@@ -892,7 +902,7 @@
             // btnClearSrc
             // 
             this.btnClearSrc.Location = new System.Drawing.Point(1120, 5);
-            this.btnClearSrc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnClearSrc.Margin = new System.Windows.Forms.Padding(4);
             this.btnClearSrc.Name = "btnClearSrc";
             this.btnClearSrc.Size = new System.Drawing.Size(83, 28);
             this.btnClearSrc.TabIndex = 39;
@@ -903,7 +913,7 @@
             // button4
             // 
             this.button4.Location = new System.Drawing.Point(1211, 5);
-            this.button4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button4.Margin = new System.Windows.Forms.Padding(4);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(157, 28);
             this.button4.TabIndex = 40;
@@ -916,7 +926,8 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.optionsToolStripMenuItem});
+            this.optionsToolStripMenuItem,
+            this.videoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1521, 28);
@@ -925,18 +936,94 @@
             // 
             // fileToolStripMenuItem
             // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addFolderToolStripMenuItem,
+            this.addFilesToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
             this.fileToolStripMenuItem.Text = "File";
+            // 
+            // addFolderToolStripMenuItem
+            // 
+            this.addFolderToolStripMenuItem.Name = "addFolderToolStripMenuItem";
+            this.addFolderToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.addFolderToolStripMenuItem.Text = "Add Folder...";
+            this.addFolderToolStripMenuItem.Click += new System.EventHandler(this.addFolderToolStripMenuItem_Click);
+            // 
+            // addFilesToolStripMenuItem
+            // 
+            this.addFilesToolStripMenuItem.Name = "addFilesToolStripMenuItem";
+            this.addFilesToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.addFilesToolStripMenuItem.Text = "Add Files...";
+            this.addFilesToolStripMenuItem.Click += new System.EventHandler(this.addFilesToolStripMenuItem_Click);
             // 
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.setCurrentParamsAsDefaultToolStripMenuItem,
-            this.selectDestinationForOutputFilesToolStripMenuItem});
+            this.selectDestinationForOutputFilesToolStripMenuItem,
+            this.outputToolStripMenuItem,
+            this.runHiddenMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
             this.optionsToolStripMenuItem.Text = "Options";
+            // 
+            // outputToolStripMenuItem
+            // 
+            this.outputToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.outputFormatToolStripMenuItem,
+            this.outputSuffixToolStripMenuItem,
+            this.tbSuffixMenu});
+            this.outputToolStripMenuItem.Name = "outputToolStripMenuItem";
+            this.outputToolStripMenuItem.Size = new System.Drawing.Size(326, 26);
+            this.outputToolStripMenuItem.Text = "Output";
+            // 
+            // outputFormatToolStripMenuItem
+            // 
+            this.outputFormatToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.formatMkvMenuItem,
+            this.formatMp4MenuItem});
+            this.outputFormatToolStripMenuItem.Name = "outputFormatToolStripMenuItem";
+            this.outputFormatToolStripMenuItem.Size = new System.Drawing.Size(220, 26);
+            this.outputFormatToolStripMenuItem.Text = "Output Format";
+            // 
+            // formatMkvMenuItem
+            // 
+            this.formatMkvMenuItem.CheckOnClick = true;
+            this.formatMkvMenuItem.Name = "formatMkvMenuItem";
+            this.formatMkvMenuItem.Size = new System.Drawing.Size(120, 26);
+            this.formatMkvMenuItem.Text = "MKV";
+            this.formatMkvMenuItem.Click += new System.EventHandler(this.formatMkvMenuItem_Click);
+            // 
+            // formatMp4MenuItem
+            // 
+            this.formatMp4MenuItem.CheckOnClick = true;
+            this.formatMp4MenuItem.Name = "formatMp4MenuItem";
+            this.formatMp4MenuItem.Size = new System.Drawing.Size(120, 26);
+            this.formatMp4MenuItem.Text = "MP4";
+            this.formatMp4MenuItem.Click += new System.EventHandler(this.formatMp4MenuItem_Click);
+            // 
+            // outputSuffixToolStripMenuItem
+            // 
+            this.outputSuffixToolStripMenuItem.Enabled = false;
+            this.outputSuffixToolStripMenuItem.Name = "outputSuffixToolStripMenuItem";
+            this.outputSuffixToolStripMenuItem.Size = new System.Drawing.Size(220, 26);
+            this.outputSuffixToolStripMenuItem.Text = "Output File Suffix:";
+            // 
+            // tbSuffixMenu
+            // 
+            this.tbSuffixMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbSuffixMenu.Name = "tbSuffixMenu";
+            this.tbSuffixMenu.Size = new System.Drawing.Size(160, 27);
+            this.tbSuffixMenu.ToolTipText = "Output file suffix";
+            this.tbSuffixMenu.TextChanged += new System.EventHandler(this.tbSuffixMenu_TextChanged);
+            // 
+            // runHiddenMenuItem
+            // 
+            this.runHiddenMenuItem.CheckOnClick = true;
+            this.runHiddenMenuItem.Name = "runHiddenMenuItem";
+            this.runHiddenMenuItem.Size = new System.Drawing.Size(326, 26);
+            this.runHiddenMenuItem.Text = "Run Hidden";
             // 
             // setCurrentParamsAsDefaultToolStripMenuItem
             // 
@@ -952,38 +1039,54 @@
             this.selectDestinationForOutputFilesToolStripMenuItem.Text = "Select Destination  for  Output Files";
             this.selectDestinationForOutputFilesToolStripMenuItem.Click += new System.EventHandler(this.selectDestinationForOutputFilesToolStripMenuItem_Click);
             // 
-            // radioX264
+            // videoToolStripMenuItem
             // 
-            this.radioX264.AutoSize = true;
-            this.radioX264.Location = new System.Drawing.Point(8, 50);
-            this.radioX264.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.radioX264.Name = "radioX264";
-            this.radioX264.Size = new System.Drawing.Size(55, 20);
-            this.radioX264.TabIndex = 42;
-            this.radioX264.TabStop = true;
-            this.radioX264.Text = "x264";
-            this.radioX264.UseVisualStyleBackColor = true;
-            this.radioX264.CheckedChanged += new System.EventHandler(this.radioX264_CheckedChanged);
+            this.videoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.codecToolStripMenuItem});
+            this.videoToolStripMenuItem.Name = "videoToolStripMenuItem";
+            this.videoToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
+            this.videoToolStripMenuItem.Text = "Video";
             // 
-            // radioX265
+            // codecToolStripMenuItem
             // 
-            this.radioX265.AutoSize = true;
-            this.radioX265.Location = new System.Drawing.Point(8, 23);
-            this.radioX265.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.radioX265.Name = "radioX265";
-            this.radioX265.Size = new System.Drawing.Size(55, 20);
-            this.radioX265.TabIndex = 43;
-            this.radioX265.TabStop = true;
-            this.radioX265.Text = "x265";
-            this.radioX265.UseVisualStyleBackColor = true;
-            this.radioX265.CheckedChanged += new System.EventHandler(this.radioX265_CheckedChanged);
+            this.codecToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.codecX265MenuItem,
+            this.codecX264MenuItem,
+            this.codecAv1MenuItem});
+            this.codecToolStripMenuItem.Name = "codecToolStripMenuItem";
+            this.codecToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.codecToolStripMenuItem.Text = "Codec";
+            // 
+            // codecX265MenuItem
+            // 
+            this.codecX265MenuItem.CheckOnClick = true;
+            this.codecX265MenuItem.Name = "codecX265MenuItem";
+            this.codecX265MenuItem.Size = new System.Drawing.Size(224, 26);
+            this.codecX265MenuItem.Text = "x265";
+            this.codecX265MenuItem.Click += new System.EventHandler(this.codecX265MenuItem_Click);
+            // 
+            // codecX264MenuItem
+            // 
+            this.codecX264MenuItem.CheckOnClick = true;
+            this.codecX264MenuItem.Name = "codecX264MenuItem";
+            this.codecX264MenuItem.Size = new System.Drawing.Size(224, 26);
+            this.codecX264MenuItem.Text = "x264";
+            this.codecX264MenuItem.Click += new System.EventHandler(this.codecX264MenuItem_Click);
+            // 
+            // codecAv1MenuItem
+            // 
+            this.codecAv1MenuItem.CheckOnClick = true;
+            this.codecAv1MenuItem.Name = "codecAv1MenuItem";
+            this.codecAv1MenuItem.Size = new System.Drawing.Size(224, 26);
+            this.codecAv1MenuItem.Text = "AV1";
+            this.codecAv1MenuItem.Click += new System.EventHandler(this.codecAv1MenuItem_Click);
             // 
             // tbCmdOut
             // 
             this.tbCmdOut.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbCmdOut.Location = new System.Drawing.Point(80, 720);
-            this.tbCmdOut.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbCmdOut.Location = new System.Drawing.Point(80, 708);
+            this.tbCmdOut.Margin = new System.Windows.Forms.Padding(4);
             this.tbCmdOut.Name = "tbCmdOut";
             this.tbCmdOut.Size = new System.Drawing.Size(1421, 22);
             this.tbCmdOut.TabIndex = 45;
@@ -992,7 +1095,7 @@
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(4, 725);
+            this.label5.Location = new System.Drawing.Point(4, 713);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(61, 16);
@@ -1013,28 +1116,15 @@
             // 
             this.comboDenoise.FormattingEnabled = true;
             this.comboDenoise.Location = new System.Drawing.Point(203, 38);
-            this.comboDenoise.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboDenoise.Margin = new System.Windows.Forms.Padding(4);
             this.comboDenoise.Name = "comboDenoise";
             this.comboDenoise.Size = new System.Drawing.Size(165, 24);
             this.comboDenoise.TabIndex = 48;
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.radioX264);
-            this.groupBox3.Controls.Add(this.radioX265);
-            this.groupBox3.Location = new System.Drawing.Point(8, 63);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox3.Size = new System.Drawing.Size(85, 79);
-            this.groupBox3.TabIndex = 53;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Codec";
-            // 
             // BtnSaveDstConfig
             // 
             this.BtnSaveDstConfig.Location = new System.Drawing.Point(1197, 380);
-            this.BtnSaveDstConfig.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnSaveDstConfig.Margin = new System.Windows.Forms.Padding(4);
             this.BtnSaveDstConfig.Name = "BtnSaveDstConfig";
             this.BtnSaveDstConfig.Size = new System.Drawing.Size(157, 28);
             this.BtnSaveDstConfig.TabIndex = 54;
@@ -1047,9 +1137,9 @@
             this.groupBox4.Controls.Add(this.radioMp4);
             this.groupBox4.Controls.Add(this.radioMkv);
             this.groupBox4.Location = new System.Drawing.Point(101, 63);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox4.Size = new System.Drawing.Size(107, 80);
             this.groupBox4.TabIndex = 55;
             this.groupBox4.TabStop = false;
@@ -1059,7 +1149,7 @@
             // 
             this.radioMp4.AutoSize = true;
             this.radioMp4.Location = new System.Drawing.Point(8, 52);
-            this.radioMp4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioMp4.Margin = new System.Windows.Forms.Padding(4);
             this.radioMp4.Name = "radioMp4";
             this.radioMp4.Size = new System.Drawing.Size(55, 20);
             this.radioMp4.TabIndex = 1;
@@ -1071,7 +1161,7 @@
             // 
             this.radioMkv.AutoSize = true;
             this.radioMkv.Location = new System.Drawing.Point(8, 22);
-            this.radioMkv.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioMkv.Margin = new System.Windows.Forms.Padding(4);
             this.radioMkv.Name = "radioMkv";
             this.radioMkv.Size = new System.Drawing.Size(56, 20);
             this.radioMkv.TabIndex = 0;
@@ -1088,7 +1178,7 @@
             // btnAddFiles
             // 
             this.btnAddFiles.Location = new System.Drawing.Point(131, 32);
-            this.btnAddFiles.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAddFiles.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddFiles.Name = "btnAddFiles";
             this.btnAddFiles.Size = new System.Drawing.Size(105, 28);
             this.btnAddFiles.TabIndex = 57;
@@ -1109,7 +1199,7 @@
             // tbSuffix
             // 
             this.tbSuffix.Location = new System.Drawing.Point(507, 30);
-            this.tbSuffix.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbSuffix.Margin = new System.Windows.Forms.Padding(4);
             this.tbSuffix.Name = "tbSuffix";
             this.tbSuffix.Size = new System.Drawing.Size(96, 22);
             this.tbSuffix.TabIndex = 59;
@@ -1122,14 +1212,14 @@
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.comboDenoise);
-            this.groupBox1.Location = new System.Drawing.Point(224, 63);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Location = new System.Drawing.Point(8, 30);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(380, 86);
             this.groupBox1.TabIndex = 60;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Video:";
+            this.groupBox1.Text = "Video:"; 
             // 
             // numericCrf
             // 
@@ -1140,7 +1230,7 @@
             0,
             65536});
             this.numericCrf.Location = new System.Drawing.Point(8, 39);
-            this.numericCrf.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericCrf.Margin = new System.Windows.Forms.Padding(4);
             this.numericCrf.Name = "numericCrf";
             this.numericCrf.Size = new System.Drawing.Size(79, 22);
             this.numericCrf.TabIndex = 0;
@@ -1153,10 +1243,10 @@
             this.groupBox5.Controls.Add(this.radioEncodeAAC);
             this.groupBox5.Controls.Add(this.label3);
             this.groupBox5.Controls.Add(this.textBoxAAC);
-            this.groupBox5.Location = new System.Drawing.Point(612, 41);
-            this.groupBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox5.Location = new System.Drawing.Point(612, 30);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox5.Size = new System.Drawing.Size(267, 108);
             this.groupBox5.TabIndex = 61;
             this.groupBox5.TabStop = false;
@@ -1166,7 +1256,7 @@
             // 
             this.radioDisableAudio.AutoSize = true;
             this.radioDisableAudio.Location = new System.Drawing.Point(8, 68);
-            this.radioDisableAudio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioDisableAudio.Margin = new System.Windows.Forms.Padding(4);
             this.radioDisableAudio.Name = "radioDisableAudio";
             this.radioDisableAudio.Size = new System.Drawing.Size(113, 20);
             this.radioDisableAudio.TabIndex = 19;
@@ -1179,7 +1269,7 @@
             // 
             this.radioCopyAudio.AutoSize = true;
             this.radioCopyAudio.Location = new System.Drawing.Point(8, 44);
-            this.radioCopyAudio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioCopyAudio.Margin = new System.Windows.Forms.Padding(4);
             this.radioCopyAudio.Name = "radioCopyAudio";
             this.radioCopyAudio.Size = new System.Drawing.Size(115, 20);
             this.radioCopyAudio.TabIndex = 18;
@@ -1192,7 +1282,7 @@
             // 
             this.radioEncodeAAC.AutoSize = true;
             this.radioEncodeAAC.Location = new System.Drawing.Point(8, 22);
-            this.radioEncodeAAC.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioEncodeAAC.Margin = new System.Windows.Forms.Padding(4);
             this.radioEncodeAAC.Name = "radioEncodeAAC";
             this.radioEncodeAAC.Size = new System.Drawing.Size(75, 20);
             this.radioEncodeAAC.TabIndex = 17;
@@ -1206,11 +1296,11 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(8, 145);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabControl1.Location = new System.Drawing.Point(8, 148);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1513, 782);
+            this.tabControl1.Size = new System.Drawing.Size(1513, 770);
             this.tabControl1.TabIndex = 62;
             // 
             // tabPage1
@@ -1233,10 +1323,10 @@
             this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.btnClear);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tabPage1.Size = new System.Drawing.Size(1505, 753);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage1.Size = new System.Drawing.Size(1505, 741);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Main";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -1244,10 +1334,10 @@
             // tabPage2
             // 
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tabPage2.Size = new System.Drawing.Size(1505, 753);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage2.Size = new System.Drawing.Size(1505, 741);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Progress";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1259,10 +1349,10 @@
             this.tabPage3.Controls.Add(this.label2);
             this.tabPage3.Controls.Add(this.tbLog);
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
-            this.tabPage3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tabPage3.Size = new System.Drawing.Size(1505, 753);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage3.Size = new System.Drawing.Size(1505, 741);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Log";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -1270,7 +1360,7 @@
             // btnClearLog
             // 
             this.btnClearLog.Location = new System.Drawing.Point(268, 7);
-            this.btnClearLog.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnClearLog.Margin = new System.Windows.Forms.Padding(4);
             this.btnClearLog.Name = "btnClearLog";
             this.btnClearLog.Size = new System.Drawing.Size(100, 28);
             this.btnClearLog.TabIndex = 3;
@@ -1281,7 +1371,7 @@
             // btnOpenLog
             // 
             this.btnOpenLog.Location = new System.Drawing.Point(148, 7);
-            this.btnOpenLog.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnOpenLog.Margin = new System.Windows.Forms.Padding(4);
             this.btnOpenLog.Name = "btnOpenLog";
             this.btnOpenLog.Size = new System.Drawing.Size(100, 28);
             this.btnOpenLog.TabIndex = 2;
@@ -1302,7 +1392,7 @@
             // tbLog
             // 
             this.tbLog.Location = new System.Drawing.Point(8, 42);
-            this.tbLog.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbLog.Margin = new System.Windows.Forms.Padding(4);
             this.tbLog.Multiline = true;
             this.tbLog.Name = "tbLog";
             this.tbLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -1317,19 +1407,12 @@
             this.ClientSize = new System.Drawing.Size(1521, 927);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.tbSuffix);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnAddFiles);
-            this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.CheckBoxRunHidden);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.btn_browse);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Batch Video Encoder v0.68";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -1342,8 +1425,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvSrc)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -1399,13 +1480,15 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem setCurrentParamsAsDefaultToolStripMenuItem;
-        private System.Windows.Forms.RadioButton radioX264;
-        private System.Windows.Forms.RadioButton radioX265;
+        private System.Windows.Forms.ToolStripMenuItem videoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem codecToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem codecX265MenuItem;
+        private System.Windows.Forms.ToolStripMenuItem codecX264MenuItem;
+        private System.Windows.Forms.ToolStripMenuItem codecAv1MenuItem;
         private System.Windows.Forms.TextBox tbCmdOut;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox comboDenoise;
-        private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
@@ -1469,6 +1552,15 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbLog;
         private System.Windows.Forms.Button btnClearLog;
+        private System.Windows.Forms.ToolStripMenuItem addFolderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addFilesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem outputToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem outputFormatToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem formatMkvMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem formatMp4MenuItem;
+        private System.Windows.Forms.ToolStripMenuItem outputSuffixToolStripMenuItem;
+        private System.Windows.Forms.ToolStripTextBox tbSuffixMenu;
+        private System.Windows.Forms.ToolStripMenuItem runHiddenMenuItem;
     }
 }
 
