@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/BatchVideoEncoder
+/BatchVideoEncoder/bin/Debug
+/BatchVideoEncoder/obj/x86/Debug
+/packages
