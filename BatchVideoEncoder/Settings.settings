@@ -1,0 +1,42 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="BatchVideoEncoder" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="NeroAaacDefaultQuality" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0.24</Value>
+    </Setting>
+    <Setting Name="X265DefaultCrf" Type="System.String" Scope="User">
+      <Value Profile="(Default)">32</Value>
+    </Setting>
+    <Setting Name="defaultVideoPreset" Type="System.String" Scope="User">
+      <Value Profile="(Default)">medium</Value>
+    </Setting>
+    <Setting Name="X265Presets" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ultrafast,superfast,veryfast,faster,fast,medium,slow,slower,veryslow</Value>
+    </Setting>
+    <Setting Name="SupportedFileExtensions" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.avi,.flv,.mp4,.mkv,.mpg,.vob,.wmv,.webm</Value>
+    </Setting>
+    <Setting Name="OutFileSuffix" Type="System.String" Scope="User">
+      <Value Profile="(Default)">_</Value>
+    </Setting>
+    <Setting Name="xResLimit" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">720</Value>
+    </Setting>
+    <Setting Name="yResLimit" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">480</Value>
+    </Setting>
+    <Setting Name="OutputDirectory" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="NoiseFilters" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;string&gt;No Filter, &lt;/string&gt;
+  &lt;string&gt;Light Denoise Filter,hqdn3d=2.0:1.0:2.0:3.0&lt;/string&gt;
+  &lt;string&gt;Medium Denoise Filter,hqdn3d=4.0:3.0:6.0:4.5&lt;/string&gt;
+  &lt;string&gt;Strong Denoise Filter,hqdn3d=7.0:7.0:5.0:5.0&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
