@@ -105,16 +105,11 @@
             this.button4 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setCurrentParamsAsDefaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectDestinationForOutputFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.videoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.codecToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.codecX265MenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.codecX264MenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.codecAv1MenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.outputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.outputFormatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.formatMkvMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -122,6 +117,11 @@
             this.outputSuffixToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tbSuffixMenu = new System.Windows.Forms.ToolStripTextBox();
             this.runHiddenMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.videoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.codecToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.codecX265MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.codecX264MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.codecAv1MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tbCmdOut = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -142,12 +142,22 @@
             this.radioEncodeAAC = new System.Windows.Forms.RadioButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dgvSubtitleStreams = new System.Windows.Forms.DataGridView();
+            this.tbTempPath = new System.Windows.Forms.TextBox();
+            this.dgvAudioStreams = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.btnClearLog = new System.Windows.Forms.Button();
             this.btnOpenLog = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.tbLog = new System.Windows.Forms.TextBox();
+            this.colStreamInclude = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colStreamCodec = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStreamLanguage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStreamChannels = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStreamBitrate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSubInclude = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colSubLanguage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDst)).BeginInit();
@@ -159,6 +169,8 @@
             this.groupBox5.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSubtitleStreams)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAudioStreams)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -746,7 +758,7 @@
             this.dgvSrc.ReadOnly = true;
             this.dgvSrc.RowHeadersWidth = 51;
             this.dgvSrc.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSrc.Size = new System.Drawing.Size(1499, 337);
+            this.dgvSrc.Size = new System.Drawing.Size(976, 337);
             this.dgvSrc.TabIndex = 35;
             this.dgvSrc.SelectionChanged += new System.EventHandler(this.dataGridViewSrc_SelectionChanged);
             // 
@@ -946,14 +958,14 @@
             // addFolderToolStripMenuItem
             // 
             this.addFolderToolStripMenuItem.Name = "addFolderToolStripMenuItem";
-            this.addFolderToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.addFolderToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
             this.addFolderToolStripMenuItem.Text = "Add Folder...";
             this.addFolderToolStripMenuItem.Click += new System.EventHandler(this.addFolderToolStripMenuItem_Click);
             // 
             // addFilesToolStripMenuItem
             // 
             this.addFilesToolStripMenuItem.Name = "addFilesToolStripMenuItem";
-            this.addFilesToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.addFilesToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
             this.addFilesToolStripMenuItem.Text = "Add Files...";
             this.addFilesToolStripMenuItem.Click += new System.EventHandler(this.addFilesToolStripMenuItem_Click);
             // 
@@ -967,6 +979,20 @@
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
             this.optionsToolStripMenuItem.Text = "Options";
+            // 
+            // setCurrentParamsAsDefaultToolStripMenuItem
+            // 
+            this.setCurrentParamsAsDefaultToolStripMenuItem.Name = "setCurrentParamsAsDefaultToolStripMenuItem";
+            this.setCurrentParamsAsDefaultToolStripMenuItem.Size = new System.Drawing.Size(326, 26);
+            this.setCurrentParamsAsDefaultToolStripMenuItem.Text = "Set Current Params as Default";
+            this.setCurrentParamsAsDefaultToolStripMenuItem.Click += new System.EventHandler(this.setCurrentParamsAsDefaultToolStripMenuItem_Click);
+            // 
+            // selectDestinationForOutputFilesToolStripMenuItem
+            // 
+            this.selectDestinationForOutputFilesToolStripMenuItem.Name = "selectDestinationForOutputFilesToolStripMenuItem";
+            this.selectDestinationForOutputFilesToolStripMenuItem.Size = new System.Drawing.Size(326, 26);
+            this.selectDestinationForOutputFilesToolStripMenuItem.Text = "Select Destination  for  Output Files";
+            this.selectDestinationForOutputFilesToolStripMenuItem.Click += new System.EventHandler(this.selectDestinationForOutputFilesToolStripMenuItem_Click);
             // 
             // outputToolStripMenuItem
             // 
@@ -984,14 +1010,14 @@
             this.formatMkvMenuItem,
             this.formatMp4MenuItem});
             this.outputFormatToolStripMenuItem.Name = "outputFormatToolStripMenuItem";
-            this.outputFormatToolStripMenuItem.Size = new System.Drawing.Size(220, 26);
+            this.outputFormatToolStripMenuItem.Size = new System.Drawing.Size(234, 26);
             this.outputFormatToolStripMenuItem.Text = "Output Format";
             // 
             // formatMkvMenuItem
             // 
             this.formatMkvMenuItem.CheckOnClick = true;
             this.formatMkvMenuItem.Name = "formatMkvMenuItem";
-            this.formatMkvMenuItem.Size = new System.Drawing.Size(120, 26);
+            this.formatMkvMenuItem.Size = new System.Drawing.Size(123, 26);
             this.formatMkvMenuItem.Text = "MKV";
             this.formatMkvMenuItem.Click += new System.EventHandler(this.formatMkvMenuItem_Click);
             // 
@@ -999,7 +1025,7 @@
             // 
             this.formatMp4MenuItem.CheckOnClick = true;
             this.formatMp4MenuItem.Name = "formatMp4MenuItem";
-            this.formatMp4MenuItem.Size = new System.Drawing.Size(120, 26);
+            this.formatMp4MenuItem.Size = new System.Drawing.Size(123, 26);
             this.formatMp4MenuItem.Text = "MP4";
             this.formatMp4MenuItem.Click += new System.EventHandler(this.formatMp4MenuItem_Click);
             // 
@@ -1007,12 +1033,13 @@
             // 
             this.outputSuffixToolStripMenuItem.Enabled = false;
             this.outputSuffixToolStripMenuItem.Name = "outputSuffixToolStripMenuItem";
-            this.outputSuffixToolStripMenuItem.Size = new System.Drawing.Size(220, 26);
+            this.outputSuffixToolStripMenuItem.Size = new System.Drawing.Size(234, 26);
             this.outputSuffixToolStripMenuItem.Text = "Output File Suffix:";
             // 
             // tbSuffixMenu
             // 
             this.tbSuffixMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbSuffixMenu.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tbSuffixMenu.Name = "tbSuffixMenu";
             this.tbSuffixMenu.Size = new System.Drawing.Size(160, 27);
             this.tbSuffixMenu.ToolTipText = "Output file suffix";
@@ -1024,20 +1051,6 @@
             this.runHiddenMenuItem.Name = "runHiddenMenuItem";
             this.runHiddenMenuItem.Size = new System.Drawing.Size(326, 26);
             this.runHiddenMenuItem.Text = "Run Hidden";
-            // 
-            // setCurrentParamsAsDefaultToolStripMenuItem
-            // 
-            this.setCurrentParamsAsDefaultToolStripMenuItem.Name = "setCurrentParamsAsDefaultToolStripMenuItem";
-            this.setCurrentParamsAsDefaultToolStripMenuItem.Size = new System.Drawing.Size(326, 26);
-            this.setCurrentParamsAsDefaultToolStripMenuItem.Text = "Set Current Params as Default";
-            this.setCurrentParamsAsDefaultToolStripMenuItem.Click += new System.EventHandler(this.setCurrentParamsAsDefaultToolStripMenuItem_Click);
-            // 
-            // selectDestinationForOutputFilesToolStripMenuItem
-            // 
-            this.selectDestinationForOutputFilesToolStripMenuItem.Name = "selectDestinationForOutputFilesToolStripMenuItem";
-            this.selectDestinationForOutputFilesToolStripMenuItem.Size = new System.Drawing.Size(326, 26);
-            this.selectDestinationForOutputFilesToolStripMenuItem.Text = "Select Destination  for  Output Files";
-            this.selectDestinationForOutputFilesToolStripMenuItem.Click += new System.EventHandler(this.selectDestinationForOutputFilesToolStripMenuItem_Click);
             // 
             // videoToolStripMenuItem
             // 
@@ -1054,14 +1067,14 @@
             this.codecX264MenuItem,
             this.codecAv1MenuItem});
             this.codecToolStripMenuItem.Name = "codecToolStripMenuItem";
-            this.codecToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.codecToolStripMenuItem.Size = new System.Drawing.Size(134, 26);
             this.codecToolStripMenuItem.Text = "Codec";
             // 
             // codecX265MenuItem
             // 
             this.codecX265MenuItem.CheckOnClick = true;
             this.codecX265MenuItem.Name = "codecX265MenuItem";
-            this.codecX265MenuItem.Size = new System.Drawing.Size(224, 26);
+            this.codecX265MenuItem.Size = new System.Drawing.Size(123, 26);
             this.codecX265MenuItem.Text = "x265";
             this.codecX265MenuItem.Click += new System.EventHandler(this.codecX265MenuItem_Click);
             // 
@@ -1069,7 +1082,7 @@
             // 
             this.codecX264MenuItem.CheckOnClick = true;
             this.codecX264MenuItem.Name = "codecX264MenuItem";
-            this.codecX264MenuItem.Size = new System.Drawing.Size(224, 26);
+            this.codecX264MenuItem.Size = new System.Drawing.Size(123, 26);
             this.codecX264MenuItem.Text = "x264";
             this.codecX264MenuItem.Click += new System.EventHandler(this.codecX264MenuItem_Click);
             // 
@@ -1077,7 +1090,7 @@
             // 
             this.codecAv1MenuItem.CheckOnClick = true;
             this.codecAv1MenuItem.Name = "codecAv1MenuItem";
-            this.codecAv1MenuItem.Size = new System.Drawing.Size(224, 26);
+            this.codecAv1MenuItem.Size = new System.Drawing.Size(123, 26);
             this.codecAv1MenuItem.Text = "AV1";
             this.codecAv1MenuItem.Click += new System.EventHandler(this.codecAv1MenuItem_Click);
             // 
@@ -1123,7 +1136,7 @@
             // 
             // BtnSaveDstConfig
             // 
-            this.BtnSaveDstConfig.Location = new System.Drawing.Point(1197, 380);
+            this.BtnSaveDstConfig.Location = new System.Drawing.Point(929, 380);
             this.BtnSaveDstConfig.Margin = new System.Windows.Forms.Padding(4);
             this.BtnSaveDstConfig.Name = "BtnSaveDstConfig";
             this.BtnSaveDstConfig.Size = new System.Drawing.Size(157, 28);
@@ -1219,7 +1232,7 @@
             this.groupBox1.Size = new System.Drawing.Size(380, 86);
             this.groupBox1.TabIndex = 60;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Video:"; 
+            this.groupBox1.Text = "Video:";
             // 
             // numericCrf
             // 
@@ -1305,6 +1318,9 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.dgvSubtitleStreams);
+            this.tabPage1.Controls.Add(this.tbTempPath);
+            this.tabPage1.Controls.Add(this.dgvAudioStreams);
             this.tabPage1.Controls.Add(this.dgvSrc);
             this.tabPage1.Controls.Add(this.btnStart);
             this.tabPage1.Controls.Add(this.label7);
@@ -1330,6 +1346,46 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Main";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // dgvSubtitleStreams
+            // 
+            this.dgvSubtitleStreams.AllowUserToAddRows = false;
+            this.dgvSubtitleStreams.AllowUserToDeleteRows = false;
+            this.dgvSubtitleStreams.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSubtitleStreams.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colSubInclude,
+            this.colSubLanguage});
+            this.dgvSubtitleStreams.Location = new System.Drawing.Point(1006, 244);
+            this.dgvSubtitleStreams.Name = "dgvSubtitleStreams";
+            this.dgvSubtitleStreams.RowHeadersWidth = 51;
+            this.dgvSubtitleStreams.RowTemplate.Height = 24;
+            this.dgvSubtitleStreams.Size = new System.Drawing.Size(464, 133);
+            this.dgvSubtitleStreams.TabIndex = 57;
+            // 
+            // tbTempPath
+            // 
+            this.tbTempPath.Location = new System.Drawing.Point(1120, 382);
+            this.tbTempPath.Name = "tbTempPath";
+            this.tbTempPath.Size = new System.Drawing.Size(221, 22);
+            this.tbTempPath.TabIndex = 56;
+            // 
+            // dgvAudioStreams
+            // 
+            this.dgvAudioStreams.AllowUserToAddRows = false;
+            this.dgvAudioStreams.AllowUserToDeleteRows = false;
+            this.dgvAudioStreams.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAudioStreams.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colStreamInclude,
+            this.colStreamCodec,
+            this.colStreamLanguage,
+            this.colStreamChannels,
+            this.colStreamBitrate});
+            this.dgvAudioStreams.Location = new System.Drawing.Point(1006, 36);
+            this.dgvAudioStreams.Name = "dgvAudioStreams";
+            this.dgvAudioStreams.RowHeadersWidth = 51;
+            this.dgvAudioStreams.RowTemplate.Height = 24;
+            this.dgvAudioStreams.Size = new System.Drawing.Size(464, 185);
+            this.dgvAudioStreams.TabIndex = 55;
             // 
             // tabPage2
             // 
@@ -1399,6 +1455,60 @@
             this.tbLog.Size = new System.Drawing.Size(1483, 697);
             this.tbLog.TabIndex = 0;
             // 
+            // colStreamInclude
+            // 
+            this.colStreamInclude.HeaderText = "Incl";
+            this.colStreamInclude.MinimumWidth = 6;
+            this.colStreamInclude.Name = "colStreamInclude";
+            this.colStreamInclude.Width = 50;
+            // 
+            // colStreamCodec
+            // 
+            this.colStreamCodec.HeaderText = "Codec";
+            this.colStreamCodec.MinimumWidth = 6;
+            this.colStreamCodec.Name = "colStreamCodec";
+            this.colStreamCodec.ReadOnly = true;
+            this.colStreamCodec.Width = 40;
+            // 
+            // colStreamLanguage
+            // 
+            this.colStreamLanguage.HeaderText = "Lang";
+            this.colStreamLanguage.MinimumWidth = 6;
+            this.colStreamLanguage.Name = "colStreamLanguage";
+            this.colStreamLanguage.ReadOnly = true;
+            this.colStreamLanguage.Width = 40;
+            // 
+            // colStreamChannels
+            // 
+            this.colStreamChannels.HeaderText = "Chan";
+            this.colStreamChannels.MinimumWidth = 6;
+            this.colStreamChannels.Name = "colStreamChannels";
+            this.colStreamChannels.ReadOnly = true;
+            this.colStreamChannels.Width = 40;
+            // 
+            // colStreamBitrate
+            // 
+            this.colStreamBitrate.HeaderText = "Bitrate";
+            this.colStreamBitrate.MinimumWidth = 6;
+            this.colStreamBitrate.Name = "colStreamBitrate";
+            this.colStreamBitrate.ReadOnly = true;
+            this.colStreamBitrate.Width = 80;
+            // 
+            // colSubInclude
+            // 
+            this.colSubInclude.HeaderText = "Incl";
+            this.colSubInclude.MinimumWidth = 6;
+            this.colSubInclude.Name = "colSubInclude";
+            this.colSubInclude.Width = 60;
+            // 
+            // colSubLanguage
+            // 
+            this.colSubLanguage.HeaderText = "Language";
+            this.colSubLanguage.MinimumWidth = 6;
+            this.colSubLanguage.Name = "colSubLanguage";
+            this.colSubLanguage.ReadOnly = true;
+            this.colSubLanguage.Width = 110;
+            // 
             // Form1
             // 
             this.AllowDrop = true;
@@ -1435,6 +1545,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSubtitleStreams)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAudioStreams)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
@@ -1561,6 +1673,16 @@
         private System.Windows.Forms.ToolStripMenuItem outputSuffixToolStripMenuItem;
         private System.Windows.Forms.ToolStripTextBox tbSuffixMenu;
         private System.Windows.Forms.ToolStripMenuItem runHiddenMenuItem;
+        private System.Windows.Forms.DataGridView dgvAudioStreams;
+        private System.Windows.Forms.TextBox tbTempPath;
+        private System.Windows.Forms.DataGridView dgvSubtitleStreams;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colStreamInclude;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colStreamCodec;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colStreamLanguage;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colStreamChannels;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colStreamBitrate;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colSubInclude;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSubLanguage;
     }
 }
 

@@ -1,16 +1,17 @@
-﻿using System;
+﻿using BatchVideoEncoder.Helpers;
+using FFMpegCore;
+using MediaInfoNET;
+using NLog;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using MediaInfoNET;
-using System.Text.RegularExpressions;
-using NLog;
-using System.Reflection;
-using System.Diagnostics;
-using BatchVideoEncoder.Helpers;
+using System.Windows.Forms;
 
 namespace BatchVideoEncoder
 {
@@ -599,6 +600,7 @@ namespace BatchVideoEncoder
         private void dataGridViewSrc_SelectionChanged(object sender, EventArgs e)
         {
             //IsEditingSrcGV = true;
+            if (dgvSrc.CurrentCell == null) return;
             var selectedRowIndex = dgvSrc.CurrentCell.RowIndex;
             var selectedFileName = dgvSrc.Rows[selectedRowIndex].Cells[1].Value;
             if (selectedFileName != null && !string.IsNullOrWhiteSpace(selectedFileName.ToString()))
@@ -608,6 +610,63 @@ namespace BatchVideoEncoder
                 var selectedDbEntry = SrcDB[selectedRowIndex];
                 //if (selectedDbEntry == null) return;
                 GetGuiParamsFromDb(selectedDbEntry);
+                PopulateStreamsGrid(selectedDbEntry.fullFilePath);
+            }
+        }
+
+        private void PopulateStreamsGrid(string filePath)
+        {
+            dgvAudioStreams.Rows.Clear();
+            dgvSubtitleStreams.Rows.Clear();
+
+            try
+            {
+                IMediaAnalysis mediaInfo = FFProbe.Analyse(filePath);
+                var primaryHighlight = System.Drawing.Color.LightGoldenrodYellow;
+
+                // Populate audio streams
+                foreach (var audioStream in mediaInfo.AudioStreams)
+                {
+                    string bitrate = audioStream.BitRate > 0 
+                        ? (audioStream.BitRate / 1000) + " kbps" 
+                        : "N/A";
+                    
+                    int rowIndex = dgvAudioStreams.Rows.Add(
+                        true, 
+                        audioStream.CodecName ?? "Unknown", 
+                        audioStream.Language ?? "Unknown", 
+                        audioStream.Channels.ToString(),
+                        bitrate
+                    );
+
+                    if (audioStream == mediaInfo.PrimaryAudioStream)
+                    {
+                        dgvAudioStreams.Rows[rowIndex].DefaultCellStyle.BackColor = primaryHighlight;
+                        dgvAudioStreams.Rows[rowIndex].DefaultCellStyle.Font =
+                            new System.Drawing.Font(dgvAudioStreams.Font, System.Drawing.FontStyle.Bold);
+                    }
+                }
+
+                // Populate subtitle streams
+                foreach (var subtitleStream in mediaInfo.SubtitleStreams)
+                {
+                    int rowIndex = dgvSubtitleStreams.Rows.Add(
+                        true,
+                       
+                        subtitleStream.Language ?? "Unknown"
+                    );
+
+                    if (subtitleStream == mediaInfo.PrimarySubtitleStream)
+                    {
+                        dgvSubtitleStreams.Rows[rowIndex].DefaultCellStyle.BackColor = primaryHighlight;
+                        dgvSubtitleStreams.Rows[rowIndex].DefaultCellStyle.Font =
+                            new System.Drawing.Font(dgvSubtitleStreams.Font, System.Drawing.FontStyle.Bold);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Error populating streams grid for file {0}: {1}", filePath, ex.ToString());
             }
         }
 
@@ -831,6 +890,28 @@ namespace BatchVideoEncoder
 
         private void button1_Click_2(object sender, EventArgs e)
         {
+            string filePath = tbTempPath.Text;
+
+            IMediaAnalysis info = FFProbe.Analyse(filePath);
+
+           
+
+            logger.Debug($"Primary audio stream: Index: {info.PrimaryAudioStream.Index} Codec={info.PrimaryAudioStream.CodecName}, Channels={info.PrimaryAudioStream.Channels}, Bitrate={info.PrimaryAudioStream.BitRate}, Language: {info.PrimaryAudioStream.Language}");
+            logger.Debug($"All Audio Streams:");
+            foreach (var stream in info.AudioStreams)
+            {
+                logger.Debug($"Audio Stream: Index: {stream.Index} Codec={stream.CodecName}, Channels={stream.Channels}, Bitrate={stream.BitRate}, Bitrate={stream.BitRate}, Language: {stream.Language}");
+            }
+
+            if (info.PrimarySubtitleStream != null)
+            {
+                logger.Debug($"Primary subtitle stream: Index: {info.PrimarySubtitleStream.Index} Codec={info.PrimarySubtitleStream.CodecName}, Language: {info.PrimarySubtitleStream.Language}");
+            }
+            logger.Debug($"All Subtitle Streams:");
+            foreach (var stream in info.SubtitleStreams)
+            {
+                logger.Debug($"Subtitle Stream: Index: {stream.Index} Codec={stream.CodecName}, Language: {stream.Language}");
+            }
 
         }
 

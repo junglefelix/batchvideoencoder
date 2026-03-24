@@ -17,6 +17,92 @@ namespace BatchVideoEncoder.Helpers
         public static string workingDir;
         public static bool isRunHidden;
 
+        public static List<StreamInfo> ParseStreams(string filePath)
+        {
+            var streams = new List<StreamInfo>();
+            if (!System.IO.File.Exists(filePath)) return streams;
+
+            try
+            {
+                var movie = new MediaInfoNET.MediaFile(filePath);
+
+                // Video streams
+                for (int i = 0; i < movie.Video.Count; i++)
+                {
+                    var v = movie.Video[i];
+                    string lang = v.Properties.ContainsKey("Language") ? v.Properties["Language"].ToString() : string.Empty;
+                    streams.Add(new StreamInfo
+                    {
+                        StreamIndex   = v.StreamIndex,
+                        StreamType    = StreamType.Video,
+                        Codec         = v.FormatID ?? v.Format ?? string.Empty,
+                        Language      = lang,
+                        Channels      = string.Empty,
+                        Include       = true
+                    });
+                }
+
+                // Audio streams
+                for (int i = 0; i < movie.Audio.Count; i++)
+                {
+                    var a = movie.Audio[i];
+                    string lang = a.Properties.ContainsKey("Language") ? a.Properties["Language"].ToString() : string.Empty;
+                    string channels = a.Channels > 0 ? a.Channels.ToString() : string.Empty;
+                    streams.Add(new StreamInfo
+                    {
+                        StreamIndex   = a.StreamIndex,
+                        StreamType    = StreamType.Audio,
+                        Codec         = a.FormatID ?? a.Format ?? string.Empty,
+                        Language      = lang,
+                        Channels      = channels,
+                        Include       = true,
+                        IsPrimary     = (i == 0)
+                    });
+                }
+
+                // Subtitle (Text) streams
+                for (int i = 0; i < movie.Text.Count; i++)
+                {
+                    var t = movie.Text[i];
+                    string lang = t.Language ?? string.Empty;
+                    if (string.IsNullOrEmpty(lang) && t.Properties.ContainsKey("Language"))
+                        lang = t.Properties["Language"].ToString();
+                    streams.Add(new StreamInfo
+                    {
+                        StreamIndex   = t.StreamIndex,
+                        StreamType    = StreamType.Subtitle,
+                        Codec         = t.FormatID ?? t.Format ?? string.Empty,
+                        Language      = lang,
+                        Channels      = string.Empty,
+                        Include       = true,
+                        IsPrimary     = (i == 0)
+                    });
+                }
+
+                // Other streams (Menu, Data, etc.)
+                foreach (var s in movie.AllStreams)
+                {
+                    if (s.StreamType == "Video" || s.StreamType == "Audio" || s.StreamType == "Text") continue;
+                    string lang = s.Properties.ContainsKey("Language") ? s.Properties["Language"].ToString() : string.Empty;
+                    streams.Add(new StreamInfo
+                    {
+                        StreamIndex   = s.StreamIndex,
+                        StreamType    = StreamType.Other,
+                        Codec         = s.FormatID ?? s.Format ?? string.Empty,
+                        Language      = lang,
+                        Channels      = string.Empty,
+                        Include       = true
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Error parsing streams for file {0}: {1}", filePath, ex.ToString());
+            }
+
+            return streams;
+        }
+
 
 
 
