@@ -32,11 +32,12 @@ namespace BatchVideoEncoder
             bitsPixelFrameStr = "err";
             fullFilePath = _filePath;
             fileNameOnly = Path.GetFileName(_filePath);
-            useDefaultParams = true;
+        useDefaultParams = true;
             videoCodec = VideoCodec.X265;
             useNoiseFilter = true;
             curPercentDone = 0.0;
-            audioMode = AudioMode.Encode;
+            opusBitrate = 96;
+            opusChannelMode = OpusChannelMode.ConvertToStereo;
 
         }
         public int index { get; set; }
@@ -64,7 +65,6 @@ namespace BatchVideoEncoder
         public int limitXres { get; set; } // for <limit resolution> option only
         public int limitYres { get; set; } // for <limit resolution> option only
         public double crf { get; set; }
-        public double aQuality { get; set; }
         public double nr { get; set; }
         public Preset preset { get; set; }
         public string presetStr { get; set; }
@@ -78,7 +78,8 @@ namespace BatchVideoEncoder
         public double curPercentDone { get; set; }
         public DateTime TimeStartedEncoding { get; set; }
         public string encodedAacFile { get; set; }
-        public AudioMode audioMode { get; set; }
+        public int opusBitrate { get; set; }
+        public OpusChannelMode opusChannelMode { get; set; }
 
         #region Properties
 
@@ -151,10 +152,10 @@ namespace BatchVideoEncoder
         }
     }
 
-    public enum AudioMode
+    public enum OpusChannelMode
     {
-        Encode,
-        Copy,
-        Disable
+        ConvertToStereo,
+        KeepSourceChannels,
+        CopyAllStreams
     }
 }

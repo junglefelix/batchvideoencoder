@@ -47,6 +47,12 @@ namespace BatchVideoEncoder
         private double selectedEntryRatio;
         public static Form1 Instance { get; private set; }
 
+        // Per-file stream checkbox state memory: filePath -> list of Include booleans
+        private Dictionary<string, List<bool>> _audioStreamSelections = new Dictionary<string, List<bool>>();
+        private Dictionary<string, List<bool>> _subtitleStreamSelections = new Dictionary<string, List<bool>>();
+        // Track the file currently shown in the stream grids so we can save state on change
+        private string _currentStreamsFilePath = null;
+
         #endregion
         public Form1()
         {
@@ -58,12 +64,12 @@ namespace BatchVideoEncoder
 
 
             tbSuffixMenu.Text = Settings.Default.OutFileSuffix;
-            textBoxAAC.Text = Settings.Default.NeroAaacDefaultQuality;
             numericCrf.Value = Convert.ToDecimal(Settings.Default.X265DefaultCrf);
             comboBoxPreset.Items.AddRange(Settings.Default.X265Presets.Split(','));
             comboBoxPreset.SelectedItem = Settings.Default.defaultVideoPreset;
-            radioEncodeAAC.Checked = true;
             numericUpDown1.Value = 100;
+            numericOpusBitrate.Text = "96";
+            audioStereoMenuItem.Checked = true;
             MediaProcessingHelper.workingDir = Directory.GetCurrentDirectory();
             radioNoResize.Checked = true;
             tbXresLimit.Text = "720";
@@ -331,9 +337,9 @@ namespace BatchVideoEncoder
                 string name = Path.GetFileNameWithoutExtension(entry.fullFilePath);
 
                 entry.dstEncodedFile = Path.Combine(targetOutFileDir, name + tbSuffixMenu.Text + (formatMkvMenuItem.Checked ? ".mkv" : ".mp4"));
-                entry.encodedAacFile = Path.Combine(tempDir, name + GeneralHelper.GenerateRandomWord(5, 5) + ".mp4");
-                logger.Info("encoded aac mp4 file: " + entry.encodedAacFile);
                 entry.videoCodec = GetSelectedCodec();
+                entry.opusBitrate = GetSelectedOpusBitrate();
+                entry.opusChannelMode = GetSelectedOpusChannelMode();
                
             }
         }
@@ -351,23 +357,6 @@ namespace BatchVideoEncoder
                 var curFile = curDbEntry.fullFilePath; //  fileLIstToEncode[fileCnt];
 
          
-                if(curDbEntry.audioMode == AudioMode.Encode)
-                {
-                    #region Audio Encoding
-                UiUpdateHelper.updateGridView(dgvDst, 17, fileCnt, "Enc. Audio...");
-                var encodeAudioTask = Task.Factory.StartNew(() => MediaProcessingHelper.encodeAudio(curDbEntry), CancellationToken.None,
-                    TaskCreationOptions.LongRunning, TaskScheduler.Default);
-                encodeAudioTask.Wait();
-                if (encodeAudioTask.Result == false)
-                {
-                    UiUpdateHelper.updateGridView(dgvDst, 17, fileCnt, "! Audio Fail !");
-                    logger.Info("!! Error !! Audio Encoding failed. Aborting current encoding..");
-                    continue;
-                }
-                logger.Info( "Audio Encoding finished successfully."); 
-                #endregion
-                }
-
                 UiUpdateHelper.updateGridView(dgvDst, 17, fileCnt, "Enc. Video...");
 
                 var encodeVideoTask = Task.Factory.StartNew(() => MediaProcessingHelper.encodeVideoFFMpeg(curDbEntry, ProgressCallback), CancellationToken.None,
@@ -557,7 +546,6 @@ namespace BatchVideoEncoder
             if (!entry.useDefaultParams) return;
             entry.crf = defaultParams.crf;
             entry.nr = defaultParams.nr; // ???
-            entry.aQuality = defaultParams.aQuality;
             //entry.preset = defaultParams.preset;
             entry.presetStr = defaultParams.presetStr;
             entry.videoCodec = defaultParams.videoCodec;
@@ -568,7 +556,8 @@ namespace BatchVideoEncoder
             entry.useNoiseFilter = defaultParams.useNoiseFilter;
             entry.DenoiseFilterName = defaultParams.DenoiseFilterName;
             entry.DenoiseFilterStr = defaultParams.DenoiseFilterStr;
-            entry.audioMode = defaultParams.audioMode;
+            entry.opusBitrate = defaultParams.opusBitrate;
+            entry.opusChannelMode = defaultParams.opusChannelMode;
 
 
             entry.calculateNewRes();
@@ -597,6 +586,18 @@ namespace BatchVideoEncoder
             AddFilesToSrcDB(supportedFiles);
             PopulateSrcDGVfromSrcDB();
         }
+        private void dgvAudioStreams_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == colStreamInclude.Index && _currentStreamsFilePath != null)
+                SaveCurrentStreamSelections();
+        }
+
+        private void dgvSubtitleStreams_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == colSubInclude.Index && _currentStreamsFilePath != null)
+                SaveCurrentStreamSelections();
+        }
+
         private void dataGridViewSrc_SelectionChanged(object sender, EventArgs e)
         {
             //IsEditingSrcGV = true;
@@ -614,30 +615,65 @@ namespace BatchVideoEncoder
             }
         }
 
+        private void SaveCurrentStreamSelections()
+        {
+            if (_currentStreamsFilePath == null) return;
+
+            var audioStates = new List<bool>();
+            foreach (DataGridViewRow row in dgvAudioStreams.Rows)
+            {
+                var cell = row.Cells[colStreamInclude.Index] as DataGridViewCheckBoxCell;
+                audioStates.Add(cell != null && cell.Value is bool b && b);
+            }
+            _audioStreamSelections[_currentStreamsFilePath] = audioStates;
+
+            var subStates = new List<bool>();
+            foreach (DataGridViewRow row in dgvSubtitleStreams.Rows)
+            {
+                var cell = row.Cells[colSubInclude.Index] as DataGridViewCheckBoxCell;
+                subStates.Add(cell != null && cell.Value is bool b2 && b2);
+            }
+            _subtitleStreamSelections[_currentStreamsFilePath] = subStates;
+        }
+
         private void PopulateStreamsGrid(string filePath)
         {
+            // Save checkbox state of the previously displayed file before switching
+            SaveCurrentStreamSelections();
+
             dgvAudioStreams.Rows.Clear();
             dgvSubtitleStreams.Rows.Clear();
+            _currentStreamsFilePath = filePath;
 
             try
             {
                 IMediaAnalysis mediaInfo = FFProbe.Analyse(filePath);
                 var primaryHighlight = System.Drawing.Color.LightGoldenrodYellow;
 
+                // Restore saved audio selections for this file (default: all included)
+                List<bool> savedAudio = null;
+                _audioStreamSelections.TryGetValue(filePath, out savedAudio);
+
+                int audioIdx = 0;
                 // Populate audio streams
                 foreach (var audioStream in mediaInfo.AudioStreams)
                 {
                     string bitrate = audioStream.BitRate > 0 
                         ? (audioStream.BitRate / 1000) + " kbps" 
                         : "N/A";
-                    
+
+                    bool include = (savedAudio != null && audioIdx < savedAudio.Count)
+                        ? savedAudio[audioIdx]
+                        : true;
+
                     int rowIndex = dgvAudioStreams.Rows.Add(
-                        true, 
+                        include, 
                         audioStream.CodecName ?? "Unknown", 
                         audioStream.Language ?? "Unknown", 
                         audioStream.Channels.ToString(),
                         bitrate
                     );
+                    audioIdx++;
 
                     if (audioStream == mediaInfo.PrimaryAudioStream)
                     {
@@ -647,14 +683,23 @@ namespace BatchVideoEncoder
                     }
                 }
 
+                // Restore saved subtitle selections for this file (default: all included)
+                List<bool> savedSub = null;
+                _subtitleStreamSelections.TryGetValue(filePath, out savedSub);
+
+                int subIdx = 0;
                 // Populate subtitle streams
                 foreach (var subtitleStream in mediaInfo.SubtitleStreams)
                 {
+                    bool include = (savedSub != null && subIdx < savedSub.Count)
+                        ? savedSub[subIdx]
+                        : true;
+
                     int rowIndex = dgvSubtitleStreams.Rows.Add(
-                        true,
-                       
+                        include,
                         subtitleStream.Language ?? "Unknown"
                     );
+                    subIdx++;
 
                     if (subtitleStream == mediaInfo.PrimarySubtitleStream)
                     {
@@ -709,7 +754,6 @@ namespace BatchVideoEncoder
             //textBoxCRF.Text = dbEntry.crf.ToString();
             numericCrf.Value = Convert.ToDecimal(  dbEntry.crf);
             //textBoxNR.Text = dbEntry.nr.ToString();
-            textBoxAAC.Text = dbEntry.aQuality.ToString();
             //comboBoxPreset.Text = dbEntry.preset.ToString();
             comboBoxPreset.Text = dbEntry.presetStr;
             
@@ -846,7 +890,6 @@ namespace BatchVideoEncoder
             dbEntry.NewYRes = Convert.ToInt32(tbYresLimit.Text);
             dbEntry.crf = Convert.ToDouble(numericCrf.Value);
             //dbEntry.nr = Convert.ToDouble(textBoxNR.Text);
-            dbEntry.aQuality = Convert.ToDouble(textBoxAAC.Text);
             //dbEntry.preset = (Preset)Enum.Parse(typeof(Preset), comboBoxPreset.Text);
             dbEntry.presetStr = comboBoxPreset.Text;
             if (radioNoResize.Checked)
@@ -881,8 +924,8 @@ namespace BatchVideoEncoder
                 }
 
             }
-            //if(dbEntry.useNoiseFilter) dbEntry.DenoiseFilterStr = appConfigDict[dbEntry.DenoiseFilterName];
-            dbEntry.audioMode = radioEncodeAAC.Checked ? AudioMode.Encode : radioCopyAudio.Checked ? AudioMode.Copy : AudioMode.Disable;
+            dbEntry.opusBitrate = GetSelectedOpusBitrate();
+            dbEntry.opusChannelMode = GetSelectedOpusChannelMode();
 
             dbEntry.calculateNewRes();
 
@@ -901,6 +944,10 @@ namespace BatchVideoEncoder
             foreach (var stream in info.AudioStreams)
             {
                 logger.Debug($"Audio Stream: Index: {stream.Index} Codec={stream.CodecName}, Channels={stream.Channels}, Bitrate={stream.BitRate}, Bitrate={stream.BitRate}, Language: {stream.Language}");
+                foreach(var tag in stream.Tags)
+                {
+                    logger.Debug($"    Tag: {tag.Key} = {tag.Value}");
+                }
             }
 
             if (info.PrimarySubtitleStream != null)
@@ -911,6 +958,10 @@ namespace BatchVideoEncoder
             foreach (var stream in info.SubtitleStreams)
             {
                 logger.Debug($"Subtitle Stream: Index: {stream.Index} Codec={stream.CodecName}, Language: {stream.Language}");
+                foreach (var tag in stream.Tags)
+                {
+                    logger.Debug($"    Tag: {tag.Key} = {tag.Value}");
+                }
             }
 
         }
@@ -955,21 +1006,39 @@ namespace BatchVideoEncoder
             
         }
 
-        private void radioEncodeAAC_CheckedChanged(object sender, EventArgs e)
+        private void audioStereoMenuItem_Click(object sender, EventArgs e)
         {
-            textBoxAAC.Enabled = radioEncodeAAC.Checked;
+            audioStereoMenuItem.Checked = true;
+            audioKeepSourceMenuItem.Checked = false;
+            audioCopyStreamsMenuItem.Checked = false;
         }
 
-        private void radioCopyAudio_CheckedChanged(object sender, EventArgs e)
+        private void audioKeepSourceMenuItem_Click(object sender, EventArgs e)
         {
-            textBoxAAC.Enabled = radioEncodeAAC.Checked;
-
+            audioStereoMenuItem.Checked = false;
+            audioKeepSourceMenuItem.Checked = true;
+            audioCopyStreamsMenuItem.Checked = false;
         }
 
-        private void radioDisableAudio_CheckedChanged(object sender, EventArgs e)
+        private void audioCopyStreamsMenuItem_Click(object sender, EventArgs e)
         {
-            textBoxAAC.Enabled = radioEncodeAAC.Checked;
+            audioStereoMenuItem.Checked = false;
+            audioKeepSourceMenuItem.Checked = false;
+            audioCopyStreamsMenuItem.Checked = true;
+        }
 
+        private int GetSelectedOpusBitrate()
+        {
+            if (int.TryParse(numericOpusBitrate.Text, out int bitrate) && bitrate > 0)
+                return bitrate;
+            return 96;
+        }
+
+        private OpusChannelMode GetSelectedOpusChannelMode()
+        {
+            if (audioCopyStreamsMenuItem.Checked) return OpusChannelMode.CopyAllStreams;
+            if (audioKeepSourceMenuItem.Checked) return OpusChannelMode.KeepSourceChannels;
+            return OpusChannelMode.ConvertToStereo;
         }
 
         private void btnOpenLog_Click(object sender, EventArgs e)
@@ -985,8 +1054,30 @@ namespace BatchVideoEncoder
 
         private void btnClearLog_Click(object sender, EventArgs e)
         {
-            string logPath = Path.Combine(Directory.GetCurrentDirectory(), "Logs", "AppLog.log");
-            if (System.IO.File.Exists(logPath)) System.IO.File.WriteAllText(logPath, "");
+            try
+            {
+                // Flush all pending log messages
+                LogManager.Flush();
+                
+                // Close all targets to release file locks
+                LogManager.Shutdown();
+                
+                string logPath = Path.Combine(Directory.GetCurrentDirectory(), "Logs", "AppLog.log");
+                if (System.IO.File.Exists(logPath))
+                {
+                    System.IO.File.WriteAllText(logPath, "");
+                }
+                
+                // Clear the log text box
+                UiUpdateHelper.updateUI(tbLog, () => tbLog.Clear());
+                
+                // Re-initialize LogManager for continued logging
+                LogManager.LoadConfiguration(System.IO.Path.Combine(Directory.GetCurrentDirectory(), "NLog.config"));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error clearing log file: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void numericCrf_ValueChanged(object sender, EventArgs e)

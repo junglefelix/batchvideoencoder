@@ -32,8 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btn_browse = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBoxAAC = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.comboBoxPreset = new System.Windows.Forms.ComboBox();
@@ -122,6 +120,13 @@
             this.codecX265MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.codecX264MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.codecAv1MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.audioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.audioOpusBitrateMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.numericOpusBitrate = new System.Windows.Forms.ToolStripTextBox();
+            this.audioChannelModeMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.audioStereoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.audioKeepSourceMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.audioCopyStreamsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tbCmdOut = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -136,28 +141,24 @@
             this.tbSuffix = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.numericCrf = new System.Windows.Forms.NumericUpDown();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.radioDisableAudio = new System.Windows.Forms.RadioButton();
-            this.radioCopyAudio = new System.Windows.Forms.RadioButton();
-            this.radioEncodeAAC = new System.Windows.Forms.RadioButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dgvSubtitleStreams = new System.Windows.Forms.DataGridView();
+            this.colSubInclude = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colSubLanguage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbTempPath = new System.Windows.Forms.TextBox();
             this.dgvAudioStreams = new System.Windows.Forms.DataGridView();
+            this.colStreamInclude = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colStreamCodec = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStreamLanguage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStreamChannels = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStreamBitrate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.btnClearLog = new System.Windows.Forms.Button();
             this.btnOpenLog = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.tbLog = new System.Windows.Forms.TextBox();
-            this.colStreamInclude = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colStreamCodec = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStreamLanguage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStreamChannels = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStreamBitrate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSubInclude = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colSubLanguage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDst)).BeginInit();
@@ -166,7 +167,6 @@
             this.groupBox4.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCrf)).BeginInit();
-            this.groupBox5.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSubtitleStreams)).BeginInit();
@@ -195,24 +195,6 @@
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(108, 25);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(75, 16);
-            this.label3.TabIndex = 15;
-            this.label3.Text = "aac quality:";
-            // 
-            // textBoxAAC
-            // 
-            this.textBoxAAC.Location = new System.Drawing.Point(189, 21);
-            this.textBoxAAC.Margin = new System.Windows.Forms.Padding(4);
-            this.textBoxAAC.Name = "textBoxAAC";
-            this.textBoxAAC.Size = new System.Drawing.Size(68, 22);
-            this.textBoxAAC.TabIndex = 16;
             // 
             // label4
             // 
@@ -939,7 +921,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.optionsToolStripMenuItem,
-            this.videoToolStripMenuItem});
+            this.videoToolStripMenuItem,
+            this.audioToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1521, 28);
@@ -1093,6 +1076,68 @@
             this.codecAv1MenuItem.Size = new System.Drawing.Size(123, 26);
             this.codecAv1MenuItem.Text = "AV1";
             this.codecAv1MenuItem.Click += new System.EventHandler(this.codecAv1MenuItem_Click);
+            // 
+            // audioToolStripMenuItem
+            // 
+            this.audioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.audioOpusBitrateMenuItem,
+            this.numericOpusBitrate,
+            this.audioChannelModeMenuItem});
+            this.audioToolStripMenuItem.Name = "audioToolStripMenuItem";
+            this.audioToolStripMenuItem.Size = new System.Drawing.Size(63, 24);
+            this.audioToolStripMenuItem.Text = "Audio";
+            // 
+            // audioOpusBitrateMenuItem
+            // 
+            this.audioOpusBitrateMenuItem.Enabled = false;
+            this.audioOpusBitrateMenuItem.Name = "audioOpusBitrateMenuItem";
+            this.audioOpusBitrateMenuItem.Size = new System.Drawing.Size(222, 26);
+            this.audioOpusBitrateMenuItem.Text = "Opus Bitrate (kbps):";
+            // 
+            // numericOpusBitrate
+            // 
+            this.numericOpusBitrate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.numericOpusBitrate.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.numericOpusBitrate.Name = "numericOpusBitrate";
+            this.numericOpusBitrate.Size = new System.Drawing.Size(80, 27);
+            this.numericOpusBitrate.Text = "96";
+            this.numericOpusBitrate.ToolTipText = "Opus codec bitrate in kbps";
+            // 
+            // audioChannelModeMenuItem
+            // 
+            this.audioChannelModeMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.audioStereoMenuItem,
+            this.audioKeepSourceMenuItem,
+            this.audioCopyStreamsMenuItem});
+            this.audioChannelModeMenuItem.Name = "audioChannelModeMenuItem";
+            this.audioChannelModeMenuItem.Size = new System.Drawing.Size(222, 26);
+            this.audioChannelModeMenuItem.Text = "Channel Mode";
+            // 
+            // audioStereoMenuItem
+            // 
+            this.audioStereoMenuItem.Checked = true;
+            this.audioStereoMenuItem.CheckOnClick = true;
+            this.audioStereoMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.audioStereoMenuItem.Name = "audioStereoMenuItem";
+            this.audioStereoMenuItem.Size = new System.Drawing.Size(249, 26);
+            this.audioStereoMenuItem.Text = "Convert to Stereo";
+            this.audioStereoMenuItem.Click += new System.EventHandler(this.audioStereoMenuItem_Click);
+            // 
+            // audioKeepSourceMenuItem
+            // 
+            this.audioKeepSourceMenuItem.CheckOnClick = true;
+            this.audioKeepSourceMenuItem.Name = "audioKeepSourceMenuItem";
+            this.audioKeepSourceMenuItem.Size = new System.Drawing.Size(249, 26);
+            this.audioKeepSourceMenuItem.Text = "Convert, but keep Source Channels";
+            this.audioKeepSourceMenuItem.Click += new System.EventHandler(this.audioKeepSourceMenuItem_Click);
+            // 
+            // audioCopyStreamsMenuItem
+            // 
+            this.audioCopyStreamsMenuItem.CheckOnClick = true;
+            this.audioCopyStreamsMenuItem.Name = "audioCopyStreamsMenuItem";
+            this.audioCopyStreamsMenuItem.Size = new System.Drawing.Size(249, 26);
+            this.audioCopyStreamsMenuItem.Text = "Copy All Audio Streams";
+            this.audioCopyStreamsMenuItem.Click += new System.EventHandler(this.audioCopyStreamsMenuItem_Click);
             // 
             // tbCmdOut
             // 
@@ -1249,61 +1294,6 @@
             this.numericCrf.TabIndex = 0;
             this.numericCrf.ValueChanged += new System.EventHandler(this.numericCrf_ValueChanged);
             // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.radioDisableAudio);
-            this.groupBox5.Controls.Add(this.radioCopyAudio);
-            this.groupBox5.Controls.Add(this.radioEncodeAAC);
-            this.groupBox5.Controls.Add(this.label3);
-            this.groupBox5.Controls.Add(this.textBoxAAC);
-            this.groupBox5.Location = new System.Drawing.Point(612, 30);
-            this.groupBox5.Margin = new System.Windows.Forms.Padding(4);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox5.Size = new System.Drawing.Size(267, 108);
-            this.groupBox5.TabIndex = 61;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Audio";
-            // 
-            // radioDisableAudio
-            // 
-            this.radioDisableAudio.AutoSize = true;
-            this.radioDisableAudio.Location = new System.Drawing.Point(8, 68);
-            this.radioDisableAudio.Margin = new System.Windows.Forms.Padding(4);
-            this.radioDisableAudio.Name = "radioDisableAudio";
-            this.radioDisableAudio.Size = new System.Drawing.Size(113, 20);
-            this.radioDisableAudio.TabIndex = 19;
-            this.radioDisableAudio.TabStop = true;
-            this.radioDisableAudio.Text = "Disable Audio";
-            this.radioDisableAudio.UseVisualStyleBackColor = true;
-            this.radioDisableAudio.CheckedChanged += new System.EventHandler(this.radioDisableAudio_CheckedChanged);
-            // 
-            // radioCopyAudio
-            // 
-            this.radioCopyAudio.AutoSize = true;
-            this.radioCopyAudio.Location = new System.Drawing.Point(8, 44);
-            this.radioCopyAudio.Margin = new System.Windows.Forms.Padding(4);
-            this.radioCopyAudio.Name = "radioCopyAudio";
-            this.radioCopyAudio.Size = new System.Drawing.Size(115, 20);
-            this.radioCopyAudio.TabIndex = 18;
-            this.radioCopyAudio.TabStop = true;
-            this.radioCopyAudio.Text = "Copy all Audio";
-            this.radioCopyAudio.UseVisualStyleBackColor = true;
-            this.radioCopyAudio.CheckedChanged += new System.EventHandler(this.radioCopyAudio_CheckedChanged);
-            // 
-            // radioEncodeAAC
-            // 
-            this.radioEncodeAAC.AutoSize = true;
-            this.radioEncodeAAC.Location = new System.Drawing.Point(8, 22);
-            this.radioEncodeAAC.Margin = new System.Windows.Forms.Padding(4);
-            this.radioEncodeAAC.Name = "radioEncodeAAC";
-            this.radioEncodeAAC.Size = new System.Drawing.Size(75, 20);
-            this.radioEncodeAAC.TabIndex = 17;
-            this.radioEncodeAAC.TabStop = true;
-            this.radioEncodeAAC.Text = "Encode";
-            this.radioEncodeAAC.UseVisualStyleBackColor = true;
-            this.radioEncodeAAC.CheckedChanged += new System.EventHandler(this.radioEncodeAAC_CheckedChanged);
-            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
@@ -1361,6 +1351,22 @@
             this.dgvSubtitleStreams.RowTemplate.Height = 24;
             this.dgvSubtitleStreams.Size = new System.Drawing.Size(464, 133);
             this.dgvSubtitleStreams.TabIndex = 57;
+            this.dgvSubtitleStreams.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSubtitleStreams_CellValueChanged);
+            // 
+            // colSubInclude
+            // 
+            this.colSubInclude.HeaderText = "Incl";
+            this.colSubInclude.MinimumWidth = 6;
+            this.colSubInclude.Name = "colSubInclude";
+            this.colSubInclude.Width = 60;
+            // 
+            // colSubLanguage
+            // 
+            this.colSubLanguage.HeaderText = "Language";
+            this.colSubLanguage.MinimumWidth = 6;
+            this.colSubLanguage.Name = "colSubLanguage";
+            this.colSubLanguage.ReadOnly = true;
+            this.colSubLanguage.Width = 110;
             // 
             // tbTempPath
             // 
@@ -1386,6 +1392,46 @@
             this.dgvAudioStreams.RowTemplate.Height = 24;
             this.dgvAudioStreams.Size = new System.Drawing.Size(464, 185);
             this.dgvAudioStreams.TabIndex = 55;
+            this.dgvAudioStreams.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAudioStreams_CellValueChanged);
+            // 
+            // colStreamInclude
+            // 
+            this.colStreamInclude.HeaderText = "Incl";
+            this.colStreamInclude.MinimumWidth = 6;
+            this.colStreamInclude.Name = "colStreamInclude";
+            this.colStreamInclude.Width = 50;
+            // 
+            // colStreamCodec
+            // 
+            this.colStreamCodec.HeaderText = "Codec";
+            this.colStreamCodec.MinimumWidth = 6;
+            this.colStreamCodec.Name = "colStreamCodec";
+            this.colStreamCodec.ReadOnly = true;
+            this.colStreamCodec.Width = 40;
+            // 
+            // colStreamLanguage
+            // 
+            this.colStreamLanguage.HeaderText = "Lang";
+            this.colStreamLanguage.MinimumWidth = 6;
+            this.colStreamLanguage.Name = "colStreamLanguage";
+            this.colStreamLanguage.ReadOnly = true;
+            this.colStreamLanguage.Width = 40;
+            // 
+            // colStreamChannels
+            // 
+            this.colStreamChannels.HeaderText = "Chan";
+            this.colStreamChannels.MinimumWidth = 6;
+            this.colStreamChannels.Name = "colStreamChannels";
+            this.colStreamChannels.ReadOnly = true;
+            this.colStreamChannels.Width = 40;
+            // 
+            // colStreamBitrate
+            // 
+            this.colStreamBitrate.HeaderText = "Bitrate";
+            this.colStreamBitrate.MinimumWidth = 6;
+            this.colStreamBitrate.Name = "colStreamBitrate";
+            this.colStreamBitrate.ReadOnly = true;
+            this.colStreamBitrate.Width = 80;
             // 
             // tabPage2
             // 
@@ -1455,67 +1501,12 @@
             this.tbLog.Size = new System.Drawing.Size(1483, 697);
             this.tbLog.TabIndex = 0;
             // 
-            // colStreamInclude
-            // 
-            this.colStreamInclude.HeaderText = "Incl";
-            this.colStreamInclude.MinimumWidth = 6;
-            this.colStreamInclude.Name = "colStreamInclude";
-            this.colStreamInclude.Width = 50;
-            // 
-            // colStreamCodec
-            // 
-            this.colStreamCodec.HeaderText = "Codec";
-            this.colStreamCodec.MinimumWidth = 6;
-            this.colStreamCodec.Name = "colStreamCodec";
-            this.colStreamCodec.ReadOnly = true;
-            this.colStreamCodec.Width = 40;
-            // 
-            // colStreamLanguage
-            // 
-            this.colStreamLanguage.HeaderText = "Lang";
-            this.colStreamLanguage.MinimumWidth = 6;
-            this.colStreamLanguage.Name = "colStreamLanguage";
-            this.colStreamLanguage.ReadOnly = true;
-            this.colStreamLanguage.Width = 40;
-            // 
-            // colStreamChannels
-            // 
-            this.colStreamChannels.HeaderText = "Chan";
-            this.colStreamChannels.MinimumWidth = 6;
-            this.colStreamChannels.Name = "colStreamChannels";
-            this.colStreamChannels.ReadOnly = true;
-            this.colStreamChannels.Width = 40;
-            // 
-            // colStreamBitrate
-            // 
-            this.colStreamBitrate.HeaderText = "Bitrate";
-            this.colStreamBitrate.MinimumWidth = 6;
-            this.colStreamBitrate.Name = "colStreamBitrate";
-            this.colStreamBitrate.ReadOnly = true;
-            this.colStreamBitrate.Width = 80;
-            // 
-            // colSubInclude
-            // 
-            this.colSubInclude.HeaderText = "Incl";
-            this.colSubInclude.MinimumWidth = 6;
-            this.colSubInclude.Name = "colSubInclude";
-            this.colSubInclude.Width = 60;
-            // 
-            // colSubLanguage
-            // 
-            this.colSubLanguage.HeaderText = "Language";
-            this.colSubLanguage.MinimumWidth = 6;
-            this.colSubLanguage.Name = "colSubLanguage";
-            this.colSubLanguage.ReadOnly = true;
-            this.colSubLanguage.Width = 110;
-            // 
             // Form1
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1521, 927);
-            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.menuStrip1);
@@ -1540,8 +1531,6 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCrf)).EndInit();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -1557,8 +1546,6 @@
         #endregion
         private System.Windows.Forms.Button btn_browse;
         private System.Windows.Forms.Button btnStart;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBoxAAC;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox comboBoxPreset;
@@ -1652,10 +1639,13 @@
         private System.Windows.Forms.TextBox tbSuffix;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.NumericUpDown numericCrf;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.RadioButton radioDisableAudio;
-        private System.Windows.Forms.RadioButton radioCopyAudio;
-        private System.Windows.Forms.RadioButton radioEncodeAAC;
+        private System.Windows.Forms.ToolStripMenuItem audioToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem audioOpusBitrateMenuItem;
+        private System.Windows.Forms.ToolStripTextBox numericOpusBitrate;
+        private System.Windows.Forms.ToolStripMenuItem audioChannelModeMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem audioStereoMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem audioKeepSourceMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem audioCopyStreamsMenuItem;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage1;

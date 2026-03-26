@@ -165,35 +165,28 @@ namespace BatchVideoEncoder.Helpers
                     break;
             }
 
-            string cli_path = string.Empty;
-
-            switch (dbEntry.audioMode)
+            // Build audio encoding arguments using libopus
+            string audioArgs;
+            switch (dbEntry.opusChannelMode)
             {
-                case AudioMode.Encode:
-                    cli_path = @"start ""encode"" /b /low /wait """ +                                       //set low priority
-                       workingDir + @"\tools\ffmpeg.exe"" -i " + "\"" + dbEntry.encodedAacFile + "\"" +   //Input1 - aac Audio
-                       " -i " + " \"" + srcFileName + "\"" + " -map 0:0 -map 1:0 -acodec copy " + filtersStr + " -preset " + preset +
-                       " -map 1:s? -c copy " + " -c:v " + vCodecAndCrfStr + " \"" + dbEntry.dstEncodedFile + "\"";
+                case OpusChannelMode.CopyAllStreams:
+                    audioArgs = " -map 0 -c:a copy";
                     break;
-                case AudioMode.Copy:
-                    cli_path = @"start ""encode"" /b /low /wait """ + workingDir + @"\tools\ffmpeg.exe"" -i " +
-                       " \"" + srcFileName + "\"" + " -c:a copy -map 0 " + filtersStr + " -preset " + preset +
-                     " -c:v " + vCodecAndCrfStr + " \"" + dbEntry.dstEncodedFile + "\"";
+                case OpusChannelMode.KeepSourceChannels:
+                    audioArgs = " -map 0 -c:a libopus -b:a " + dbEntry.opusBitrate + "k";
                     break;
-                case AudioMode.Disable:
-                    cli_path = @"start ""encode"" /b /low /wait """ + workingDir + @"\tools\ffmpeg.exe"" -i " +
-                       " \"" + srcFileName + "\"" + " -an " + filtersStr + " -preset " + preset + " -map 0:s? -c copy " +
-                      " -map 0:v -c:v " + vCodecAndCrfStr + " \"" + dbEntry.dstEncodedFile + "\"";
-                    break;
-                default:
+                default: // ConvertToStereo
+                    audioArgs = " -map 0 -c:a libopus -ac 2 -b:a " + dbEntry.opusBitrate + "k";
                     break;
             }
+
+            string cli_path = @"start ""encode"" /b /low /wait """ + workingDir + @"\tools\ffmpeg.exe"" -i " +
+                "\"" + srcFileName + "\"" + audioArgs + filtersStr + " -preset " + preset +
+                " -map 0:s? -c:s copy" + " -c:v " + vCodecAndCrfStr + " \"" + dbEntry.dstEncodedFile + "\"";
             // copy subtitles: -map 0:s -c copy
             logger.Info("FFMpeg video encoding and mux command: {0}{1}", Environment.NewLine, cli_path);
             ProcessHelper.RunProcessWithCallback("cmd", "/c " + cli_path, callBack, Path.Combine(workingDir, "Tools"), isRunHidden);
             logger.Info("Encode and Mux command process finished.");
-            logger.Info("will delete temp audio files...");
-            if (File.Exists(dbEntry.encodedAacFile)) File.Delete(dbEntry.encodedAacFile);
             logger.Info("About to check if output file was created...");
             if (File.Exists(dbEntry.dstEncodedFile))
             {
@@ -208,36 +201,6 @@ namespace BatchVideoEncoder.Helpers
         }
 
        
-
-        public static bool encodeAudio(MovieEntry dbEntry)
-        {
-            logger.Info( "Entered encodeAudio()");
-            var aQuality = dbEntry.aQuality.ToString();
-            // ffmpeg -i source.avi -acodec pcm_s32le -ac 2 -f wav - | neroAacEnc -if - -q 0.24 -ignorelength -of out.mp4
-            string cli_path = @"start ""encode"" /b /low /wait """ +                                      
-                   workingDir + @"\tools\ffmpeg.exe"" -i " + "\"" + dbEntry.fullFilePath + "\"" +
-                   " -acodec pcm_s32le -ac 2 -f wav - | neroAacEnc -if - -q " + aQuality +
-                   " -ignorelength -of \"" + dbEntry.encodedAacFile + "\"";
-
-           logger.Info("Audio Encoding arguments: {0}", cli_path);
-           logger.Info( "Working dir=" + workingDir);
-            //Helper.run_CLI_tool2(cli_path,Path.Combine(workingDir, "Tools"),isRunHidden);
-            var cmdOut =  ProcessHelper.runCliAppWithOutput("cmd", "/c " + cli_path, Path.Combine(workingDir, "Tools"), isRunHidden);
-            logger.Info("Audio encode ouput is................:");
-            logger.Info(cmdOut);
-            logger.Info("About to check if output file was created...");
-            if (File.Exists(dbEntry.encodedAacFile))
-            {
-                logger.Info("Encoded aac ile exists, name=" + dbEntry.encodedAacFile);
-                return true;
-
-            }
-            else
-            {
-                logger.Error( "!! Error !! File does not exist, name=" + dbEntry.encodedAacFile);
-                return false;
-            }
-        }
 
     
     }
