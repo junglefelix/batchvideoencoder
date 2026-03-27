@@ -149,40 +149,47 @@ namespace BatchVideoEncoder.Helpers
             logger.Info("Output filename is going to be = " + dbEntry.dstEncodedFile);
             #endregion
 
-            // Build codec + CRF arguments:
-            // x264/x265 pass CRF via encoder params string; AV1 (libaom-av1) uses -crf directly.
+            
+            string mappings = " -map 0:v:0" +  // default mapping for video stream (first video stream)
+                " -map 0:a?" + // map all audio streams if exist, otherwise ignore audio streams
+                " -map 0:s? "; // map all subtitle streams if exist, otherwise ignore subtitle streams
+
+
             string vCodecAndCrfStr;
             switch (dbEntry.videoCodec)
             {
                 case VideoCodec.X264:
-                    vCodecAndCrfStr = " libx264 -x264-params crf=" + crf;
+                    vCodecAndCrfStr = " -c:v libx264 -crf " + crf;
                     break;
                 case VideoCodec.AV1:
-                    vCodecAndCrfStr = " libaom-av1 -crf " + crf + " -b:v 0";
+                    vCodecAndCrfStr = " -c:v libsvtav1 -crf" + crf;
                     break;
-                default: // X265
-                    vCodecAndCrfStr = " hevc -x265-params crf=" + crf;
+                case VideoCodec.X265:
+                    vCodecAndCrfStr = " -c:v libx265 -crf " + crf;
+                    break;
+                default:
+                    vCodecAndCrfStr = " -c:v libsvtav1 -crf" + crf;
                     break;
             }
 
             // Build audio encoding arguments using libopus
             string audioArgs;
-            switch (dbEntry.opusChannelMode)
+            switch (dbEntry.audioChannelMode)
             {
-                case OpusChannelMode.CopyAllStreams:
-                    audioArgs = " -map 0 -c:a copy";
+                case OpusChannelMode.CopyAllStreamsAsIs:
+                    audioArgs = " -c:a copy";
                     break;
-                case OpusChannelMode.KeepSourceChannels:
-                    audioArgs = " -map 0 -c:a libopus -b:a " + dbEntry.opusBitrate + "k";
+                case OpusChannelMode.CompressButKeepSourceChannels:
+                    audioArgs = " -c:a libopus -b:a " + dbEntry.opusBitrate + "k";
                     break;
                 default: // ConvertToStereo
-                    audioArgs = " -map 0 -c:a libopus -ac 2 -b:a " + dbEntry.opusBitrate + "k";
+                    audioArgs = " -c:a libopus -ac 2 -b:a " + dbEntry.opusBitrate + "k"; //-c:a libopus -ac 2 -b:a 96k
                     break;
             }
 
             string cli_path = @"start ""encode"" /b /low /wait """ + workingDir + @"\tools\ffmpeg.exe"" -i " +
-                "\"" + srcFileName + "\"" + audioArgs + filtersStr + " -preset " + preset +
-                " -map 0:s? -c:s copy" + " -c:v " + vCodecAndCrfStr + " \"" + dbEntry.dstEncodedFile + "\"";
+                "\"" + srcFileName + "\"" + mappings + audioArgs + filtersStr + " -preset " + preset +
+                 vCodecAndCrfStr + " \"" + dbEntry.dstEncodedFile + "\"";
             // copy subtitles: -map 0:s -c copy
             logger.Info("FFMpeg video encoding and mux command: {0}{1}", Environment.NewLine, cli_path);
             ProcessHelper.RunProcessWithCallback("cmd", "/c " + cli_path, callBack, Path.Combine(workingDir, "Tools"), isRunHidden);
@@ -205,3 +212,4 @@ namespace BatchVideoEncoder.Helpers
     
     }
 }
+

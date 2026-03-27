@@ -37,7 +37,7 @@ namespace BatchVideoEncoder
             useNoiseFilter = true;
             curPercentDone = 0.0;
             opusBitrate = 96;
-            opusChannelMode = OpusChannelMode.ConvertToStereo;
+            audioChannelMode = OpusChannelMode.CompressAndConvertToStereo;
 
         }
         public int index { get; set; }
@@ -79,7 +79,7 @@ namespace BatchVideoEncoder
         public DateTime TimeStartedEncoding { get; set; }
         public string encodedAacFile { get; set; }
         public int opusBitrate { get; set; }
-        public OpusChannelMode opusChannelMode { get; set; }
+        public OpusChannelMode audioChannelMode { get; set; }
 
         #region Properties
 
@@ -154,8 +154,8 @@ namespace BatchVideoEncoder
 
     public enum OpusChannelMode
     {
-        ConvertToStereo,
-        KeepSourceChannels,
-        CopyAllStreams
+        CompressAndConvertToStereo,
+        CompressButKeepSourceChannels,
+        CopyAllStreamsAsIs
     }
 }

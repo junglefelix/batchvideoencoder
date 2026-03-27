@@ -6,7 +6,7 @@
       <Value Profile="(Default)">0.24</Value>
     </Setting>
     <Setting Name="X265DefaultCrf" Type="System.String" Scope="User">
-      <Value Profile="(Default)">32</Value>
+      <Value Profile="(Default)">36</Value>
     </Setting>
     <Setting Name="defaultVideoPreset" Type="System.String" Scope="User">
       <Value Profile="(Default)">medium</Value>

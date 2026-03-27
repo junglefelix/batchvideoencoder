@@ -1022,7 +1022,6 @@
             // tbSuffixMenu
             // 
             this.tbSuffixMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbSuffixMenu.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tbSuffixMenu.Name = "tbSuffixMenu";
             this.tbSuffixMenu.Size = new System.Drawing.Size(160, 27);
             this.tbSuffixMenu.ToolTipText = "Output file suffix";
@@ -1091,13 +1090,12 @@
             // 
             this.audioOpusBitrateMenuItem.Enabled = false;
             this.audioOpusBitrateMenuItem.Name = "audioOpusBitrateMenuItem";
-            this.audioOpusBitrateMenuItem.Size = new System.Drawing.Size(222, 26);
+            this.audioOpusBitrateMenuItem.Size = new System.Drawing.Size(224, 26);
             this.audioOpusBitrateMenuItem.Text = "Opus Bitrate (kbps):";
             // 
             // numericOpusBitrate
             // 
             this.numericOpusBitrate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.numericOpusBitrate.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.numericOpusBitrate.Name = "numericOpusBitrate";
             this.numericOpusBitrate.Size = new System.Drawing.Size(80, 27);
             this.numericOpusBitrate.Text = "96";
@@ -1110,7 +1108,7 @@
             this.audioKeepSourceMenuItem,
             this.audioCopyStreamsMenuItem});
             this.audioChannelModeMenuItem.Name = "audioChannelModeMenuItem";
-            this.audioChannelModeMenuItem.Size = new System.Drawing.Size(222, 26);
+            this.audioChannelModeMenuItem.Size = new System.Drawing.Size(224, 26);
             this.audioChannelModeMenuItem.Text = "Channel Mode";
             // 
             // audioStereoMenuItem
@@ -1119,24 +1117,24 @@
             this.audioStereoMenuItem.CheckOnClick = true;
             this.audioStereoMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.audioStereoMenuItem.Name = "audioStereoMenuItem";
-            this.audioStereoMenuItem.Size = new System.Drawing.Size(249, 26);
-            this.audioStereoMenuItem.Text = "Convert to Stereo";
+            this.audioStereoMenuItem.Size = new System.Drawing.Size(334, 26);
+            this.audioStereoMenuItem.Text = "Compress, convert to Stereo";
             this.audioStereoMenuItem.Click += new System.EventHandler(this.audioStereoMenuItem_Click);
             // 
             // audioKeepSourceMenuItem
             // 
             this.audioKeepSourceMenuItem.CheckOnClick = true;
             this.audioKeepSourceMenuItem.Name = "audioKeepSourceMenuItem";
-            this.audioKeepSourceMenuItem.Size = new System.Drawing.Size(249, 26);
-            this.audioKeepSourceMenuItem.Text = "Convert, but keep Source Channels";
+            this.audioKeepSourceMenuItem.Size = new System.Drawing.Size(334, 26);
+            this.audioKeepSourceMenuItem.Text = "Compress, but keep Source Channels";
             this.audioKeepSourceMenuItem.Click += new System.EventHandler(this.audioKeepSourceMenuItem_Click);
             // 
             // audioCopyStreamsMenuItem
             // 
             this.audioCopyStreamsMenuItem.CheckOnClick = true;
             this.audioCopyStreamsMenuItem.Name = "audioCopyStreamsMenuItem";
-            this.audioCopyStreamsMenuItem.Size = new System.Drawing.Size(249, 26);
-            this.audioCopyStreamsMenuItem.Text = "Copy All Audio Streams";
+            this.audioCopyStreamsMenuItem.Size = new System.Drawing.Size(334, 26);
+            this.audioCopyStreamsMenuItem.Text = "Copy All Audio Streams as-is";
             this.audioCopyStreamsMenuItem.Click += new System.EventHandler(this.audioCopyStreamsMenuItem_Click);
             // 
             // tbCmdOut

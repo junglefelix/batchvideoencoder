@@ -75,7 +75,8 @@ namespace BatchVideoEncoder
             tbXresLimit.Text = "720";
             tbYresLimit.Text = "480";
             runHiddenMenuItem.Checked = true;
-            codecX265MenuItem.Checked = true;
+            codecX265MenuItem.Checked = false;
+            codecAv1MenuItem.Checked = true;
 
             formatMkvMenuItem.Checked = true;
             formatMp4MenuItem.Checked = false;
@@ -339,7 +340,7 @@ namespace BatchVideoEncoder
                 entry.dstEncodedFile = Path.Combine(targetOutFileDir, name + tbSuffixMenu.Text + (formatMkvMenuItem.Checked ? ".mkv" : ".mp4"));
                 entry.videoCodec = GetSelectedCodec();
                 entry.opusBitrate = GetSelectedOpusBitrate();
-                entry.opusChannelMode = GetSelectedOpusChannelMode();
+                entry.audioChannelMode = GetSelectedOpusChannelMode();
                
             }
         }
@@ -557,7 +558,7 @@ namespace BatchVideoEncoder
             entry.DenoiseFilterName = defaultParams.DenoiseFilterName;
             entry.DenoiseFilterStr = defaultParams.DenoiseFilterStr;
             entry.opusBitrate = defaultParams.opusBitrate;
-            entry.opusChannelMode = defaultParams.opusChannelMode;
+            entry.audioChannelMode = defaultParams.audioChannelMode;
 
 
             entry.calculateNewRes();
@@ -925,7 +926,7 @@ namespace BatchVideoEncoder
 
             }
             dbEntry.opusBitrate = GetSelectedOpusBitrate();
-            dbEntry.opusChannelMode = GetSelectedOpusChannelMode();
+            dbEntry.audioChannelMode = GetSelectedOpusChannelMode();
 
             dbEntry.calculateNewRes();
 
@@ -1036,9 +1037,9 @@ namespace BatchVideoEncoder
 
         private OpusChannelMode GetSelectedOpusChannelMode()
         {
-            if (audioCopyStreamsMenuItem.Checked) return OpusChannelMode.CopyAllStreams;
-            if (audioKeepSourceMenuItem.Checked) return OpusChannelMode.KeepSourceChannels;
-            return OpusChannelMode.ConvertToStereo;
+            if (audioCopyStreamsMenuItem.Checked) return OpusChannelMode.CopyAllStreamsAsIs;
+            if (audioKeepSourceMenuItem.Checked) return OpusChannelMode.CompressButKeepSourceChannels;
+            return OpusChannelMode.CompressAndConvertToStereo;
         }
 
         private void btnOpenLog_Click(object sender, EventArgs e)
