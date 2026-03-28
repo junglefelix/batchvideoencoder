@@ -125,7 +125,6 @@
             this.numericOpusBitrate = new System.Windows.Forms.ToolStripTextBox();
             this.audioChannelModeMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.audioStereoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.audioKeepSourceMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.audioCopyStreamsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tbCmdOut = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -1022,6 +1021,7 @@
             // tbSuffixMenu
             // 
             this.tbSuffixMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbSuffixMenu.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tbSuffixMenu.Name = "tbSuffixMenu";
             this.tbSuffixMenu.Size = new System.Drawing.Size(160, 27);
             this.tbSuffixMenu.ToolTipText = "Output file suffix";
@@ -1096,6 +1096,7 @@
             // numericOpusBitrate
             // 
             this.numericOpusBitrate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.numericOpusBitrate.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.numericOpusBitrate.Name = "numericOpusBitrate";
             this.numericOpusBitrate.Size = new System.Drawing.Size(80, 27);
             this.numericOpusBitrate.Text = "96";
@@ -1105,7 +1106,6 @@
             // 
             this.audioChannelModeMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.audioStereoMenuItem,
-            this.audioKeepSourceMenuItem,
             this.audioCopyStreamsMenuItem});
             this.audioChannelModeMenuItem.Name = "audioChannelModeMenuItem";
             this.audioChannelModeMenuItem.Size = new System.Drawing.Size(224, 26);
@@ -1117,23 +1117,15 @@
             this.audioStereoMenuItem.CheckOnClick = true;
             this.audioStereoMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.audioStereoMenuItem.Name = "audioStereoMenuItem";
-            this.audioStereoMenuItem.Size = new System.Drawing.Size(334, 26);
+            this.audioStereoMenuItem.Size = new System.Drawing.Size(283, 26);
             this.audioStereoMenuItem.Text = "Compress, convert to Stereo";
             this.audioStereoMenuItem.Click += new System.EventHandler(this.audioStereoMenuItem_Click);
-            // 
-            // audioKeepSourceMenuItem
-            // 
-            this.audioKeepSourceMenuItem.CheckOnClick = true;
-            this.audioKeepSourceMenuItem.Name = "audioKeepSourceMenuItem";
-            this.audioKeepSourceMenuItem.Size = new System.Drawing.Size(334, 26);
-            this.audioKeepSourceMenuItem.Text = "Compress, but keep Source Channels";
-            this.audioKeepSourceMenuItem.Click += new System.EventHandler(this.audioKeepSourceMenuItem_Click);
             // 
             // audioCopyStreamsMenuItem
             // 
             this.audioCopyStreamsMenuItem.CheckOnClick = true;
             this.audioCopyStreamsMenuItem.Name = "audioCopyStreamsMenuItem";
-            this.audioCopyStreamsMenuItem.Size = new System.Drawing.Size(334, 26);
+            this.audioCopyStreamsMenuItem.Size = new System.Drawing.Size(283, 26);
             this.audioCopyStreamsMenuItem.Text = "Copy All Audio Streams as-is";
             this.audioCopyStreamsMenuItem.Click += new System.EventHandler(this.audioCopyStreamsMenuItem_Click);
             // 
@@ -1513,7 +1505,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
-            this.Text = "Batch Video Encoder v0.68";
+            this.Text = "Batch Video Encoder v0.73";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Form1_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Form1_DragEnter);
@@ -1642,7 +1634,6 @@
         private System.Windows.Forms.ToolStripTextBox numericOpusBitrate;
         private System.Windows.Forms.ToolStripMenuItem audioChannelModeMenuItem;
         private System.Windows.Forms.ToolStripMenuItem audioStereoMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem audioKeepSourceMenuItem;
         private System.Windows.Forms.ToolStripMenuItem audioCopyStreamsMenuItem;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage2;

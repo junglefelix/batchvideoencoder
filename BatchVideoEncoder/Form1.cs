@@ -365,7 +365,8 @@ namespace BatchVideoEncoder
                 encodeVideoTask.Wait();
                 if(encodeVideoTask.Result == false)
                 {
-                    UiUpdateHelper.updateGridView(dgvDst, 17, fileCnt, "! Video Fail !"); 
+                    UiUpdateHelper.updateGridView(dgvDst, 17, fileCnt, "! FAILED !");
+                    UiUpdateHelper.updateGridView(dgvDst, 18, fileCnt, "0"); // % done
                     logger.Error("!! Error !! Video Encoding failed. Aborting current encoding..");
 
                     continue;
@@ -1010,21 +1011,18 @@ namespace BatchVideoEncoder
         private void audioStereoMenuItem_Click(object sender, EventArgs e)
         {
             audioStereoMenuItem.Checked = true;
-            audioKeepSourceMenuItem.Checked = false;
             audioCopyStreamsMenuItem.Checked = false;
         }
 
         private void audioKeepSourceMenuItem_Click(object sender, EventArgs e)
         {
             audioStereoMenuItem.Checked = false;
-            audioKeepSourceMenuItem.Checked = true;
             audioCopyStreamsMenuItem.Checked = false;
         }
 
         private void audioCopyStreamsMenuItem_Click(object sender, EventArgs e)
         {
             audioStereoMenuItem.Checked = false;
-            audioKeepSourceMenuItem.Checked = false;
             audioCopyStreamsMenuItem.Checked = true;
         }
 
@@ -1038,7 +1036,6 @@ namespace BatchVideoEncoder
         private OpusChannelMode GetSelectedOpusChannelMode()
         {
             if (audioCopyStreamsMenuItem.Checked) return OpusChannelMode.CopyAllStreamsAsIs;
-            if (audioKeepSourceMenuItem.Checked) return OpusChannelMode.CompressButKeepSourceChannels;
             return OpusChannelMode.CompressAndConvertToStereo;
         }
 

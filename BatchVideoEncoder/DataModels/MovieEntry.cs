@@ -155,7 +155,6 @@ namespace BatchVideoEncoder
     public enum OpusChannelMode
     {
         CompressAndConvertToStereo,
-        CompressButKeepSourceChannels,
         CopyAllStreamsAsIs
     }
 }

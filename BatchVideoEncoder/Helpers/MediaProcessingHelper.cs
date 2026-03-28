@@ -162,13 +162,13 @@ namespace BatchVideoEncoder.Helpers
                     vCodecAndCrfStr = " -c:v libx264 -crf " + crf;
                     break;
                 case VideoCodec.AV1:
-                    vCodecAndCrfStr = " -c:v libsvtav1 -crf" + crf;
+                    vCodecAndCrfStr = " -c:v libsvtav1 -crf " + crf;
                     break;
                 case VideoCodec.X265:
                     vCodecAndCrfStr = " -c:v libx265 -crf " + crf;
                     break;
                 default:
-                    vCodecAndCrfStr = " -c:v libsvtav1 -crf" + crf;
+                    vCodecAndCrfStr = " -c:v libsvtav1 -crf " + crf;
                     break;
             }
 
@@ -179,35 +179,68 @@ namespace BatchVideoEncoder.Helpers
                 case OpusChannelMode.CopyAllStreamsAsIs:
                     audioArgs = " -c:a copy";
                     break;
-                case OpusChannelMode.CompressButKeepSourceChannels:
-                    audioArgs = " -c:a libopus -b:a " + dbEntry.opusBitrate + "k";
-                    break;
                 default: // ConvertToStereo
                     audioArgs = " -c:a libopus -ac 2 -b:a " + dbEntry.opusBitrate + "k"; //-c:a libopus -ac 2 -b:a 96k
                     break;
             }
 
-            string cli_path = @"start ""encode"" /b /low /wait """ + workingDir + @"\tools\ffmpeg.exe"" -i " +
-                "\"" + srcFileName + "\"" + mappings + audioArgs + filtersStr + " -preset " + preset +
-                 vCodecAndCrfStr + " \"" + dbEntry.dstEncodedFile + "\"";
+            string presetArg = (dbEntry.videoCodec == VideoCodec.AV1)
+                ? " -preset " + GetAv1Preset(preset)
+                : " -preset " + preset;
+
+            string cli_path = @"start ""encode"" /b /low /wait ffmpeg -i " +
+                "\"" + srcFileName + "\"" + mappings + audioArgs + filtersStr + presetArg +
+                 vCodecAndCrfStr + " -c:s copy \"" + dbEntry.dstEncodedFile + "\"";
             // copy subtitles: -map 0:s -c copy
             logger.Info("FFMpeg video encoding and mux command: {0}{1}", Environment.NewLine, cli_path);
-            ProcessHelper.RunProcessWithCallback("cmd", "/c " + cli_path, callBack, Path.Combine(workingDir, "Tools"), isRunHidden);
+            bool processExitedClean = ProcessHelper.RunProcessWithCallback("cmd", "/c " + cli_path, callBack, workingDir, isRunHidden);
             logger.Info("Encode and Mux command process finished.");
+            if (!processExitedClean)
+            {
+                logger.Error("FFMpeg exited with a non-zero exit code. Encoding failed.");
+                return false;
+            }
             logger.Info("About to check if output file was created...");
             if (File.Exists(dbEntry.dstEncodedFile))
             {
-                logger.Info(" Encoded File exists: " + dbEntry.dstEncodedFile);
+                var fileSize = new FileInfo(dbEntry.dstEncodedFile).Length;
+                if (fileSize == 0)
+                {
+                    logger.Error("Output file is 0 bytes, encoding failed: " + dbEntry.dstEncodedFile);
+                    try { File.Delete(dbEntry.dstEncodedFile); } catch { }
+                    return false;
+                }
+                logger.Info("Encoded file exists and has size " + fileSize + " bytes: " + dbEntry.dstEncodedFile);
                 return true;
             }
             else
             {
-                logger.Error("Targer file does not exist: " + dbEntry.dstEncodedFile);
+                logger.Error("Target file does not exist: " + dbEntry.dstEncodedFile);
                 return false;
             }
         }
 
-       
+        /// <summary>
+        /// Maps x265-style named presets to SVT-AV1 numeric presets (0=best/slowest, 13=fastest).
+        /// </summary>
+        private static string GetAv1Preset(string namedPreset)
+        {
+            switch ((namedPreset ?? string.Empty).ToLowerInvariant())
+            {
+                case "ultrafast":  return "12";
+                case "superfast":  return "11";
+                case "veryfast":   return "10";
+                case "faster":     return "9";
+                case "fast":       return "8";
+                case "medium":     return "7";
+                case "slow":       return "5";
+                case "slower":     return "3";
+                case "veryslow":   return "1";
+                default:
+                    int n;
+                    return int.TryParse(namedPreset, out n) ? namedPreset : "7";
+            }
+        }
 
     
     }
