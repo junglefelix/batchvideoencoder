@@ -924,7 +924,7 @@
             this.audioToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1521, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1521, 30);
             this.menuStrip1.TabIndex = 41;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -934,7 +934,7 @@
             this.addFolderToolStripMenuItem,
             this.addFilesToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 26);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // addFolderToolStripMenuItem
@@ -959,7 +959,7 @@
             this.outputToolStripMenuItem,
             this.runHiddenMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(75, 26);
             this.optionsToolStripMenuItem.Text = "Options";
             // 
             // setCurrentParamsAsDefaultToolStripMenuItem
@@ -1039,7 +1039,7 @@
             this.videoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.codecToolStripMenuItem});
             this.videoToolStripMenuItem.Name = "videoToolStripMenuItem";
-            this.videoToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
+            this.videoToolStripMenuItem.Size = new System.Drawing.Size(62, 26);
             this.videoToolStripMenuItem.Text = "Video";
             // 
             // codecToolStripMenuItem
@@ -1083,14 +1083,14 @@
             this.numericOpusBitrate,
             this.audioChannelModeMenuItem});
             this.audioToolStripMenuItem.Name = "audioToolStripMenuItem";
-            this.audioToolStripMenuItem.Size = new System.Drawing.Size(63, 24);
+            this.audioToolStripMenuItem.Size = new System.Drawing.Size(63, 26);
             this.audioToolStripMenuItem.Text = "Audio";
             // 
             // audioOpusBitrateMenuItem
             // 
             this.audioOpusBitrateMenuItem.Enabled = false;
             this.audioOpusBitrateMenuItem.Name = "audioOpusBitrateMenuItem";
-            this.audioOpusBitrateMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.audioOpusBitrateMenuItem.Size = new System.Drawing.Size(222, 26);
             this.audioOpusBitrateMenuItem.Text = "Opus Bitrate (kbps):";
             // 
             // numericOpusBitrate
@@ -1108,7 +1108,7 @@
             this.audioStereoMenuItem,
             this.audioCopyStreamsMenuItem});
             this.audioChannelModeMenuItem.Name = "audioChannelModeMenuItem";
-            this.audioChannelModeMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.audioChannelModeMenuItem.Size = new System.Drawing.Size(222, 26);
             this.audioChannelModeMenuItem.Text = "Channel Mode";
             // 
             // audioStereoMenuItem
@@ -1505,7 +1505,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
-            this.Text = "Batch Video Encoder v0.73";
+            this.Text = "Batch Video Encoder v0.75 - Add to queue after started working";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Form1_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Form1_DragEnter);

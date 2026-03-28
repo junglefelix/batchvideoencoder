@@ -39,7 +39,11 @@ namespace BatchVideoEncoder
         private int curDstFileIndex = 0;
         //DateTime BeginOneFile, EndOneFile, BeginAllFiles, EndAllFiles;
         List<MovieEntry> SrcDB = new List<MovieEntry>();
-        List<MovieEntry> DstDB = new List<MovieEntry>();
+        private System.Collections.Concurrent.BlockingCollection<MovieEntry> _encodeQueue
+    = new System.Collections.Concurrent.BlockingCollection<MovieEntry>();
+        private List<MovieEntry> DstDB = new List<MovieEntry>(); // UI-only mirror for dgvDst
+        private bool _isWorkerRunning = false;
+        private readonly object _dstDbLock = new object();
         MovieEntry defaultParams = new MovieEntry();
 
         CancellationTokenSource cancelToken = new CancellationTokenSource();
@@ -233,100 +237,94 @@ namespace BatchVideoEncoder
             }
         }
 
-        
-        private void btnAddAllToList_Click(object sender, EventArgs e) //  ADD ALL TO LIST BUTTON
+
+        private void btnAddAllToList_Click(object sender, EventArgs e)
         {
-            DstDB.AddRange(SrcDB);
+            var toAdd = new List<MovieEntry>(SrcDB);
             SrcDB.Clear();
             SaveCurrentGuiParamsToDbEntry(defaultParams);
-            foreach(var dbEntry in DstDB)
+            foreach (var dbEntry in toAdd)
             {
                 SetDefaultEncParamsForDbEntry(dbEntry);
+                updateTargetFileNameForEntry(dbEntry);
+                lock (_dstDbLock) { DstDB.Add(dbEntry); }
+                _encodeQueue.Add(dbEntry);
+                AppendEntryToDstDGV(dbEntry);  // append only, don't rebuild
             }
-            UpdateDstDGV();
             dgvSrc.Rows.Clear();
         }
 
         private void UpdateDstDGV()
         {
             dgvDst.Rows.Clear();
-            int fileIndex = 0;
             foreach (var dbEntry in DstDB)
             {
                 if (dbEntry == null) continue;
-                if(!System.IO.File.Exists(dbEntry.fullFilePath))
+                if (!System.IO.File.Exists(dbEntry.fullFilePath))
                 {
                     logger.Error("Error! About to add entry to dst GridView. File: " + dbEntry.fullFilePath + " does not exist!!");
                     continue;
                 }
-                FileInfo file = new FileInfo(dbEntry.fullFilePath);
-                fileIndex++; // current file index
-                string curFileName = Path.GetFileName(dbEntry.fullFilePath); // file name
-                string status = "Not Done"; // status
-                long srcFileSizeMb = (long)file.Length / (1024 * 1024); //Source File Size
-                string length = "n/a";
-                string resolution = "n/a";
-                string percentDone = "0%";
-                // find the entry in the dst database.
-                //dbEntry = DstDB.FirstOrDefault(r => r.fileNameOnly == curFileName);
-
-                length = dbEntry.durationStr;
-                resolution = dbEntry.newResStr;
-
-
-                //dgvDst.Rows.Add(fileIndex, curFileName, status, srcFileSizeMb, length, resolution, percentDone);
-                dgvDst.Rows.Add(
-                    fileIndex,
-                    dbEntry.fileNameOnly,
-                    (long)file.Length / (1024 * 1024),
-                    dbEntry.origResStr,
-                    dbEntry.newResStr,
-                    dbEntry.durationStr,
-                    dbEntry.vRate.ToString(),
-                    dbEntry.aCodec,
-                    dbEntry.numOfAudioChannels.ToString(),
-                    dbEntry.aRate.ToString(),
-                    dbEntry.aSizeStr,
-                    dbEntry.aStreams.ToString(),
-                    dbEntry.bitsPixelFrameStr,
-                    GetCodecLabel(dbEntry.videoCodec),
-                    dbEntry.crf,
-                    //dbEntry.preset.ToString(),
-                    dbEntry.presetStr,
-                    dbEntry.DenoiseFilterName.Split(' ').First(),
-                    status,
-                    percentDone,
-                    "n/a",  // DstSize
-                    "n/a", // % of orig
-                    "n/a", // enc time
-                    "n/a" // ETA
-
-                    );
-
+                AppendEntryToDstDGV(dbEntry);
             }
         }
 
+        private void AppendEntryToDstDGV(MovieEntry dbEntry)
+        {
+            if (dbEntry == null) return;
+            if (!System.IO.File.Exists(dbEntry.fullFilePath))
+            {
+                logger.Error("Error! About to add entry to dst GridView. File: " + dbEntry.fullFilePath + " does not exist!!");
+                return;
+            }
+            FileInfo file = new FileInfo(dbEntry.fullFilePath);
+            int fileIndex = dgvDst.Rows.Count + 1;
 
-        private void btnStart_Click(object sender, EventArgs e) 
+            dgvDst.Rows.Add(
+                fileIndex,
+                dbEntry.fileNameOnly,
+                (long)file.Length / (1024 * 1024),
+                dbEntry.origResStr,
+                dbEntry.newResStr,
+                dbEntry.durationStr,
+                dbEntry.vRate.ToString(),
+                dbEntry.aCodec,
+                dbEntry.numOfAudioChannels.ToString(),
+                dbEntry.aRate.ToString(),
+                dbEntry.aSizeStr,
+                dbEntry.aStreams.ToString(),
+                dbEntry.bitsPixelFrameStr,
+                GetCodecLabel(dbEntry.videoCodec),
+                dbEntry.crf,
+                dbEntry.presetStr,
+                dbEntry.DenoiseFilterName.Split(' ').First(),
+                "Not Done",
+                "0%",
+                "n/a",  // DstSize
+                "n/a",  // % of orig
+                "n/a",  // enc time
+                "n/a"   // ETA
+            );
+        }
+
+
+        private void btnStart_Click(object sender, EventArgs e)
         {
             progressBar.Visible = true;
             progressBar.Minimum = 0;
-            progressBar.Maximum = DstDB.Count;
+            progressBar.Maximum = _encodeQueue.Count + DstDB.Count;
             progressBar.Step = 1;
             progressBar.Value = 0;
 
-            currentFileIndex = 0; // reset loops
-
             MediaProcessingHelper.isRunHidden = runHiddenMenuItem.Checked;
-            if (DstDB.Any())
+
+            if (!_isWorkerRunning)
             {
-                // go over all dst db, and update with latest ui changes - as suffix,extension,codec, etc.
-                updateTargetFileNamesInDstDb();
-
+                _isWorkerRunning = true;
+                cancelToken = new CancellationTokenSource();
                 btnStart.Enabled = false;
-                var work = Task.Run(() => StartWork(), cancelToken.Token);
+                Task.Run(() => StartWork(), cancelToken.Token);
             }
-
         }
 
         private void updateTargetFileNamesInDstDb()
@@ -347,41 +345,53 @@ namespace BatchVideoEncoder
 
         private void StartWork()
         {
-            for (int fileCnt = 0; fileCnt < /*fileLIstToEncode.Count*/ DstDB.Count; fileCnt++)
+            UiUpdateHelper.update_label(label_status, "Running");
+            try
             {
-                curDstFileIndex = fileCnt;
-                var curDbEntry = DstDB[fileCnt];
-                UiUpdateHelper.update_label(lblCurFile, (fileCnt + 1).ToString() + "/" + (DstDB.Count).ToString());
-                //loop_running = true;
-                UiUpdateHelper.update_label(label_status, "Running");
-                DstDB[fileCnt].TimeStartedEncoding = DateTime.Now;
-                var curFile = curDbEntry.fullFilePath; //  fileLIstToEncode[fileCnt];
-
-         
-                UiUpdateHelper.updateGridView(dgvDst, 17, fileCnt, "Enc. Video...");
-
-                var encodeVideoTask = Task.Factory.StartNew(() => MediaProcessingHelper.encodeVideoFFMpeg(curDbEntry, ProgressCallback), CancellationToken.None,
-                    TaskCreationOptions.LongRunning, TaskScheduler.Default);
-                encodeVideoTask.Wait();
-                if(encodeVideoTask.Result == false)
+                MovieEntry curDbEntry;
+                // TryTake with timeout: waits up to 5s for new items before giving up
+                while (!cancelToken.IsCancellationRequested
+                    && _encodeQueue.TryTake(out curDbEntry, TimeSpan.FromSeconds(5)))
                 {
-                    UiUpdateHelper.updateGridView(dgvDst, 17, fileCnt, "! FAILED !");
-                    UiUpdateHelper.updateGridView(dgvDst, 18, fileCnt, "0"); // % done
-                    logger.Error("!! Error !! Video Encoding failed. Aborting current encoding..");
+                    int fileCnt;
+                    lock (_dstDbLock) { fileCnt = DstDB.IndexOf(curDbEntry); }
+                    if (fileCnt < 0) continue; // safety check
 
-                    continue;
+                    curDstFileIndex = fileCnt;
+                    curDbEntry.TimeStartedEncoding = DateTime.Now;
+
+                    int total;
+                    lock (_dstDbLock) { total = DstDB.Count; }
+                    UiUpdateHelper.update_label(lblCurFile, (fileCnt + 1) + "/" + total);
+                    UiUpdateHelper.updateGridView(dgvDst, 17, fileCnt, "Enc. Video...");
+
+                    var encodeVideoTask = Task.Factory.StartNew(
+                        () => MediaProcessingHelper.encodeVideoFFMpeg(curDbEntry, ProgressCallback),
+                        CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+                    encodeVideoTask.Wait();
+
+                    if (encodeVideoTask.Result == false)
+                    {
+                        UiUpdateHelper.updateGridView(dgvDst, 17, fileCnt, "! FAILED !");
+                        UiUpdateHelper.updateGridView(dgvDst, 18, fileCnt, "0");
+                        logger.Error("Video Encoding failed for: " + curDbEntry.fullFilePath);
+                        continue;
+                    }
+                    logger.Info("Video Encoding finished successfully.");
+
+                    lock (_dstDbLock) { total = DstDB.Count; }
+                    var updateInfoTask = Task.Factory.StartNew(
+                        () => UpdateInfo(curDbEntry, fileCnt, total),
+                        CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+                    updateInfoTask.Wait();
                 }
-                logger.Info("Video Encoding finished successfully.");
-
-                var updateInfoTask = Task.Factory.StartNew(() => UpdateInfo(curDbEntry, fileCnt, DstDB.Count), CancellationToken.None,
-                    TaskCreationOptions.LongRunning, TaskScheduler.Default);
-                //updateGridView(dataGridViewDst, 2, "Updating Info");
-
-                updateInfoTask.Wait();
-                if (cancelToken.IsCancellationRequested) break;
             }
-            UiUpdateHelper.update_label(label_status, "Stopped");
-            UiUpdateHelper.update_btn(btnStart, true);
+            finally
+            {
+                _isWorkerRunning = false;
+                UiUpdateHelper.update_label(label_status, "Stopped");
+                UiUpdateHelper.update_btn(btnStart, true);
+            }
         }
         private string PrepareTempDir()
         {
@@ -498,11 +508,13 @@ namespace BatchVideoEncoder
             var allFiles = Directory.EnumerateFiles(folderPath, "*.*", SearchOption.AllDirectories);
             return allFiles.Where(f => supportedExtensions.Contains(Path.GetExtension(f).ToLower())).ToList();
         }
-  
-        private void bntStop_Click(object sender, EventArgs e) // TODO !!!
+
+        private void bntStop_Click(object sender, EventArgs e)
         {
-            //test_started = false ;
             cancelToken.Cancel(false);
+            // Drain remaining queued (not-yet-started) items so TryTake unblocks immediately
+            MovieEntry dummy;
+            while (_encodeQueue.TryTake(out dummy)) { }
             label_status.Text = "Cancelled..";
         }
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
@@ -517,31 +529,28 @@ namespace BatchVideoEncoder
             DstDB.Clear();
             dgvDst.Rows.Clear();
         }
-        private void btnAddSelected_Click(object sender, EventArgs e) // Add Selected Button // 
+        private void btnAddSelected_Click(object sender, EventArgs e)
         {
             List<int> removeIndexes = new List<int>();
             foreach (var row in dgvSrc.SelectedRows)
             {
-                var curRow = (DataGridViewRow)row;
-                removeIndexes.Add(curRow.Index);
+                removeIndexes.Add(((DataGridViewRow)row).Index);
             }
-            foreach(var rowIndex in removeIndexes.OrderByDescending( t => t))
+            foreach (var rowIndex in removeIndexes.OrderByDescending(t => t))
             {
                 var matchingDbEntry = SrcDB[rowIndex];
-                DstDB.Add(matchingDbEntry);
                 SrcDB.Remove(matchingDbEntry);
-            }
-            SaveCurrentGuiParamsToDbEntry(defaultParams);
-            foreach (var dbEntry in DstDB)
-            {
-                SetDefaultEncParamsForDbEntry(dbEntry);
+                SaveCurrentGuiParamsToDbEntry(defaultParams);
+                SetDefaultEncParamsForDbEntry(matchingDbEntry);
+                updateTargetFileNameForEntry(matchingDbEntry);
+                lock (_dstDbLock) { DstDB.Add(matchingDbEntry); }
+                _encodeQueue.Add(matchingDbEntry);
+                AppendEntryToDstDGV(matchingDbEntry);  // append only, don't rebuild
             }
             PopulateSrcDGVfromSrcDB();
-            UpdateDstDGV();
-            
         }
 
- 
+
 
         private void SetDefaultEncParamsForDbEntry(MovieEntry entry)
         {
@@ -1132,5 +1141,20 @@ namespace BatchVideoEncoder
                 default:             return "x265";
             }
         }
+
+        private void updateTargetFileNameForEntry(MovieEntry entry)
+        {
+            string targetOutFileDir = string.IsNullOrEmpty(Settings.Default.OutputDirectory)
+                ? Path.GetDirectoryName(entry.fullFilePath)
+                : Settings.Default.OutputDirectory;
+            string name = Path.GetFileNameWithoutExtension(entry.fullFilePath);
+            entry.dstEncodedFile = Path.Combine(targetOutFileDir,
+                name + tbSuffixMenu.Text + (formatMkvMenuItem.Checked ? ".mkv" : ".mp4"));
+            entry.videoCodec = GetSelectedCodec();
+            entry.opusBitrate = GetSelectedOpusBitrate();
+            entry.audioChannelMode = GetSelectedOpusChannelMode();
+        }
+
+
     }
 }
