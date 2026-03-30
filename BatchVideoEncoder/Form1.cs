@@ -65,6 +65,7 @@ namespace BatchVideoEncoder
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.FormClosing += Form1_FormClosing;
 
 
             tbSuffixMenu.Text = Settings.Default.OutFileSuffix;
@@ -327,6 +328,12 @@ namespace BatchVideoEncoder
             }
         }
 
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            cancelToken.Cancel(false);
+            BatchVideoEncoder.Helpers.ProcessHelper.KillActiveProcess();
+        }
+
         private void updateTargetFileNamesInDstDb()
         {
             foreach (var entry in DstDB)
@@ -366,7 +373,7 @@ namespace BatchVideoEncoder
                     UiUpdateHelper.updateGridView(dgvDst, 17, fileCnt, "Enc. Video...");
 
                     var encodeVideoTask = Task.Factory.StartNew(
-                        () => MediaProcessingHelper.encodeVideoFFMpeg(curDbEntry, ProgressCallback),
+                        () => MediaProcessingHelper.encodeVideoFFMpeg(curDbEntry, ProgressCallback, cancelToken.Token),
                         CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
                     encodeVideoTask.Wait();
 
@@ -512,6 +519,7 @@ namespace BatchVideoEncoder
         private void bntStop_Click(object sender, EventArgs e)
         {
             cancelToken.Cancel(false);
+            BatchVideoEncoder.Helpers.ProcessHelper.KillActiveProcess();
             // Drain remaining queued (not-yet-started) items so TryTake unblocks immediately
             MovieEntry dummy;
             while (_encodeQueue.TryTake(out dummy)) { }

@@ -13,6 +13,27 @@ namespace BatchVideoEncoder.Helpers
     {
         private static ILogger logger = LogManager.GetCurrentClassLogger();
 
+        // Tracks the currently running encode process so it can be killed on cancel/close.
+        private static volatile Process _activeProcess = null;
+
+        public static void KillActiveProcess()
+        {
+            var p = _activeProcess;
+            if (p == null) return;
+            try
+            {
+                if (!p.HasExited)
+                {
+                    p.Kill();
+                    logger.Info("Active encode process was killed.");
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("KillActiveProcess: " + ex.Message);
+            }
+        }
+
         public static void run_CLI_tool(string path, string cli_params, bool runHidden = false)
         {
             Process p = new Process();
@@ -76,11 +97,9 @@ namespace BatchVideoEncoder.Helpers
             Thread.Sleep(5000);
         }
 
-        public static bool RunProcessWithCallback(string path, string cmd, Action<string, bool> Calback, string workDir, bool runHidden = false)
+        public static bool RunProcessWithCallback(string path, string cmd, Action<string, bool> Calback, string workDir, bool runHidden = false, CancellationToken cancellationToken = default(CancellationToken))
         {
             logger.Info("### RunProcessCallback() launched,");
-            //if (!System.IO.File.Exists(path))
-            //    return false;
             Calback(string.Format("command: {0}", cmd), true);
             Calback(string.Format("App path: {0}", path), true);
             var p = new Process
@@ -100,14 +119,28 @@ namespace BatchVideoEncoder.Helpers
             p.OutputDataReceived += (sender, args) => Calback(args.Data, true);
             p.ErrorDataReceived += (sender, args) => Calback(args.Data, false);
             var rs = p.Start();
-            p.BeginOutputReadLine();
-            p.BeginErrorReadLine();
-            p.WaitForExit();
+            _activeProcess = p;
+
+            // Register cancellation: kill the process if the token is cancelled
+            using (cancellationToken.Register(() =>
+            {
+                try { if (!p.HasExited) p.Kill(); }
+                catch (Exception ex) { logger.Warn("CancellationToken kill: " + ex.Message); }
+            }))
+            {
+                p.BeginOutputReadLine();
+                p.BeginErrorReadLine();
+                p.WaitForExit();
+            }
+
+            _activeProcess = null;
             var ExitCode = p.ExitCode;
             Calback(String.Format("Exit code: {0}", ExitCode), true);
             Calback(String.Format("App file:  {0}", p.StartInfo.FileName), true);
             Calback(String.Format("Parameters:  {0}", cmd), true);
 
+            // Treat a killed process (non-zero exit after cancellation) as not-clean but not an error to log
+            if (cancellationToken.IsCancellationRequested) return false;
             return (ExitCode == 0);
         }
 

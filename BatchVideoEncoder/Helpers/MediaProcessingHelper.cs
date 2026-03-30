@@ -107,7 +107,7 @@ namespace BatchVideoEncoder.Helpers
 
 
 
-        public static bool encodeVideoFFMpeg(MovieEntry dbEntry,  Action<string, bool> callBack)
+        public static bool encodeVideoFFMpeg(MovieEntry dbEntry, Action<string, bool> callBack, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             logger.Info("Entered encodeVideoFFMpeg()");
             var srcFileName = dbEntry.fullFilePath;
@@ -188,12 +188,13 @@ namespace BatchVideoEncoder.Helpers
                 ? " -preset " + GetAv1Preset(preset)
                 : " -preset " + preset;
 
-            string cli_path = @"start ""encode"" /b /low /wait ffmpeg -i " +
+            // Build the ffmpeg argument string (no cmd/start wrapper so the process can be killed directly)
+            string ffmpegArgs = "-i " +
                 "\"" + srcFileName + "\"" + mappings + audioArgs + filtersStr + presetArg +
-                 vCodecAndCrfStr + " -c:s copy \"" + dbEntry.dstEncodedFile + "\"";
-            // copy subtitles: -map 0:s -c copy
-            logger.Info("FFMpeg video encoding and mux command: {0}{1}", Environment.NewLine, cli_path);
-            bool processExitedClean = ProcessHelper.RunProcessWithCallback("cmd", "/c " + cli_path, callBack, workingDir, isRunHidden);
+                vCodecAndCrfStr + " -c:s copy \"" + dbEntry.dstEncodedFile + "\"";
+
+            logger.Info("FFMpeg video encoding and mux command: {0}{1}", Environment.NewLine, "ffmpeg " + ffmpegArgs);
+            bool processExitedClean = ProcessHelper.RunProcessWithCallback("ffmpeg", ffmpegArgs, callBack, workingDir, isRunHidden, cancellationToken);
             logger.Info("Encode and Mux command process finished.");
             if (!processExitedClean)
             {
