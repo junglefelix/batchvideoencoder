@@ -1150,6 +1150,92 @@ namespace BatchVideoEncoder
             }
         }
 
+        private void btnClearSelected_Click(object sender, EventArgs e)
+        {
+            if (dgvDst.SelectedRows.Count == 0) return;
+
+            var selectedIndexes = new List<int>();
+            foreach (DataGridViewRow row in dgvDst.SelectedRows)
+                selectedIndexes.Add(row.Index);
+
+            // Sort descending so we can remove from DstDB by index safely
+            selectedIndexes.Sort((a, b) => b.CompareTo(a));
+
+            var entriesToRemove = new List<MovieEntry>();
+            lock (_dstDbLock)
+            {
+                foreach (int idx in selectedIndexes)
+                {
+                    if (idx >= 0 && idx < DstDB.Count)
+                        entriesToRemove.Add(DstDB[idx]);
+                }
+                foreach (var entry in entriesToRemove)
+                    DstDB.Remove(entry);
+            }
+
+            // Rebuild the encode queue excluding removed entries
+            var remaining = new List<MovieEntry>();
+            MovieEntry item;
+            while (_encodeQueue.TryTake(out item))
+            {
+                if (!entriesToRemove.Contains(item))
+                    remaining.Add(item);
+            }
+            foreach (var entry in remaining)
+                _encodeQueue.Add(entry);
+
+            // Remove rows from the grid (descending to preserve indexes)
+            foreach (int idx in selectedIndexes)
+            {
+                if (idx >= 0 && idx < dgvDst.Rows.Count)
+                    dgvDst.Rows.RemoveAt(idx);
+            }
+
+            // Re-number the first column
+            for (int i = 0; i < dgvDst.Rows.Count; i++)
+                dgvDst.Rows[i].Cells[0].Value = i + 1;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            var finishedStatuses = new HashSet<string> { "Done", "! FAILED !", "! Update Info FAILED !" };
+
+            var indexesToRemove = new List<int>();
+            for (int i = 0; i < dgvDst.Rows.Count; i++)
+            {
+                var statusCell = dgvDst.Rows[i].Cells[17].Value;
+                if (statusCell != null && finishedStatuses.Contains(statusCell.ToString()))
+                    indexesToRemove.Add(i);
+            }
+
+            if (indexesToRemove.Count == 0) return;
+
+            // Collect matching DstDB entries to remove
+            var entriesToRemove = new List<MovieEntry>();
+            lock (_dstDbLock)
+            {
+                foreach (int idx in indexesToRemove)
+                {
+                    if (idx >= 0 && idx < DstDB.Count)
+                        entriesToRemove.Add(DstDB[idx]);
+                }
+                foreach (var entry in entriesToRemove)
+                    DstDB.Remove(entry);
+            }
+
+            // Remove rows descending to preserve indexes
+            for (int i = indexesToRemove.Count - 1; i >= 0; i--)
+            {
+                int idx = indexesToRemove[i];
+                if (idx >= 0 && idx < dgvDst.Rows.Count)
+                    dgvDst.Rows.RemoveAt(idx);
+            }
+
+            // Re-number the first column
+            for (int i = 0; i < dgvDst.Rows.Count; i++)
+                dgvDst.Rows[i].Cells[0].Value = i + 1;
+        }
+
         private void updateTargetFileNameForEntry(MovieEntry entry)
         {
             string targetOutFileDir = string.IsNullOrEmpty(Settings.Default.OutputDirectory)
