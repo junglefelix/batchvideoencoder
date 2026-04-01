@@ -161,6 +161,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tbLog = new System.Windows.Forms.TextBox();
             this.cbMuxAsIs = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnClearSelected = new System.Windows.Forms.Button();
+            this.btnClearFinished = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnClearSelected = new System.Windows.Forms.Button();
+            this.btnClearFinished = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDst)).BeginInit();
@@ -205,7 +211,7 @@
             this.label4.Location = new System.Drawing.Point(8, 20);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(31, 20);
+            this.label4.Size = new System.Drawing.Size(24, 16);
             this.label4.TabIndex = 17;
             this.label4.Text = "crf:";
             // 
@@ -215,7 +221,7 @@
             this.label6.Location = new System.Drawing.Point(96, 21);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(59, 20);
+            this.label6.Size = new System.Drawing.Size(49, 16);
             this.label6.TabIndex = 19;
             this.label6.Text = "Preset:";
             // 
@@ -234,7 +240,7 @@
             this.label7.Location = new System.Drawing.Point(487, 6);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(60, 20);
+            this.label7.Size = new System.Drawing.Size(47, 16);
             this.label7.TabIndex = 22;
             this.label7.Text = "Status:";
             // 
@@ -255,7 +261,7 @@
             this.lblCurFile.Location = new System.Drawing.Point(937, 10);
             this.lblCurFile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCurFile.Name = "lblCurFile";
-            this.lblCurFile.Size = new System.Drawing.Size(0, 20);
+            this.lblCurFile.Size = new System.Drawing.Size(0, 16);
             this.lblCurFile.TabIndex = 27;
             // 
             // bntStop
@@ -319,7 +325,7 @@
             this.label13.Location = new System.Drawing.Point(172, 94);
             this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(24, 20);
+            this.label13.Size = new System.Drawing.Size(19, 16);
             this.label13.TabIndex = 10;
             this.label13.Text = "Y:";
             // 
@@ -329,7 +335,7 @@
             this.label12.Location = new System.Drawing.Point(43, 95);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(24, 20);
+            this.label12.Size = new System.Drawing.Size(18, 16);
             this.label12.TabIndex = 10;
             this.label12.Text = "X:";
             // 
@@ -338,7 +344,7 @@
             this.tbYresLimit.Location = new System.Drawing.Point(200, 91);
             this.tbYresLimit.Margin = new System.Windows.Forms.Padding(4);
             this.tbYresLimit.Name = "tbYresLimit";
-            this.tbYresLimit.Size = new System.Drawing.Size(93, 26);
+            this.tbYresLimit.Size = new System.Drawing.Size(93, 22);
             this.tbYresLimit.TabIndex = 9;
             // 
             // tbXresLimit
@@ -346,7 +352,7 @@
             this.tbXresLimit.Location = new System.Drawing.Point(71, 91);
             this.tbXresLimit.Margin = new System.Windows.Forms.Padding(4);
             this.tbXresLimit.Name = "tbXresLimit";
-            this.tbXresLimit.Size = new System.Drawing.Size(93, 26);
+            this.tbXresLimit.Size = new System.Drawing.Size(93, 22);
             this.tbXresLimit.TabIndex = 8;
             // 
             // radioNoResize
@@ -355,7 +361,7 @@
             this.radioNoResize.Location = new System.Drawing.Point(13, 17);
             this.radioNoResize.Margin = new System.Windows.Forms.Padding(4);
             this.radioNoResize.Name = "radioNoResize";
-            this.radioNoResize.Size = new System.Drawing.Size(121, 24);
+            this.radioNoResize.Size = new System.Drawing.Size(104, 20);
             this.radioNoResize.TabIndex = 7;
             this.radioNoResize.TabStop = true;
             this.radioNoResize.Text = "Don\'t Resize";
@@ -368,7 +374,7 @@
             this.radioResizeByLimit.Location = new System.Drawing.Point(13, 69);
             this.radioResizeByLimit.Margin = new System.Windows.Forms.Padding(4);
             this.radioResizeByLimit.Name = "radioResizeByLimit";
-            this.radioResizeByLimit.Size = new System.Drawing.Size(165, 24);
+            this.radioResizeByLimit.Size = new System.Drawing.Size(139, 20);
             this.radioResizeByLimit.TabIndex = 6;
             this.radioResizeByLimit.TabStop = true;
             this.radioResizeByLimit.Text = "Limit Resolution to:";
@@ -380,7 +386,7 @@
             this.radioResizeByPercent.Location = new System.Drawing.Point(13, 42);
             this.radioResizeByPercent.Margin = new System.Windows.Forms.Padding(4);
             this.radioResizeByPercent.Name = "radioResizeByPercent";
-            this.radioResizeByPercent.Size = new System.Drawing.Size(169, 24);
+            this.radioResizeByPercent.Size = new System.Drawing.Size(146, 20);
             this.radioResizeByPercent.TabIndex = 5;
             this.radioResizeByPercent.TabStop = true;
             this.radioResizeByPercent.Text = "Resize by % of orig.";
@@ -401,7 +407,7 @@
             this.numericUpDown1.Location = new System.Drawing.Point(177, 43);
             this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(76, 26);
+            this.numericUpDown1.Size = new System.Drawing.Size(76, 22);
             this.numericUpDown1.TabIndex = 1;
             this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
@@ -1042,14 +1048,14 @@
             this.codecX264MenuItem,
             this.codecAv1MenuItem});
             this.codecToolStripMenuItem.Name = "codecToolStripMenuItem";
-            this.codecToolStripMenuItem.Size = new System.Drawing.Size(134, 26);
+            this.codecToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.codecToolStripMenuItem.Text = "Codec";
             // 
             // codecX265MenuItem
             // 
             this.codecX265MenuItem.CheckOnClick = true;
             this.codecX265MenuItem.Name = "codecX265MenuItem";
-            this.codecX265MenuItem.Size = new System.Drawing.Size(123, 26);
+            this.codecX265MenuItem.Size = new System.Drawing.Size(224, 26);
             this.codecX265MenuItem.Text = "x265";
             this.codecX265MenuItem.Click += new System.EventHandler(this.codecX265MenuItem_Click);
             // 
@@ -1057,7 +1063,7 @@
             // 
             this.codecX264MenuItem.CheckOnClick = true;
             this.codecX264MenuItem.Name = "codecX264MenuItem";
-            this.codecX264MenuItem.Size = new System.Drawing.Size(123, 26);
+            this.codecX264MenuItem.Size = new System.Drawing.Size(224, 26);
             this.codecX264MenuItem.Text = "x264";
             this.codecX264MenuItem.Click += new System.EventHandler(this.codecX264MenuItem_Click);
             // 
@@ -1065,7 +1071,7 @@
             // 
             this.codecAv1MenuItem.CheckOnClick = true;
             this.codecAv1MenuItem.Name = "codecAv1MenuItem";
-            this.codecAv1MenuItem.Size = new System.Drawing.Size(123, 26);
+            this.codecAv1MenuItem.Size = new System.Drawing.Size(224, 26);
             this.codecAv1MenuItem.Text = "AV1";
             this.codecAv1MenuItem.Click += new System.EventHandler(this.codecAv1MenuItem_Click);
             // 
@@ -1083,7 +1089,7 @@
             // 
             this.audioOpusBitrateMenuItem.Enabled = false;
             this.audioOpusBitrateMenuItem.Name = "audioOpusBitrateMenuItem";
-            this.audioOpusBitrateMenuItem.Size = new System.Drawing.Size(222, 26);
+            this.audioOpusBitrateMenuItem.Size = new System.Drawing.Size(224, 26);
             this.audioOpusBitrateMenuItem.Text = "Opus Bitrate (kbps):";
             // 
             // numericOpusBitrate
@@ -1101,7 +1107,7 @@
             this.audioStereoMenuItem,
             this.audioCopyStreamsMenuItem});
             this.audioChannelModeMenuItem.Name = "audioChannelModeMenuItem";
-            this.audioChannelModeMenuItem.Size = new System.Drawing.Size(222, 26);
+            this.audioChannelModeMenuItem.Size = new System.Drawing.Size(224, 26);
             this.audioChannelModeMenuItem.Text = "Channel Mode";
             // 
             // audioStereoMenuItem
@@ -1129,7 +1135,7 @@
             this.tbCmdOut.Location = new System.Drawing.Point(80, 708);
             this.tbCmdOut.Margin = new System.Windows.Forms.Padding(4);
             this.tbCmdOut.Name = "tbCmdOut";
-            this.tbCmdOut.Size = new System.Drawing.Size(1421, 26);
+            this.tbCmdOut.Size = new System.Drawing.Size(1421, 22);
             this.tbCmdOut.TabIndex = 45;
             // 
             // label5
@@ -1139,7 +1145,7 @@
             this.label5.Location = new System.Drawing.Point(4, 713);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(76, 20);
+            this.label5.Size = new System.Drawing.Size(61, 16);
             this.label5.TabIndex = 46;
             this.label5.Text = "Cmd Out:";
             // 
@@ -1149,7 +1155,7 @@
             this.label10.Location = new System.Drawing.Point(207, 18);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(106, 20);
+            this.label10.Size = new System.Drawing.Size(88, 16);
             this.label10.TabIndex = 47;
             this.label10.Text = "Denoise filter:";
             // 
@@ -1192,7 +1198,7 @@
             this.radioMp4.Location = new System.Drawing.Point(8, 52);
             this.radioMp4.Margin = new System.Windows.Forms.Padding(4);
             this.radioMp4.Name = "radioMp4";
-            this.radioMp4.Size = new System.Drawing.Size(62, 24);
+            this.radioMp4.Size = new System.Drawing.Size(55, 20);
             this.radioMp4.TabIndex = 1;
             this.radioMp4.TabStop = true;
             this.radioMp4.Text = "MP4";
@@ -1204,7 +1210,7 @@
             this.radioMkv.Location = new System.Drawing.Point(8, 22);
             this.radioMkv.Margin = new System.Windows.Forms.Padding(4);
             this.radioMkv.Name = "radioMkv";
-            this.radioMkv.Size = new System.Drawing.Size(64, 24);
+            this.radioMkv.Size = new System.Drawing.Size(56, 20);
             this.radioMkv.TabIndex = 0;
             this.radioMkv.TabStop = true;
             this.radioMkv.Text = "MKV";
@@ -1242,7 +1248,7 @@
             this.tbSuffix.Location = new System.Drawing.Point(507, 30);
             this.tbSuffix.Margin = new System.Windows.Forms.Padding(4);
             this.tbSuffix.Name = "tbSuffix";
-            this.tbSuffix.Size = new System.Drawing.Size(96, 26);
+            this.tbSuffix.Size = new System.Drawing.Size(96, 22);
             this.tbSuffix.TabIndex = 59;
             // 
             // groupBox1
@@ -1273,7 +1279,7 @@
             this.numericCrf.Location = new System.Drawing.Point(8, 39);
             this.numericCrf.Margin = new System.Windows.Forms.Padding(4);
             this.numericCrf.Name = "numericCrf";
-            this.numericCrf.Size = new System.Drawing.Size(79, 26);
+            this.numericCrf.Size = new System.Drawing.Size(79, 22);
             this.numericCrf.TabIndex = 0;
             this.numericCrf.ValueChanged += new System.EventHandler(this.numericCrf_ValueChanged);
             // 
@@ -1436,17 +1442,11 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage2.Size = new System.Drawing.Size(1505, 741);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Progress";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
             // tbTempPath
             // 
             this.tbTempPath.Location = new System.Drawing.Point(18, 34);
             this.tbTempPath.Name = "tbTempPath";
-            this.tbTempPath.Size = new System.Drawing.Size(221, 26);
+            this.tbTempPath.Size = new System.Drawing.Size(221, 22);
             this.tbTempPath.TabIndex = 58;
             // 
             // button1
@@ -1458,6 +1458,12 @@
             this.button1.TabIndex = 57;
             this.button1.Text = "test";
             this.button1.UseVisualStyleBackColor = true;
+            // 
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage2.Size = new System.Drawing.Size(1505, 741);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Progress";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // tabPage3
             // 
@@ -1502,7 +1508,7 @@
             this.label2.Location = new System.Drawing.Point(8, 16);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(103, 20);
+            this.label2.Size = new System.Drawing.Size(87, 16);
             this.label2.TabIndex = 1;
             this.label2.Text = "Detailed Log:";
             // 
@@ -1510,12 +1516,6 @@
             // 
             this.tbLog.Location = new System.Drawing.Point(8, 42);
             this.tbLog.Margin = new System.Windows.Forms.Padding(4);
-            this.tbLog.Multiline = true;
-            this.tbLog.Name = "tbLog";
-            this.tbLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbLog.Size = new System.Drawing.Size(1483, 697);
-            this.tbLog.TabIndex = 0;
-            // 
             // cbMuxAsIs
             // 
             this.cbMuxAsIs.AutoSize = true;
@@ -1525,6 +1525,12 @@
             this.cbMuxAsIs.TabIndex = 63;
             this.cbMuxAsIs.Text = "Mux video as-is";
             this.cbMuxAsIs.UseVisualStyleBackColor = true;
+            // 
+            this.btnClearFinished.Size = new System.Drawing.Size(157, 27);
+            this.btnClearFinished.TabIndex = 59;
+            this.btnClearFinished.Text = "Clear Finished";
+            this.btnClearFinished.UseVisualStyleBackColor = true;
+            this.btnClearFinished.Click += new System.EventHandler(this.button5_Click);
             // 
             // Form1
             // 
@@ -1541,7 +1547,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
-            this.Text = "Batch Video Encoder v0.77 - Clear items from bottom table";
+            this.Text = "Batch Video Encoder v0.78 - Fix resize bug";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Form1_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Form1_DragEnter);

@@ -128,7 +128,7 @@ namespace BatchVideoEncoder.Helpers
             else // with resize
             {
                 if (dbEntry.useNoiseFilter) filtersStr = " -filter:v " + dbEntry.DenoiseFilterStr + "," + resizeStr + " ";
-                else filtersStr = "-vf " + resizeStr + " ";    // resize only
+                else filtersStr = " -vf " + resizeStr + " ";    // resize only
             }
             logger.Info("Resize and filter string is:" + filtersStr);
             #endregion
