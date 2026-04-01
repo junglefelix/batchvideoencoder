@@ -141,6 +141,8 @@
             this.numericCrf = new System.Windows.Forms.NumericUpDown();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnClearFinished = new System.Windows.Forms.Button();
+            this.btnClearSelected = new System.Windows.Forms.Button();
             this.dgvSubtitleStreams = new System.Windows.Forms.DataGridView();
             this.colSubInclude = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colSubLanguage = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -151,15 +153,14 @@
             this.colStreamChannels = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colStreamBitrate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tbTempPath = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.btnClearLog = new System.Windows.Forms.Button();
             this.btnOpenLog = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.tbLog = new System.Windows.Forms.TextBox();
-            this.tbTempPath = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.btnClearSelected = new System.Windows.Forms.Button();
-            this.btnClearFinished = new System.Windows.Forms.Button();
+            this.cbMuxAsIs = new System.Windows.Forms.CheckBox();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDst)).BeginInit();
@@ -281,7 +282,7 @@
             this.groupBox2.Controls.Add(this.radioResizeByPercent);
             this.groupBox2.Controls.Add(this.labelNewRes);
             this.groupBox2.Controls.Add(this.numericUpDown1);
-            this.groupBox2.Location = new System.Drawing.Point(895, 25);
+            this.groupBox2.Location = new System.Drawing.Point(415, 30);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
@@ -916,7 +917,7 @@
             this.audioToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1521, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1521, 30);
             this.menuStrip1.TabIndex = 41;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -926,7 +927,7 @@
             this.addFolderToolStripMenuItem,
             this.addFilesToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 26);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // addFolderToolStripMenuItem
@@ -951,7 +952,7 @@
             this.outputToolStripMenuItem,
             this.runHiddenMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(75, 26);
             this.optionsToolStripMenuItem.Text = "Options";
             // 
             // setCurrentParamsAsDefaultToolStripMenuItem
@@ -1031,7 +1032,7 @@
             this.videoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.codecToolStripMenuItem});
             this.videoToolStripMenuItem.Name = "videoToolStripMenuItem";
-            this.videoToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
+            this.videoToolStripMenuItem.Size = new System.Drawing.Size(62, 26);
             this.videoToolStripMenuItem.Text = "Video";
             // 
             // codecToolStripMenuItem
@@ -1075,7 +1076,7 @@
             this.numericOpusBitrate,
             this.audioChannelModeMenuItem});
             this.audioToolStripMenuItem.Name = "audioToolStripMenuItem";
-            this.audioToolStripMenuItem.Size = new System.Drawing.Size(63, 24);
+            this.audioToolStripMenuItem.Size = new System.Drawing.Size(63, 26);
             this.audioToolStripMenuItem.Text = "Audio";
             // 
             // audioOpusBitrateMenuItem
@@ -1319,6 +1320,26 @@
             this.tabPage1.Text = "Main";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // btnClearFinished
+            // 
+            this.btnClearFinished.Location = new System.Drawing.Point(1101, 383);
+            this.btnClearFinished.Name = "btnClearFinished";
+            this.btnClearFinished.Size = new System.Drawing.Size(157, 27);
+            this.btnClearFinished.TabIndex = 59;
+            this.btnClearFinished.Text = "Clear Finished";
+            this.btnClearFinished.UseVisualStyleBackColor = true;
+            this.btnClearFinished.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // btnClearSelected
+            // 
+            this.btnClearSelected.Location = new System.Drawing.Point(930, 382);
+            this.btnClearSelected.Name = "btnClearSelected";
+            this.btnClearSelected.Size = new System.Drawing.Size(149, 28);
+            this.btnClearSelected.TabIndex = 58;
+            this.btnClearSelected.Text = "Clear Selected";
+            this.btnClearSelected.UseVisualStyleBackColor = true;
+            this.btnClearSelected.Click += new System.EventHandler(this.btnClearSelected_Click);
+            // 
             // dgvSubtitleStreams
             // 
             this.dgvSubtitleStreams.AllowUserToAddRows = false;
@@ -1421,6 +1442,23 @@
             this.tabPage2.Text = "Progress";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // tbTempPath
+            // 
+            this.tbTempPath.Location = new System.Drawing.Point(18, 34);
+            this.tbTempPath.Name = "tbTempPath";
+            this.tbTempPath.Size = new System.Drawing.Size(221, 26);
+            this.tbTempPath.TabIndex = 58;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(261, 32);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(61, 28);
+            this.button1.TabIndex = 57;
+            this.button1.Text = "test";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.btnClearLog);
@@ -1478,42 +1516,15 @@
             this.tbLog.Size = new System.Drawing.Size(1483, 697);
             this.tbLog.TabIndex = 0;
             // 
-            // tbTempPath
+            // cbMuxAsIs
             // 
-            this.tbTempPath.Location = new System.Drawing.Point(18, 34);
-            this.tbTempPath.Name = "tbTempPath";
-            this.tbTempPath.Size = new System.Drawing.Size(221, 26);
-            this.tbTempPath.TabIndex = 58;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(261, 32);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(61, 28);
-            this.button1.TabIndex = 57;
-            this.button1.Text = "test";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // btnClearSelected
-            // 
-            this.btnClearSelected.Location = new System.Drawing.Point(930, 382);
-            this.btnClearSelected.Name = "btnClearSelected";
-            this.btnClearSelected.Size = new System.Drawing.Size(149, 28);
-            this.btnClearSelected.TabIndex = 58;
-            this.btnClearSelected.Text = "Clear Selected";
-            this.btnClearSelected.UseVisualStyleBackColor = true;
-            this.btnClearSelected.Click += new System.EventHandler(this.btnClearSelected_Click);
-            // 
-            // btnClearFinished
-            // 
-            this.btnClearFinished.Location = new System.Drawing.Point(1101, 383);
-            this.btnClearFinished.Name = "btnClearFinished";
-            this.btnClearFinished.Size = new System.Drawing.Size(157, 27);
-            this.btnClearFinished.TabIndex = 59;
-            this.btnClearFinished.Text = "Clear Finished";
-            this.btnClearFinished.UseVisualStyleBackColor = true;
-            this.btnClearFinished.Click += new System.EventHandler(this.button5_Click);
+            this.cbMuxAsIs.AutoSize = true;
+            this.cbMuxAsIs.Location = new System.Drawing.Point(840, 44);
+            this.cbMuxAsIs.Name = "cbMuxAsIs";
+            this.cbMuxAsIs.Size = new System.Drawing.Size(138, 24);
+            this.cbMuxAsIs.TabIndex = 63;
+            this.cbMuxAsIs.Text = "Mux video as-is";
+            this.cbMuxAsIs.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -1521,6 +1532,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1521, 927);
+            this.Controls.Add(this.cbMuxAsIs);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.menuStrip1);
@@ -1690,6 +1702,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnClearSelected;
         private System.Windows.Forms.Button btnClearFinished;
+        private System.Windows.Forms.CheckBox cbMuxAsIs;
     }
 }
 

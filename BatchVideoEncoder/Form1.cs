@@ -36,7 +36,7 @@ namespace BatchVideoEncoder
         
         System.Timers.Timer aTimer = null;
 
-        private int curDstFileIndex = 0;
+        private MovieEntry _currentEncodingEntry = null;
         //DateTime BeginOneFile, EndOneFile, BeginAllFiles, EndAllFiles;
         List<MovieEntry> SrcDB = new List<MovieEntry>();
         private System.Collections.Concurrent.BlockingCollection<MovieEntry> _encodeQueue
@@ -364,7 +364,7 @@ namespace BatchVideoEncoder
                     lock (_dstDbLock) { fileCnt = DstDB.IndexOf(curDbEntry); }
                     if (fileCnt < 0) continue; // safety check
 
-                    curDstFileIndex = fileCnt;
+                    _currentEncodingEntry = curDbEntry;
                     curDbEntry.TimeStartedEncoding = DateTime.Now;
 
                     int total;
@@ -377,20 +377,28 @@ namespace BatchVideoEncoder
                         CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
                     encodeVideoTask.Wait();
 
+                    // Resolve the row index fresh after encoding finishes (rows may have shifted due to Clear actions)
+                    lock (_dstDbLock) { fileCnt = DstDB.IndexOf(curDbEntry); }
+
                     if (encodeVideoTask.Result == false)
                     {
-                        UiUpdateHelper.updateGridView(dgvDst, 17, fileCnt, "! FAILED !");
-                        UiUpdateHelper.updateGridView(dgvDst, 18, fileCnt, "0");
+                        if (fileCnt >= 0)
+                        {
+                            UiUpdateHelper.updateGridView(dgvDst, 17, fileCnt, "! FAILED !");
+                            UiUpdateHelper.updateGridView(dgvDst, 18, fileCnt, "0");
+                        }
                         logger.Error("Video Encoding failed for: " + curDbEntry.fullFilePath);
+                        _currentEncodingEntry = null;
                         continue;
                     }
                     logger.Info("Video Encoding finished successfully.");
 
                     lock (_dstDbLock) { total = DstDB.Count; }
                     var updateInfoTask = Task.Factory.StartNew(
-                        () => UpdateInfo(curDbEntry, fileCnt, total),
+                        () => UpdateInfo(curDbEntry, total),
                         CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
                     updateInfoTask.Wait();
+                    _currentEncodingEntry = null;
                 }
             }
             finally
@@ -415,8 +423,11 @@ namespace BatchVideoEncoder
             //if (IsOutput) Helper.updateTextBox(tbCmdOut, line);
             UiUpdateHelper.updateTextBox(tbCmdOut,  line);
             // parse the cmd output.
-            var curDstDbEntry = DstDB[curDstFileIndex];
+            var curDstDbEntry = _currentEncodingEntry;
             if (curDstDbEntry == null) return;
+            int curDstFileIndex;
+            lock (_dstDbLock) { curDstFileIndex = DstDB.IndexOf(curDstDbEntry); }
+            if (curDstFileIndex < 0) return; // entry was removed by a Clear action
             // cmd Out sample: frame=46977 fps=6.7 q=-0.0 size=  202918kB time=00:31:18.43 bitrate= 884.9kbits/s speed=0.268x
             // cmd Out Sampel2:frame=  331 fps=3.0 q=-0.0 size=     369kB time=00:00:12.06 bitrate= 250.4kbits/s speed=0.11x
             var regex1 = new Regex(@"frame\s*=\s*\d+");
@@ -464,12 +475,21 @@ namespace BatchVideoEncoder
 
         }
 
-        private void UpdateInfo(MovieEntry dbEntry, int rowCnt, int totFiles)
+        private void UpdateInfo(MovieEntry dbEntry, int totFiles)
         {
             logger.Info("Entered analyze()");
 
             try
             {
+                // Resolve the current row index now — rows may have shifted since encoding started
+                int rowCnt;
+                lock (_dstDbLock) { rowCnt = DstDB.IndexOf(dbEntry); }
+                if (rowCnt < 0)
+                {
+                    logger.Info("UpdateInfo: entry was removed from DstDB, skipping UI update.");
+                    return;
+                }
+
                 UiUpdateHelper.updateProgressBar(progressBar, rowCnt + 1, totFiles);
                 //EndOneFile = DateTime.Now;
                 TimeSpan TimeForOneFile = DateTime.Now - dbEntry.TimeStartedEncoding;
@@ -577,6 +597,10 @@ namespace BatchVideoEncoder
             entry.DenoiseFilterStr = defaultParams.DenoiseFilterStr;
             entry.opusBitrate = defaultParams.opusBitrate;
             entry.audioChannelMode = defaultParams.audioChannelMode;
+            entry.muxVideoAsIs = defaultParams.muxVideoAsIs;
+
+
+
 
 
             entry.calculateNewRes();
@@ -811,6 +835,7 @@ namespace BatchVideoEncoder
                 comboDenoise.SelectedItem = dbEntry.DenoiseFilterName;
                 //dbEntry.DenoiseFilterStr
             }
+            cbMuxAsIs.Checked = dbEntry.muxVideoAsIs;
 
         }
 
@@ -945,6 +970,7 @@ namespace BatchVideoEncoder
             }
             dbEntry.opusBitrate = GetSelectedOpusBitrate();
             dbEntry.audioChannelMode = GetSelectedOpusChannelMode();
+            dbEntry.muxVideoAsIs = cbMuxAsIs.Checked;
 
             dbEntry.calculateNewRes();
 
@@ -1167,7 +1193,12 @@ namespace BatchVideoEncoder
                 foreach (int idx in selectedIndexes)
                 {
                     if (idx >= 0 && idx < DstDB.Count)
-                        entriesToRemove.Add(DstDB[idx]);
+                    {
+                        var entry = DstDB[idx];
+                        // Never remove the entry that is currently being encoded
+                        if (entry == _currentEncodingEntry) continue;
+                        entriesToRemove.Add(entry);
+                    }
                 }
                 foreach (var entry in entriesToRemove)
                     DstDB.Remove(entry);
@@ -1217,7 +1248,12 @@ namespace BatchVideoEncoder
                 foreach (int idx in indexesToRemove)
                 {
                     if (idx >= 0 && idx < DstDB.Count)
-                        entriesToRemove.Add(DstDB[idx]);
+                    {
+                        var entry = DstDB[idx];
+                        // Never remove the entry that is currently being encoded
+                        if (entry == _currentEncodingEntry) continue;
+                        entriesToRemove.Add(entry);
+                    }
                 }
                 foreach (var entry in entriesToRemove)
                     DstDB.Remove(entry);

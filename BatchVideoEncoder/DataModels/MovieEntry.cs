@@ -80,6 +80,7 @@ namespace BatchVideoEncoder
         public string encodedAacFile { get; set; }
         public int opusBitrate { get; set; }
         public OpusChannelMode audioChannelMode { get; set; }
+        public bool muxVideoAsIs { get; set; }
 
         #region Properties
 

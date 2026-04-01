@@ -156,20 +156,27 @@ namespace BatchVideoEncoder.Helpers
 
 
             string vCodecAndCrfStr;
-            switch (dbEntry.videoCodec)
+            if (dbEntry.muxVideoAsIs)
             {
-                case VideoCodec.X264:
-                    vCodecAndCrfStr = " -c:v libx264 -crf " + crf;
-                    break;
-                case VideoCodec.AV1:
-                    vCodecAndCrfStr = " -c:v libsvtav1 -crf " + crf;
-                    break;
-                case VideoCodec.X265:
-                    vCodecAndCrfStr = " -c:v libx265 -crf " + crf;
-                    break;
-                default:
-                    vCodecAndCrfStr = " -c:v libsvtav1 -crf " + crf;
-                    break;
+                vCodecAndCrfStr = " -c:v copy";
+            }
+            else
+            {
+                switch (dbEntry.videoCodec)
+                {
+                    case VideoCodec.X264:
+                        vCodecAndCrfStr = " -c:v libx264 -crf " + crf;
+                        break;
+                    case VideoCodec.AV1:
+                        vCodecAndCrfStr = " -c:v libsvtav1 -crf " + crf;
+                        break;
+                    case VideoCodec.X265:
+                        vCodecAndCrfStr = " -c:v libx265 -crf " + crf;
+                        break;
+                    default:
+                        vCodecAndCrfStr = " -c:v libsvtav1 -crf " + crf;
+                        break;
+                }
             }
 
             // Build audio encoding arguments using libopus
@@ -184,9 +191,11 @@ namespace BatchVideoEncoder.Helpers
                     break;
             }
 
-            string presetArg = (dbEntry.videoCodec == VideoCodec.AV1)
-                ? " -preset " + GetAv1Preset(preset)
-                : " -preset " + preset;
+            string presetArg = dbEntry.muxVideoAsIs
+                ? string.Empty
+                : (dbEntry.videoCodec == VideoCodec.AV1)
+                    ? " -preset " + GetAv1Preset(preset)
+                    : " -preset " + preset;
 
             // Build the ffmpeg argument string (no cmd/start wrapper so the process can be killed directly)
             string ffmpegArgs = "-i " +
