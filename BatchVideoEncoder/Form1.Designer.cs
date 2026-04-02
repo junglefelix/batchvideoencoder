@@ -54,29 +54,6 @@
             this.btnAddAllToList = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.dgvDst = new System.Windows.Forms.DataGridView();
-            this.Index = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SrcSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Resolution = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dst_res = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Length = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.v_rate_ = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codec_ = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.crf_ = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.preset_ = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.denoise_ = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PercentDone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DstSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Percent = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ETA = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAddSelected = new System.Windows.Forms.Button();
             this.CheckBoxRunHidden = new System.Windows.Forms.CheckBox();
             this.progressBar = new System.Windows.Forms.ProgressBar();
@@ -143,15 +120,6 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.btnClearFinished = new System.Windows.Forms.Button();
             this.btnClearSelected = new System.Windows.Forms.Button();
-            this.dgvSubtitleStreams = new System.Windows.Forms.DataGridView();
-            this.colSubInclude = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colSubLanguage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvAudioStreams = new System.Windows.Forms.DataGridView();
-            this.colStreamInclude = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colStreamCodec = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStreamLanguage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStreamChannels = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStreamBitrate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tbTempPath = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -161,6 +129,38 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tbLog = new System.Windows.Forms.TextBox();
             this.cbMuxAsIs = new System.Windows.Forms.CheckBox();
+            this.Index = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SrcSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Resolution = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dst_res = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Length = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.v_rate_ = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.codec_ = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.crf_ = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.preset_ = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.denoise_ = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PercentDone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DstSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Percent = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ETA = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvSubtitleStreams = new System.Windows.Forms.DataGridView();
+            this.colSubInclude = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colSubLanguage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvAudioStreams = new System.Windows.Forms.DataGridView();
+            this.colStreamInclude = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colStreamCodec = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStreamLanguage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStreamChannels = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStreamBitrate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDst)).BeginInit();
@@ -171,10 +171,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericCrf)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSubtitleStreams)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAudioStreams)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSubtitleStreams)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAudioStreams)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_browse
@@ -190,10 +190,10 @@
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(392, 0);
-            this.btnStart.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnStart.Location = new System.Drawing.Point(348, 0);
+            this.btnStart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(68, 35);
+            this.btnStart.Size = new System.Drawing.Size(60, 28);
             this.btnStart.TabIndex = 12;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
@@ -202,39 +202,39 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 25);
+            this.label4.Location = new System.Drawing.Point(8, 20);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(31, 20);
+            this.label4.Size = new System.Drawing.Size(24, 16);
             this.label4.TabIndex = 17;
             this.label4.Text = "crf:";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(108, 26);
+            this.label6.Location = new System.Drawing.Point(96, 21);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(59, 20);
+            this.label6.Size = new System.Drawing.Size(49, 16);
             this.label6.TabIndex = 19;
             this.label6.Text = "Preset:";
             // 
             // comboBoxPreset
             // 
             this.comboBoxPreset.FormattingEnabled = true;
-            this.comboBoxPreset.Location = new System.Drawing.Point(107, 48);
-            this.comboBoxPreset.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.comboBoxPreset.Location = new System.Drawing.Point(95, 38);
+            this.comboBoxPreset.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.comboBoxPreset.Name = "comboBoxPreset";
-            this.comboBoxPreset.Size = new System.Drawing.Size(115, 28);
+            this.comboBoxPreset.Size = new System.Drawing.Size(103, 24);
             this.comboBoxPreset.TabIndex = 21;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(548, 8);
+            this.label7.Location = new System.Drawing.Point(487, 6);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(60, 20);
+            this.label7.Size = new System.Drawing.Size(47, 16);
             this.label7.TabIndex = 22;
             this.label7.Text = "Status:";
             // 
@@ -242,7 +242,7 @@
             // 
             this.label_status.AutoSize = true;
             this.label_status.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label_status.Location = new System.Drawing.Point(618, 8);
+            this.label_status.Location = new System.Drawing.Point(549, 6);
             this.label_status.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_status.Name = "label_status";
             this.label_status.Size = new System.Drawing.Size(68, 17);
@@ -252,18 +252,18 @@
             // lblCurFile
             // 
             this.lblCurFile.AutoSize = true;
-            this.lblCurFile.Location = new System.Drawing.Point(1054, 12);
+            this.lblCurFile.Location = new System.Drawing.Point(937, 10);
             this.lblCurFile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCurFile.Name = "lblCurFile";
-            this.lblCurFile.Size = new System.Drawing.Size(0, 20);
+            this.lblCurFile.Size = new System.Drawing.Size(0, 16);
             this.lblCurFile.TabIndex = 27;
             // 
             // bntStop
             // 
-            this.bntStop.Location = new System.Drawing.Point(468, 0);
-            this.bntStop.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.bntStop.Location = new System.Drawing.Point(416, 0);
+            this.bntStop.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.bntStop.Name = "bntStop";
-            this.bntStop.Size = new System.Drawing.Size(71, 35);
+            this.bntStop.Size = new System.Drawing.Size(63, 28);
             this.bntStop.TabIndex = 29;
             this.bntStop.Text = "Stop";
             this.bntStop.UseVisualStyleBackColor = true;
@@ -282,21 +282,21 @@
             this.groupBox2.Controls.Add(this.radioResizeByPercent);
             this.groupBox2.Controls.Add(this.labelNewRes);
             this.groupBox2.Controls.Add(this.numericUpDown1);
-            this.groupBox2.Location = new System.Drawing.Point(467, 38);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox2.Location = new System.Drawing.Point(415, 30);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox2.Size = new System.Drawing.Size(464, 155);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Size = new System.Drawing.Size(412, 124);
             this.groupBox2.TabIndex = 31;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Resize";
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(343, 125);
-            this.button3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button3.Location = new System.Drawing.Point(305, 100);
+            this.button3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(44, 28);
+            this.button3.Size = new System.Drawing.Size(39, 22);
             this.button3.TabIndex = 12;
             this.button3.Text = "∨";
             this.button3.UseVisualStyleBackColor = true;
@@ -304,10 +304,10 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(342, 92);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button2.Location = new System.Drawing.Point(304, 74);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(45, 26);
+            this.button2.Size = new System.Drawing.Size(40, 21);
             this.button2.TabIndex = 11;
             this.button2.Text = "∧";
             this.button2.UseVisualStyleBackColor = true;
@@ -316,46 +316,46 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(194, 118);
+            this.label13.Location = new System.Drawing.Point(172, 94);
             this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(24, 20);
+            this.label13.Size = new System.Drawing.Size(19, 16);
             this.label13.TabIndex = 10;
             this.label13.Text = "Y:";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(48, 119);
+            this.label12.Location = new System.Drawing.Point(43, 95);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(24, 20);
+            this.label12.Size = new System.Drawing.Size(18, 16);
             this.label12.TabIndex = 10;
             this.label12.Text = "X:";
             // 
             // tbYresLimit
             // 
-            this.tbYresLimit.Location = new System.Drawing.Point(225, 114);
-            this.tbYresLimit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbYresLimit.Location = new System.Drawing.Point(200, 91);
+            this.tbYresLimit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbYresLimit.Name = "tbYresLimit";
-            this.tbYresLimit.Size = new System.Drawing.Size(104, 26);
+            this.tbYresLimit.Size = new System.Drawing.Size(93, 22);
             this.tbYresLimit.TabIndex = 9;
             // 
             // tbXresLimit
             // 
-            this.tbXresLimit.Location = new System.Drawing.Point(80, 114);
-            this.tbXresLimit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbXresLimit.Location = new System.Drawing.Point(71, 91);
+            this.tbXresLimit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbXresLimit.Name = "tbXresLimit";
-            this.tbXresLimit.Size = new System.Drawing.Size(104, 26);
+            this.tbXresLimit.Size = new System.Drawing.Size(93, 22);
             this.tbXresLimit.TabIndex = 8;
             // 
             // radioNoResize
             // 
             this.radioNoResize.AutoSize = true;
-            this.radioNoResize.Location = new System.Drawing.Point(15, 21);
-            this.radioNoResize.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.radioNoResize.Location = new System.Drawing.Point(13, 17);
+            this.radioNoResize.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.radioNoResize.Name = "radioNoResize";
-            this.radioNoResize.Size = new System.Drawing.Size(121, 24);
+            this.radioNoResize.Size = new System.Drawing.Size(104, 20);
             this.radioNoResize.TabIndex = 7;
             this.radioNoResize.TabStop = true;
             this.radioNoResize.Text = "Don\'t Resize";
@@ -365,10 +365,10 @@
             // radioResizeByLimit
             // 
             this.radioResizeByLimit.AutoSize = true;
-            this.radioResizeByLimit.Location = new System.Drawing.Point(15, 86);
-            this.radioResizeByLimit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.radioResizeByLimit.Location = new System.Drawing.Point(13, 69);
+            this.radioResizeByLimit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.radioResizeByLimit.Name = "radioResizeByLimit";
-            this.radioResizeByLimit.Size = new System.Drawing.Size(165, 24);
+            this.radioResizeByLimit.Size = new System.Drawing.Size(139, 20);
             this.radioResizeByLimit.TabIndex = 6;
             this.radioResizeByLimit.TabStop = true;
             this.radioResizeByLimit.Text = "Limit Resolution to:";
@@ -377,10 +377,10 @@
             // radioResizeByPercent
             // 
             this.radioResizeByPercent.AutoSize = true;
-            this.radioResizeByPercent.Location = new System.Drawing.Point(15, 52);
-            this.radioResizeByPercent.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.radioResizeByPercent.Location = new System.Drawing.Point(13, 42);
+            this.radioResizeByPercent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.radioResizeByPercent.Name = "radioResizeByPercent";
-            this.radioResizeByPercent.Size = new System.Drawing.Size(169, 24);
+            this.radioResizeByPercent.Size = new System.Drawing.Size(146, 20);
             this.radioResizeByPercent.TabIndex = 5;
             this.radioResizeByPercent.TabStop = true;
             this.radioResizeByPercent.Text = "Resize by % of orig.";
@@ -390,7 +390,7 @@
             // 
             this.labelNewRes.AutoSize = true;
             this.labelNewRes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.labelNewRes.Location = new System.Drawing.Point(109, 125);
+            this.labelNewRes.Location = new System.Drawing.Point(97, 100);
             this.labelNewRes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelNewRes.Name = "labelNewRes";
             this.labelNewRes.Size = new System.Drawing.Size(0, 17);
@@ -398,19 +398,19 @@
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(199, 54);
-            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.numericUpDown1.Location = new System.Drawing.Point(177, 43);
+            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(86, 26);
+            this.numericUpDown1.Size = new System.Drawing.Size(76, 22);
             this.numericUpDown1.TabIndex = 1;
             this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
             // btnAddAllToList
             // 
-            this.btnAddAllToList.Location = new System.Drawing.Point(4, 5);
-            this.btnAddAllToList.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnAddAllToList.Location = new System.Drawing.Point(4, 4);
+            this.btnAddAllToList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAddAllToList.Name = "btnAddAllToList";
-            this.btnAddAllToList.Size = new System.Drawing.Size(112, 35);
+            this.btnAddAllToList.Size = new System.Drawing.Size(100, 28);
             this.btnAddAllToList.TabIndex = 33;
             this.btnAddAllToList.Text = "AddAllToList";
             this.btnAddAllToList.UseVisualStyleBackColor = true;
@@ -418,10 +418,10 @@
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(921, 478);
-            this.btnClear.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnClear.Location = new System.Drawing.Point(819, 270);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(102, 35);
+            this.btnClear.Size = new System.Drawing.Size(91, 28);
             this.btnClear.TabIndex = 34;
             this.btnClear.Text = "Clear All";
             this.btnClear.UseVisualStyleBackColor = true;
@@ -429,10 +429,12 @@
             // 
             // dgvDst
             // 
+            this.dgvDst.AllowUserToAddRows = false;
+            this.dgvDst.AllowUserToDeleteRows = false;
             this.dgvDst.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvDst.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDst.ColumnHeadersHeight = 29;
             this.dgvDst.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Index,
             this.FileName,
@@ -457,228 +459,23 @@
             this.Percent,
             this.Time,
             this.ETA});
-            this.dgvDst.Location = new System.Drawing.Point(3, 520);
-            this.dgvDst.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dgvDst.Location = new System.Drawing.Point(3, 308);
+            this.dgvDst.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvDst.Name = "dgvDst";
             this.dgvDst.ReadOnly = true;
             this.dgvDst.RowHeadersWidth = 51;
             this.dgvDst.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDst.Size = new System.Drawing.Size(1688, 356);
+            this.dgvDst.Size = new System.Drawing.Size(1498, 278);
             this.dgvDst.TabIndex = 35;
             this.dgvDst.SelectionChanged += new System.EventHandler(this.dataGridViewDst_SelectionChanged);
-            // 
-            // Index
-            // 
-            this.Index.HeaderText = "#";
-            this.Index.MinimumWidth = 6;
-            this.Index.Name = "Index";
-            this.Index.ReadOnly = true;
-            this.Index.Width = 30;
-            // 
-            // FileName
-            // 
-            this.FileName.HeaderText = "FileName";
-            this.FileName.MinimumWidth = 6;
-            this.FileName.Name = "FileName";
-            this.FileName.ReadOnly = true;
-            this.FileName.Width = 250;
-            // 
-            // SrcSize
-            // 
-            this.SrcSize.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.SrcSize.HeaderText = "SrcSize";
-            this.SrcSize.MinimumWidth = 6;
-            this.SrcSize.Name = "SrcSize";
-            this.SrcSize.ReadOnly = true;
-            this.SrcSize.Width = 24;
-            // 
-            // Resolution
-            // 
-            this.Resolution.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.Resolution.HeaderText = "old Res";
-            this.Resolution.MinimumWidth = 6;
-            this.Resolution.Name = "Resolution";
-            this.Resolution.ReadOnly = true;
-            this.Resolution.Width = 24;
-            // 
-            // dst_res
-            // 
-            this.dst_res.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.dst_res.HeaderText = "new Res";
-            this.dst_res.MinimumWidth = 6;
-            this.dst_res.Name = "dst_res";
-            this.dst_res.ReadOnly = true;
-            this.dst_res.Width = 24;
-            // 
-            // Length
-            // 
-            this.Length.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.Length.HeaderText = "Duration";
-            this.Length.MinimumWidth = 6;
-            this.Length.Name = "Length";
-            this.Length.ReadOnly = true;
-            this.Length.Width = 24;
-            // 
-            // v_rate_
-            // 
-            this.v_rate_.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.v_rate_.HeaderText = "V. Rate";
-            this.v_rate_.MinimumWidth = 6;
-            this.v_rate_.Name = "v_rate_";
-            this.v_rate_.ReadOnly = true;
-            this.v_rate_.Width = 24;
-            // 
-            // Column1
-            // 
-            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.Column1.HeaderText = "A. Codec";
-            this.Column1.MinimumWidth = 6;
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Width = 24;
-            // 
-            // Column2
-            // 
-            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.Column2.HeaderText = "# of ch.";
-            this.Column2.MinimumWidth = 6;
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.Width = 24;
-            // 
-            // Column3
-            // 
-            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.Column3.HeaderText = "A. Rate";
-            this.Column3.MinimumWidth = 6;
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.Width = 24;
-            // 
-            // Column4
-            // 
-            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.Column4.HeaderText = "A. Size";
-            this.Column4.MinimumWidth = 6;
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            this.Column4.Width = 24;
-            // 
-            // Column5
-            // 
-            this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.Column5.HeaderText = "# Streams";
-            this.Column5.MinimumWidth = 6;
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            this.Column5.Width = 24;
-            // 
-            // Column6
-            // 
-            this.Column6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.Column6.HeaderText = "B/(P*F)";
-            this.Column6.MinimumWidth = 6;
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
-            this.Column6.Width = 24;
-            // 
-            // codec_
-            // 
-            this.codec_.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.codec_.HeaderText = "Codec";
-            this.codec_.MinimumWidth = 6;
-            this.codec_.Name = "codec_";
-            this.codec_.ReadOnly = true;
-            this.codec_.Width = 24;
-            // 
-            // crf_
-            // 
-            this.crf_.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.crf_.HeaderText = "CRF";
-            this.crf_.MinimumWidth = 6;
-            this.crf_.Name = "crf_";
-            this.crf_.ReadOnly = true;
-            this.crf_.Width = 24;
-            // 
-            // preset_
-            // 
-            this.preset_.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.preset_.HeaderText = "Preset";
-            this.preset_.MinimumWidth = 6;
-            this.preset_.Name = "preset_";
-            this.preset_.ReadOnly = true;
-            this.preset_.Width = 24;
-            // 
-            // denoise_
-            // 
-            this.denoise_.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader;
-            this.denoise_.HeaderText = "DeNoise";
-            this.denoise_.MinimumWidth = 6;
-            this.denoise_.Name = "denoise_";
-            this.denoise_.ReadOnly = true;
-            this.denoise_.Width = 24;
-            // 
-            // Status
-            // 
-            this.Status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.Status.HeaderText = "Status";
-            this.Status.MinimumWidth = 6;
-            this.Status.Name = "Status";
-            this.Status.ReadOnly = true;
-            this.Status.Width = 24;
-            // 
-            // PercentDone
-            // 
-            this.PercentDone.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.PercentDone.HeaderText = "% Done";
-            this.PercentDone.MinimumWidth = 6;
-            this.PercentDone.Name = "PercentDone";
-            this.PercentDone.ReadOnly = true;
-            this.PercentDone.Width = 24;
-            // 
-            // DstSize
-            // 
-            this.DstSize.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.DstSize.HeaderText = "DstSize";
-            this.DstSize.MinimumWidth = 6;
-            this.DstSize.Name = "DstSize";
-            this.DstSize.ReadOnly = true;
-            this.DstSize.Width = 24;
-            // 
-            // Percent
-            // 
-            this.Percent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.Percent.HeaderText = "% of Orig";
-            this.Percent.MinimumWidth = 6;
-            this.Percent.Name = "Percent";
-            this.Percent.ReadOnly = true;
-            this.Percent.Width = 24;
-            // 
-            // Time
-            // 
-            this.Time.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.Time.HeaderText = "Enc. Time";
-            this.Time.MinimumWidth = 6;
-            this.Time.Name = "Time";
-            this.Time.ReadOnly = true;
-            this.Time.Width = 24;
-            // 
-            // ETA
-            // 
-            this.ETA.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.ETA.HeaderText = "ETA";
-            this.ETA.MinimumWidth = 6;
-            this.ETA.Name = "ETA";
-            this.ETA.ReadOnly = true;
-            this.ETA.Width = 24;
             // 
             // btnAddSelected
             // 
             this.btnAddSelected.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.btnAddSelected.Location = new System.Drawing.Point(126, 6);
-            this.btnAddSelected.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnAddSelected.Location = new System.Drawing.Point(112, 5);
+            this.btnAddSelected.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAddSelected.Name = "btnAddSelected";
-            this.btnAddSelected.Size = new System.Drawing.Size(120, 35);
+            this.btnAddSelected.Size = new System.Drawing.Size(107, 28);
             this.btnAddSelected.TabIndex = 36;
             this.btnAddSelected.Text = "Add Selected";
             this.btnAddSelected.UseVisualStyleBackColor = true;
@@ -697,14 +494,16 @@
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(3, 480);
-            this.progressBar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.progressBar.Location = new System.Drawing.Point(3, 272);
+            this.progressBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(892, 31);
+            this.progressBar.Size = new System.Drawing.Size(793, 25);
             this.progressBar.TabIndex = 38;
             // 
             // dgvSrc
             // 
+            this.dgvSrc.AllowUserToAddRows = false;
+            this.dgvSrc.AllowUserToDeleteRows = false;
             this.dgvSrc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvSrc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -726,13 +525,13 @@
             this._CRF,
             this._preset,
             this._Denoise});
-            this.dgvSrc.Location = new System.Drawing.Point(4, 45);
-            this.dgvSrc.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dgvSrc.Location = new System.Drawing.Point(4, 36);
+            this.dgvSrc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvSrc.Name = "dgvSrc";
             this.dgvSrc.ReadOnly = true;
             this.dgvSrc.RowHeadersWidth = 51;
             this.dgvSrc.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSrc.Size = new System.Drawing.Size(1098, 421);
+            this.dgvSrc.Size = new System.Drawing.Size(1497, 225);
             this.dgvSrc.TabIndex = 35;
             this.dgvSrc.SelectionChanged += new System.EventHandler(this.dataGridViewSrc_SelectionChanged);
             // 
@@ -759,7 +558,7 @@
             this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dataGridViewTextBoxColumn3.Width = 24;
+            this.dataGridViewTextBoxColumn3.Width = 6;
             // 
             // dataGridViewTextBoxColumn4
             // 
@@ -768,7 +567,7 @@
             this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.Width = 24;
+            this.dataGridViewTextBoxColumn4.Width = 6;
             // 
             // newRes
             // 
@@ -777,7 +576,7 @@
             this.newRes.MinimumWidth = 6;
             this.newRes.Name = "newRes";
             this.newRes.ReadOnly = true;
-            this.newRes.Width = 24;
+            this.newRes.Width = 6;
             // 
             // Duration
             // 
@@ -786,7 +585,7 @@
             this.Duration.MinimumWidth = 6;
             this.Duration.Name = "Duration";
             this.Duration.ReadOnly = true;
-            this.Duration.Width = 24;
+            this.Duration.Width = 6;
             // 
             // dataGridViewTextBoxColumn5
             // 
@@ -795,7 +594,7 @@
             this.dataGridViewTextBoxColumn5.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            this.dataGridViewTextBoxColumn5.Width = 24;
+            this.dataGridViewTextBoxColumn5.Width = 6;
             // 
             // AudioCodec
             // 
@@ -804,7 +603,7 @@
             this.AudioCodec.MinimumWidth = 6;
             this.AudioCodec.Name = "AudioCodec";
             this.AudioCodec.ReadOnly = true;
-            this.AudioCodec.Width = 24;
+            this.AudioCodec.Width = 6;
             // 
             // dataGridViewTextBoxColumn6
             // 
@@ -821,7 +620,7 @@
             this.dataGridViewTextBoxColumn7.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             this.dataGridViewTextBoxColumn7.ReadOnly = true;
-            this.dataGridViewTextBoxColumn7.Width = 24;
+            this.dataGridViewTextBoxColumn7.Width = 6;
             // 
             // AudioSize
             // 
@@ -830,7 +629,7 @@
             this.AudioSize.MinimumWidth = 6;
             this.AudioSize.Name = "AudioSize";
             this.AudioSize.ReadOnly = true;
-            this.AudioSize.Width = 24;
+            this.AudioSize.Width = 6;
             // 
             // AudioStreams
             // 
@@ -847,7 +646,7 @@
             this.BitsPerPixel.MinimumWidth = 6;
             this.BitsPerPixel.Name = "BitsPerPixel";
             this.BitsPerPixel.ReadOnly = true;
-            this.BitsPerPixel.Width = 24;
+            this.BitsPerPixel.Width = 6;
             // 
             // _codec
             // 
@@ -856,7 +655,7 @@
             this._codec.MinimumWidth = 6;
             this._codec.Name = "_codec";
             this._codec.ReadOnly = true;
-            this._codec.Width = 24;
+            this._codec.Width = 6;
             // 
             // _CRF
             // 
@@ -865,7 +664,7 @@
             this._CRF.MinimumWidth = 6;
             this._CRF.Name = "_CRF";
             this._CRF.ReadOnly = true;
-            this._CRF.Width = 24;
+            this._CRF.Width = 6;
             // 
             // _preset
             // 
@@ -874,7 +673,7 @@
             this._preset.MinimumWidth = 6;
             this._preset.Name = "_preset";
             this._preset.ReadOnly = true;
-            this._preset.Width = 24;
+            this._preset.Width = 6;
             // 
             // _Denoise
             // 
@@ -883,14 +682,14 @@
             this._Denoise.MinimumWidth = 6;
             this._Denoise.Name = "_Denoise";
             this._Denoise.ReadOnly = true;
-            this._Denoise.Width = 24;
+            this._Denoise.Width = 6;
             // 
             // btnClearSrc
             // 
-            this.btnClearSrc.Location = new System.Drawing.Point(1260, 6);
-            this.btnClearSrc.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnClearSrc.Location = new System.Drawing.Point(1120, 5);
+            this.btnClearSrc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnClearSrc.Name = "btnClearSrc";
-            this.btnClearSrc.Size = new System.Drawing.Size(93, 35);
+            this.btnClearSrc.Size = new System.Drawing.Size(83, 28);
             this.btnClearSrc.TabIndex = 39;
             this.btnClearSrc.Text = "Clear";
             this.btnClearSrc.UseVisualStyleBackColor = true;
@@ -898,10 +697,10 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(1362, 6);
-            this.button4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button4.Location = new System.Drawing.Point(1211, 5);
+            this.button4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(177, 35);
+            this.button4.Size = new System.Drawing.Size(157, 28);
             this.button4.TabIndex = 40;
             this.button4.Text = "Save Src Config";
             this.button4.UseVisualStyleBackColor = true;
@@ -917,8 +716,8 @@
             this.audioToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1711, 28);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(6, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(1525, 28);
             this.menuStrip1.TabIndex = 41;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -1127,48 +926,48 @@
             // 
             this.tbCmdOut.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbCmdOut.Location = new System.Drawing.Point(90, 885);
-            this.tbCmdOut.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbCmdOut.Location = new System.Drawing.Point(80, 594);
+            this.tbCmdOut.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbCmdOut.Name = "tbCmdOut";
-            this.tbCmdOut.Size = new System.Drawing.Size(1598, 26);
+            this.tbCmdOut.Size = new System.Drawing.Size(1421, 22);
             this.tbCmdOut.TabIndex = 45;
             // 
             // label5
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(4, 891);
+            this.label5.Location = new System.Drawing.Point(4, 599);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(76, 20);
+            this.label5.Size = new System.Drawing.Size(61, 16);
             this.label5.TabIndex = 46;
             this.label5.Text = "Cmd Out:";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(233, 22);
+            this.label10.Location = new System.Drawing.Point(207, 18);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(106, 20);
+            this.label10.Size = new System.Drawing.Size(88, 16);
             this.label10.TabIndex = 47;
             this.label10.Text = "Denoise filter:";
             // 
             // comboDenoise
             // 
             this.comboDenoise.FormattingEnabled = true;
-            this.comboDenoise.Location = new System.Drawing.Point(228, 48);
-            this.comboDenoise.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.comboDenoise.Location = new System.Drawing.Point(203, 38);
+            this.comboDenoise.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.comboDenoise.Name = "comboDenoise";
-            this.comboDenoise.Size = new System.Drawing.Size(185, 28);
+            this.comboDenoise.Size = new System.Drawing.Size(165, 24);
             this.comboDenoise.TabIndex = 48;
             // 
             // BtnSaveDstConfig
             // 
-            this.BtnSaveDstConfig.Location = new System.Drawing.Point(1460, 480);
-            this.BtnSaveDstConfig.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.BtnSaveDstConfig.Location = new System.Drawing.Point(1298, 272);
+            this.BtnSaveDstConfig.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.BtnSaveDstConfig.Name = "BtnSaveDstConfig";
-            this.BtnSaveDstConfig.Size = new System.Drawing.Size(177, 35);
+            this.BtnSaveDstConfig.Size = new System.Drawing.Size(157, 28);
             this.BtnSaveDstConfig.TabIndex = 54;
             this.BtnSaveDstConfig.Text = "Save Dst Config";
             this.BtnSaveDstConfig.UseVisualStyleBackColor = true;
@@ -1193,7 +992,7 @@
             this.radioMp4.Location = new System.Drawing.Point(8, 52);
             this.radioMp4.Margin = new System.Windows.Forms.Padding(4);
             this.radioMp4.Name = "radioMp4";
-            this.radioMp4.Size = new System.Drawing.Size(62, 24);
+            this.radioMp4.Size = new System.Drawing.Size(55, 20);
             this.radioMp4.TabIndex = 1;
             this.radioMp4.TabStop = true;
             this.radioMp4.Text = "MP4";
@@ -1205,7 +1004,7 @@
             this.radioMkv.Location = new System.Drawing.Point(8, 22);
             this.radioMkv.Margin = new System.Windows.Forms.Padding(4);
             this.radioMkv.Name = "radioMkv";
-            this.radioMkv.Size = new System.Drawing.Size(64, 24);
+            this.radioMkv.Size = new System.Drawing.Size(56, 20);
             this.radioMkv.TabIndex = 0;
             this.radioMkv.TabStop = true;
             this.radioMkv.Text = "MKV";
@@ -1243,7 +1042,7 @@
             this.tbSuffix.Location = new System.Drawing.Point(507, 30);
             this.tbSuffix.Margin = new System.Windows.Forms.Padding(4);
             this.tbSuffix.Name = "tbSuffix";
-            this.tbSuffix.Size = new System.Drawing.Size(96, 26);
+            this.tbSuffix.Size = new System.Drawing.Size(96, 22);
             this.tbSuffix.TabIndex = 59;
             // 
             // groupBox1
@@ -1254,11 +1053,11 @@
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.comboDenoise);
-            this.groupBox1.Location = new System.Drawing.Point(9, 38);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox1.Location = new System.Drawing.Point(8, 30);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox1.Size = new System.Drawing.Size(428, 108);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Size = new System.Drawing.Size(380, 86);
             this.groupBox1.TabIndex = 60;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Video:";
@@ -1271,10 +1070,10 @@
             0,
             0,
             65536});
-            this.numericCrf.Location = new System.Drawing.Point(9, 49);
-            this.numericCrf.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.numericCrf.Location = new System.Drawing.Point(8, 39);
+            this.numericCrf.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.numericCrf.Name = "numericCrf";
-            this.numericCrf.Size = new System.Drawing.Size(89, 26);
+            this.numericCrf.Size = new System.Drawing.Size(79, 22);
             this.numericCrf.TabIndex = 0;
             this.numericCrf.ValueChanged += new System.EventHandler(this.numericCrf_ValueChanged);
             // 
@@ -1283,19 +1082,17 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(9, 185);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabControl1.Location = new System.Drawing.Point(8, 148);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1702, 962);
+            this.tabControl1.Size = new System.Drawing.Size(1513, 653);
             this.tabControl1.TabIndex = 62;
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.btnClearFinished);
             this.tabPage1.Controls.Add(this.btnClearSelected);
-            this.tabPage1.Controls.Add(this.dgvSubtitleStreams);
-            this.tabPage1.Controls.Add(this.dgvAudioStreams);
             this.tabPage1.Controls.Add(this.dgvSrc);
             this.tabPage1.Controls.Add(this.btnStart);
             this.tabPage1.Controls.Add(this.label7);
@@ -1312,21 +1109,20 @@
             this.tabPage1.Controls.Add(this.dgvDst);
             this.tabPage1.Controls.Add(this.progressBar);
             this.tabPage1.Controls.Add(this.btnClear);
-            this.tabPage1.Location = new System.Drawing.Point(4, 29);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage1.Size = new System.Drawing.Size(1694, 929);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Size = new System.Drawing.Size(1505, 624);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Main";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // btnClearFinished
             // 
-            this.btnClearFinished.Location = new System.Drawing.Point(1239, 479);
-            this.btnClearFinished.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnClearFinished.Location = new System.Drawing.Point(1101, 271);
             this.btnClearFinished.Name = "btnClearFinished";
-            this.btnClearFinished.Size = new System.Drawing.Size(177, 34);
+            this.btnClearFinished.Size = new System.Drawing.Size(157, 27);
             this.btnClearFinished.TabIndex = 59;
             this.btnClearFinished.Text = "Clear Finished";
             this.btnClearFinished.UseVisualStyleBackColor = true;
@@ -1334,14 +1130,316 @@
             // 
             // btnClearSelected
             // 
-            this.btnClearSelected.Location = new System.Drawing.Point(1046, 478);
-            this.btnClearSelected.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnClearSelected.Location = new System.Drawing.Point(930, 270);
             this.btnClearSelected.Name = "btnClearSelected";
-            this.btnClearSelected.Size = new System.Drawing.Size(168, 35);
+            this.btnClearSelected.Size = new System.Drawing.Size(149, 28);
             this.btnClearSelected.TabIndex = 58;
             this.btnClearSelected.Text = "Clear Selected";
             this.btnClearSelected.UseVisualStyleBackColor = true;
             this.btnClearSelected.Click += new System.EventHandler(this.btnClearSelected_Click);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.dgvSubtitleStreams);
+            this.tabPage2.Controls.Add(this.dgvAudioStreams);
+            this.tabPage2.Controls.Add(this.tbTempPath);
+            this.tabPage2.Controls.Add(this.button1);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage2.Size = new System.Drawing.Size(1505, 741);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Progress";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tbTempPath
+            // 
+            this.tbTempPath.Location = new System.Drawing.Point(18, 34);
+            this.tbTempPath.Name = "tbTempPath";
+            this.tbTempPath.Size = new System.Drawing.Size(221, 22);
+            this.tbTempPath.TabIndex = 58;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(261, 32);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(61, 28);
+            this.button1.TabIndex = 57;
+            this.button1.Text = "test";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.btnClearLog);
+            this.tabPage3.Controls.Add(this.btnOpenLog);
+            this.tabPage3.Controls.Add(this.label2);
+            this.tabPage3.Controls.Add(this.tbLog);
+            this.tabPage3.Location = new System.Drawing.Point(4, 25);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage3.Size = new System.Drawing.Size(1505, 741);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Log";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // btnClearLog
+            // 
+            this.btnClearLog.Location = new System.Drawing.Point(268, 7);
+            this.btnClearLog.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnClearLog.Name = "btnClearLog";
+            this.btnClearLog.Size = new System.Drawing.Size(100, 28);
+            this.btnClearLog.TabIndex = 3;
+            this.btnClearLog.Text = "Clear Log";
+            this.btnClearLog.UseVisualStyleBackColor = true;
+            this.btnClearLog.Click += new System.EventHandler(this.btnClearLog_Click);
+            // 
+            // btnOpenLog
+            // 
+            this.btnOpenLog.Location = new System.Drawing.Point(148, 7);
+            this.btnOpenLog.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnOpenLog.Name = "btnOpenLog";
+            this.btnOpenLog.Size = new System.Drawing.Size(100, 28);
+            this.btnOpenLog.TabIndex = 2;
+            this.btnOpenLog.Text = "Open Log";
+            this.btnOpenLog.UseVisualStyleBackColor = true;
+            this.btnOpenLog.Click += new System.EventHandler(this.btnOpenLog_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(8, 16);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(87, 16);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Detailed Log:";
+            // 
+            // tbLog
+            // 
+            this.tbLog.Location = new System.Drawing.Point(8, 42);
+            this.tbLog.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbLog.Name = "tbLog";
+            this.tbLog.Size = new System.Drawing.Size(100, 22);
+            this.tbLog.TabIndex = 4;
+            // 
+            // cbMuxAsIs
+            // 
+            this.cbMuxAsIs.AutoSize = true;
+            this.cbMuxAsIs.Location = new System.Drawing.Point(840, 44);
+            this.cbMuxAsIs.Name = "cbMuxAsIs";
+            this.cbMuxAsIs.Size = new System.Drawing.Size(122, 20);
+            this.cbMuxAsIs.TabIndex = 63;
+            this.cbMuxAsIs.Text = "Mux video as-is";
+            this.cbMuxAsIs.UseVisualStyleBackColor = true;
+            // 
+            // Index
+            // 
+            this.Index.HeaderText = "#";
+            this.Index.MinimumWidth = 6;
+            this.Index.Name = "Index";
+            this.Index.ReadOnly = true;
+            this.Index.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Index.Width = 30;
+            // 
+            // FileName
+            // 
+            this.FileName.HeaderText = "FileName";
+            this.FileName.MinimumWidth = 6;
+            this.FileName.Name = "FileName";
+            this.FileName.ReadOnly = true;
+            this.FileName.Width = 250;
+            // 
+            // SrcSize
+            // 
+            this.SrcSize.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.SrcSize.HeaderText = "SrcSize";
+            this.SrcSize.MinimumWidth = 6;
+            this.SrcSize.Name = "SrcSize";
+            this.SrcSize.ReadOnly = true;
+            this.SrcSize.Width = 6;
+            // 
+            // Resolution
+            // 
+            this.Resolution.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.Resolution.HeaderText = "old Res";
+            this.Resolution.MinimumWidth = 6;
+            this.Resolution.Name = "Resolution";
+            this.Resolution.ReadOnly = true;
+            this.Resolution.Width = 6;
+            // 
+            // dst_res
+            // 
+            this.dst_res.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.dst_res.HeaderText = "new Res";
+            this.dst_res.MinimumWidth = 6;
+            this.dst_res.Name = "dst_res";
+            this.dst_res.ReadOnly = true;
+            this.dst_res.Width = 6;
+            // 
+            // Length
+            // 
+            this.Length.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.Length.HeaderText = "Duration";
+            this.Length.MinimumWidth = 6;
+            this.Length.Name = "Length";
+            this.Length.ReadOnly = true;
+            this.Length.Width = 6;
+            // 
+            // v_rate_
+            // 
+            this.v_rate_.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.v_rate_.HeaderText = "V. Rate";
+            this.v_rate_.MinimumWidth = 6;
+            this.v_rate_.Name = "v_rate_";
+            this.v_rate_.ReadOnly = true;
+            this.v_rate_.Width = 6;
+            // 
+            // Column1
+            // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.Column1.HeaderText = "A. Codec";
+            this.Column1.MinimumWidth = 6;
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Width = 6;
+            // 
+            // Column2
+            // 
+            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.Column2.HeaderText = "# of ch.";
+            this.Column2.MinimumWidth = 6;
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Width = 6;
+            // 
+            // Column3
+            // 
+            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.Column3.HeaderText = "A. Rate";
+            this.Column3.MinimumWidth = 6;
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.Width = 6;
+            // 
+            // Column4
+            // 
+            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.Column4.HeaderText = "A. Size";
+            this.Column4.MinimumWidth = 6;
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.Width = 6;
+            // 
+            // Column5
+            // 
+            this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.Column5.HeaderText = "# Streams";
+            this.Column5.MinimumWidth = 6;
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            this.Column5.Width = 6;
+            // 
+            // Column6
+            // 
+            this.Column6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.Column6.HeaderText = "B/(P*F)";
+            this.Column6.MinimumWidth = 6;
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            this.Column6.Width = 6;
+            // 
+            // codec_
+            // 
+            this.codec_.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.codec_.HeaderText = "Codec";
+            this.codec_.MinimumWidth = 6;
+            this.codec_.Name = "codec_";
+            this.codec_.ReadOnly = true;
+            this.codec_.Width = 6;
+            // 
+            // crf_
+            // 
+            this.crf_.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.crf_.HeaderText = "CRF";
+            this.crf_.MinimumWidth = 6;
+            this.crf_.Name = "crf_";
+            this.crf_.ReadOnly = true;
+            this.crf_.Width = 6;
+            // 
+            // preset_
+            // 
+            this.preset_.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.preset_.HeaderText = "Preset";
+            this.preset_.MinimumWidth = 6;
+            this.preset_.Name = "preset_";
+            this.preset_.ReadOnly = true;
+            this.preset_.Width = 6;
+            // 
+            // denoise_
+            // 
+            this.denoise_.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader;
+            this.denoise_.HeaderText = "DeNoise";
+            this.denoise_.MinimumWidth = 6;
+            this.denoise_.Name = "denoise_";
+            this.denoise_.ReadOnly = true;
+            this.denoise_.Width = 6;
+            // 
+            // Status
+            // 
+            this.Status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.Status.HeaderText = "Status";
+            this.Status.MinimumWidth = 6;
+            this.Status.Name = "Status";
+            this.Status.ReadOnly = true;
+            this.Status.Width = 6;
+            // 
+            // PercentDone
+            // 
+            this.PercentDone.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.PercentDone.HeaderText = "% Done";
+            this.PercentDone.MinimumWidth = 6;
+            this.PercentDone.Name = "PercentDone";
+            this.PercentDone.ReadOnly = true;
+            this.PercentDone.Width = 6;
+            // 
+            // DstSize
+            // 
+            this.DstSize.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.DstSize.HeaderText = "DstSize";
+            this.DstSize.MinimumWidth = 6;
+            this.DstSize.Name = "DstSize";
+            this.DstSize.ReadOnly = true;
+            this.DstSize.Width = 6;
+            // 
+            // Percent
+            // 
+            this.Percent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.Percent.HeaderText = "% of Orig";
+            this.Percent.MinimumWidth = 6;
+            this.Percent.Name = "Percent";
+            this.Percent.ReadOnly = true;
+            this.Percent.Width = 6;
+            // 
+            // Time
+            // 
+            this.Time.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.Time.HeaderText = "Enc. Time";
+            this.Time.MinimumWidth = 6;
+            this.Time.Name = "Time";
+            this.Time.ReadOnly = true;
+            this.Time.Width = 6;
+            // 
+            // ETA
+            // 
+            this.ETA.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.ETA.HeaderText = "ETA";
+            this.ETA.MinimumWidth = 6;
+            this.ETA.Name = "ETA";
+            this.ETA.ReadOnly = true;
+            this.ETA.Width = 6;
             // 
             // dgvSubtitleStreams
             // 
@@ -1351,14 +1449,12 @@
             this.dgvSubtitleStreams.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colSubInclude,
             this.colSubLanguage});
-            this.dgvSubtitleStreams.Location = new System.Drawing.Point(1132, 305);
-            this.dgvSubtitleStreams.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dgvSubtitleStreams.Location = new System.Drawing.Point(18, 285);
             this.dgvSubtitleStreams.Name = "dgvSubtitleStreams";
             this.dgvSubtitleStreams.RowHeadersWidth = 51;
             this.dgvSubtitleStreams.RowTemplate.Height = 24;
-            this.dgvSubtitleStreams.Size = new System.Drawing.Size(522, 166);
-            this.dgvSubtitleStreams.TabIndex = 57;
-            this.dgvSubtitleStreams.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSubtitleStreams_CellValueChanged);
+            this.dgvSubtitleStreams.Size = new System.Drawing.Size(464, 133);
+            this.dgvSubtitleStreams.TabIndex = 60;
             // 
             // colSubInclude
             // 
@@ -1386,14 +1482,12 @@
             this.colStreamLanguage,
             this.colStreamChannels,
             this.colStreamBitrate});
-            this.dgvAudioStreams.Location = new System.Drawing.Point(1132, 45);
-            this.dgvAudioStreams.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dgvAudioStreams.Location = new System.Drawing.Point(18, 77);
             this.dgvAudioStreams.Name = "dgvAudioStreams";
             this.dgvAudioStreams.RowHeadersWidth = 51;
             this.dgvAudioStreams.RowTemplate.Height = 24;
-            this.dgvAudioStreams.Size = new System.Drawing.Size(522, 231);
-            this.dgvAudioStreams.TabIndex = 55;
-            this.dgvAudioStreams.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAudioStreams_CellValueChanged);
+            this.dgvAudioStreams.Size = new System.Drawing.Size(464, 185);
+            this.dgvAudioStreams.TabIndex = 59;
             // 
             // colStreamInclude
             // 
@@ -1434,109 +1528,12 @@
             this.colStreamBitrate.ReadOnly = true;
             this.colStreamBitrate.Width = 80;
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.tbTempPath);
-            this.tabPage2.Controls.Add(this.button1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 29);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage2.Size = new System.Drawing.Size(1694, 929);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Progress";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tbTempPath
-            // 
-            this.tbTempPath.Location = new System.Drawing.Point(20, 42);
-            this.tbTempPath.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tbTempPath.Name = "tbTempPath";
-            this.tbTempPath.Size = new System.Drawing.Size(248, 26);
-            this.tbTempPath.TabIndex = 58;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(294, 40);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(69, 35);
-            this.button1.TabIndex = 57;
-            this.button1.Text = "test";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.btnClearLog);
-            this.tabPage3.Controls.Add(this.btnOpenLog);
-            this.tabPage3.Controls.Add(this.label2);
-            this.tabPage3.Controls.Add(this.tbLog);
-            this.tabPage3.Location = new System.Drawing.Point(4, 29);
-            this.tabPage3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage3.Size = new System.Drawing.Size(1694, 929);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Log";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // btnClearLog
-            // 
-            this.btnClearLog.Location = new System.Drawing.Point(302, 9);
-            this.btnClearLog.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnClearLog.Name = "btnClearLog";
-            this.btnClearLog.Size = new System.Drawing.Size(112, 35);
-            this.btnClearLog.TabIndex = 3;
-            this.btnClearLog.Text = "Clear Log";
-            this.btnClearLog.UseVisualStyleBackColor = true;
-            this.btnClearLog.Click += new System.EventHandler(this.btnClearLog_Click);
-            // 
-            // btnOpenLog
-            // 
-            this.btnOpenLog.Location = new System.Drawing.Point(166, 9);
-            this.btnOpenLog.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnOpenLog.Name = "btnOpenLog";
-            this.btnOpenLog.Size = new System.Drawing.Size(112, 35);
-            this.btnOpenLog.TabIndex = 2;
-            this.btnOpenLog.Text = "Open Log";
-            this.btnOpenLog.UseVisualStyleBackColor = true;
-            this.btnOpenLog.Click += new System.EventHandler(this.btnOpenLog_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 20);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(103, 20);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Detailed Log:";
-            // 
-            // tbLog
-            // 
-            this.tbLog.Location = new System.Drawing.Point(9, 52);
-            this.tbLog.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbLog.Name = "tbLog";
-            this.tbLog.Size = new System.Drawing.Size(112, 26);
-            this.tbLog.TabIndex = 4;
-            // 
-            // cbMuxAsIs
-            // 
-            this.cbMuxAsIs.AutoSize = true;
-            this.cbMuxAsIs.Location = new System.Drawing.Point(945, 55);
-            this.cbMuxAsIs.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.cbMuxAsIs.Name = "cbMuxAsIs";
-            this.cbMuxAsIs.Size = new System.Drawing.Size(138, 24);
-            this.cbMuxAsIs.TabIndex = 63;
-            this.cbMuxAsIs.Text = "Mux video as-is";
-            this.cbMuxAsIs.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AllowDrop = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1711, 1055);
+            this.ClientSize = new System.Drawing.Size(1525, 804);
             this.Controls.Add(this.cbMuxAsIs);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
@@ -1544,7 +1541,7 @@
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.Text = "Batch Video Encoder v0.79 - Mux Video as-is ";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -1565,12 +1562,12 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSubtitleStreams)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAudioStreams)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSubtitleStreams)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAudioStreams)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1638,29 +1635,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn _preset;
         private System.Windows.Forms.DataGridViewTextBoxColumn _Denoise;
         private System.Windows.Forms.Button BtnSaveDstConfig;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Index;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SrcSize;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Resolution;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dst_res;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Length;
-        private System.Windows.Forms.DataGridViewTextBoxColumn v_rate_;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn codec_;
-        private System.Windows.Forms.DataGridViewTextBoxColumn crf_;
-        private System.Windows.Forms.DataGridViewTextBoxColumn preset_;
-        private System.Windows.Forms.DataGridViewTextBoxColumn denoise_;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Status;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PercentDone;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DstSize;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Percent;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Time;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ETA;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.RadioButton radioMp4;
         private System.Windows.Forms.RadioButton radioMkv;
@@ -1694,20 +1668,43 @@
         private System.Windows.Forms.ToolStripMenuItem outputSuffixToolStripMenuItem;
         private System.Windows.Forms.ToolStripTextBox tbSuffixMenu;
         private System.Windows.Forms.ToolStripMenuItem runHiddenMenuItem;
-        private System.Windows.Forms.DataGridView dgvAudioStreams;
-        private System.Windows.Forms.DataGridView dgvSubtitleStreams;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colStreamInclude;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colStreamCodec;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colStreamLanguage;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colStreamChannels;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colStreamBitrate;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colSubInclude;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSubLanguage;
         private System.Windows.Forms.TextBox tbTempPath;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnClearSelected;
         private System.Windows.Forms.Button btnClearFinished;
         private System.Windows.Forms.CheckBox cbMuxAsIs;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Index;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SrcSize;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Resolution;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dst_res;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Length;
+        private System.Windows.Forms.DataGridViewTextBoxColumn v_rate_;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn codec_;
+        private System.Windows.Forms.DataGridViewTextBoxColumn crf_;
+        private System.Windows.Forms.DataGridViewTextBoxColumn preset_;
+        private System.Windows.Forms.DataGridViewTextBoxColumn denoise_;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Status;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PercentDone;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DstSize;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Percent;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Time;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ETA;
+        private System.Windows.Forms.DataGridView dgvSubtitleStreams;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colSubInclude;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSubLanguage;
+        private System.Windows.Forms.DataGridView dgvAudioStreams;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colStreamInclude;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colStreamCodec;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colStreamLanguage;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colStreamChannels;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colStreamBitrate;
     }
 }
 

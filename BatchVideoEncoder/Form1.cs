@@ -189,6 +189,8 @@ namespace BatchVideoEncoder
                     dbEntry.presetStr,
                     dbEntry.DenoiseFilterName.Split(' ').First()
                     );
+            // Update Start button - now that we have at least one pending entry
+            UpdateStartButtonState();
             }
         }
 
@@ -405,7 +407,8 @@ namespace BatchVideoEncoder
             {
                 _isWorkerRunning = false;
                 UiUpdateHelper.update_label(label_status, "Stopped");
-                UiUpdateHelper.update_btn(btnStart, true);
+                // Re-evaluate whether Start should be enabled based on current Dst list/statuses
+                UpdateStartButtonState();
             }
         }
         private string PrepareTempDir()
@@ -415,6 +418,41 @@ namespace BatchVideoEncoder
             if (!Directory.Exists(tempDir)) Directory.CreateDirectory(tempDir);
             //FileHelper.EmptyDirectory(tempDir); // other instanced may be working - don't empty.
             return tempDir;
+        }
+
+        // Update Start button enabled state according to Dst table contents and worker state
+        private void UpdateStartButtonState()
+        {
+            // If worker is running - Start must be disabled
+            if (_isWorkerRunning)
+            {
+                UiUpdateHelper.update_btn(btnStart, false);
+                return;
+            }
+
+            // If there are no rows - cannot start
+            int rowCount = 0;
+            try { rowCount = dgvDst.Rows.Count; } catch { rowCount = 0; }
+            if (rowCount == 0)
+            {
+                UiUpdateHelper.update_btn(btnStart, false);
+                return;
+            }
+
+            // If all rows are marked as Done - nothing to start
+            bool allDone = true;
+            for (int i = 0; i < dgvDst.Rows.Count; i++)
+            {
+                var statusCell = dgvDst.Rows[i].Cells[17].Value;
+                var status = statusCell == null ? string.Empty : statusCell.ToString();
+                if (!string.Equals(status, "Done", StringComparison.OrdinalIgnoreCase))
+                {
+                    allDone = false;
+                    break;
+                }
+            }
+
+            UiUpdateHelper.update_btn(btnStart, !allDone);
         }
         private void ProgressCallback(string line, bool IsOutput)
         {
@@ -510,6 +548,8 @@ namespace BatchVideoEncoder
                
                 FileInfo DstFile = new FileInfo(dbEntry.dstEncodedFile);
                 UiUpdateHelper.updateGridView(dgvDst, 17 , rowCnt, "Done"); // status
+                // Re-evaluate Start button - if this was the last pending item, the Start button should be disabled
+                UpdateStartButtonState();
                 UiUpdateHelper.updateGridView(dgvDst, 19 , rowCnt, ((long)DstFile.Length / (1024 * 1024)).ToString()); // dst size
                 UiUpdateHelper.updateGridView(dgvDst, 20 , rowCnt, ((int)(DstFile.Length * 100 / SrcFile.Length)).ToString()); // % Tot
                 UiUpdateHelper.updateGridView(dgvDst, 21, rowCnt, TimeForOneFile.ToString(@"hh\:mm\:ss"));  //time
@@ -556,6 +596,7 @@ namespace BatchVideoEncoder
             // Cannot clear just like that - at least need to leave file that is currently running.
             DstDB.Clear();
             dgvDst.Rows.Clear();
+            UpdateStartButtonState();
         }
         private void btnAddSelected_Click(object sender, EventArgs e)
         {
@@ -761,15 +802,19 @@ namespace BatchVideoEncoder
         private void dataGridViewDst_SelectionChanged(object sender, EventArgs e)
         {
             //IsEditingSrcGV = false;
+            // Defensive guards: CurrentCell can be null while rows are being removed/cleared.
+            if (dgvDst.CurrentCell == null) return;
             var selectedRowIndex = dgvDst.CurrentCell.RowIndex;
+            if (selectedRowIndex < 0 || selectedRowIndex >= dgvDst.Rows.Count) return;
             var selectedFileName = dgvDst.Rows[selectedRowIndex].Cells[1].Value;
-            if (selectedFileName != null &&!string.IsNullOrWhiteSpace(selectedFileName.ToString()))
-            {
-                // find the db entry by filename
-                var selectedDbEntry = DstDB.FirstOrDefault(r => r.fileNameOnly == selectedFileName.ToString());
-                if (selectedDbEntry == null) return;
-                GetGuiParamsFromDb(selectedDbEntry);
-            }
+            if (selectedFileName == null) return;
+            var selectedFileNameStr = selectedFileName.ToString();
+            if (string.IsNullOrWhiteSpace(selectedFileNameStr)) return;
+
+            // find the db entry by filename
+            var selectedDbEntry = DstDB.FirstOrDefault(r => r.fileNameOnly == selectedFileNameStr);
+            if (selectedDbEntry == null) return;
+            GetGuiParamsFromDb(selectedDbEntry);
 
         }
 
@@ -1225,6 +1270,7 @@ namespace BatchVideoEncoder
             // Re-number the first column
             for (int i = 0; i < dgvDst.Rows.Count; i++)
                 dgvDst.Rows[i].Cells[0].Value = i + 1;
+            UpdateStartButtonState();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -1270,6 +1316,7 @@ namespace BatchVideoEncoder
             // Re-number the first column
             for (int i = 0; i < dgvDst.Rows.Count; i++)
                 dgvDst.Rows[i].Cells[0].Value = i + 1;
+            UpdateStartButtonState();
         }
 
         private void updateTargetFileNameForEntry(MovieEntry entry)
