@@ -120,6 +120,14 @@ namespace BatchVideoEncoder.Helpers
             p.ErrorDataReceived += (sender, args) => Calback(args.Data, false);
             var rs = p.Start();
             _activeProcess = p;
+            try
+            {
+                p.PriorityClass = ProcessPriorityClass.BelowNormal; // or Low
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("Failed to set priority: " + ex.Message);
+            }
 
             // Register cancellation: kill the process if the token is cancelled
             using (cancellationToken.Register(() =>

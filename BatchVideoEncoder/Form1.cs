@@ -255,6 +255,7 @@ namespace BatchVideoEncoder
                 AppendEntryToDstDGV(dbEntry);  // append only, don't rebuild
             }
             dgvSrc.Rows.Clear();
+            UpdateStartButtonState();
         }
 
         private void UpdateDstDGV()
@@ -430,12 +431,17 @@ namespace BatchVideoEncoder
                 return;
             }
 
-            // If there are no rows - cannot start
-            int rowCount = 0;
-            try { rowCount = dgvDst.Rows.Count; } catch { rowCount = 0; }
-            if (rowCount == 0)
+            // Marshal grid inspection to the UI thread
+            if (btnStart.InvokeRequired)
             {
-                UiUpdateHelper.update_btn(btnStart, false);
+                btnStart.BeginInvoke((MethodInvoker)delegate () { UpdateStartButtonState(); });
+                return;
+            }
+
+            // If there are no rows - cannot start
+            if (dgvDst.Rows.Count == 0)
+            {
+                btnStart.Enabled = false;
                 return;
             }
 
@@ -452,7 +458,7 @@ namespace BatchVideoEncoder
                 }
             }
 
-            UiUpdateHelper.update_btn(btnStart, !allDone);
+            btnStart.Enabled = !allDone;
         }
         private void ProgressCallback(string line, bool IsOutput)
         {
@@ -617,6 +623,7 @@ namespace BatchVideoEncoder
                 AppendEntryToDstDGV(matchingDbEntry);  // append only, don't rebuild
             }
             PopulateSrcDGVfromSrcDB();
+            UpdateStartButtonState();
         }
 
 
